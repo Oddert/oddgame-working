@@ -1,0 +1,11 @@
+{
+  "name": "kye_working",
+  "version": "1.0.0",
+  "description": "Working space for my kye project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Robyn Felicity Heather Veitch",
+  "license": "ISC"
+}
