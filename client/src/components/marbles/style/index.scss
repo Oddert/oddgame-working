@@ -1,0 +1,25 @@
+$rad: 50px;
+
+.row {
+  display: flex;
+  .col {
+    display: flex;
+    // border: 1px dashed tomato;
+    width: $rad;
+    height: $rad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #bec3c7;
+    &.floor {
+      background: #ecf0f1;
+    }
+    &.wall {
+      background: #bec3c7;
+    }
+    &.ball {
+      background: purple;
+    }
+  }
+  // border: 1px solid steelblue;
+}
