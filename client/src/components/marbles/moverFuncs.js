@@ -5,6 +5,8 @@ const checkIsWall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRe
 const checkIsBall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'ball'
 const checkIsFloor = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'floor'
 
+const getCell = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x]
+
 export function mUp (y, x, boardRef, dir) {
   if (checkIsWall(y - 1, x, boardRef)) return { y, x, status: false }
   if (y - 1 < 0 || false) return { y, x, status: false }
@@ -25,31 +27,48 @@ export function mLeft (y, x, boardRef, dir) {
 
 const swerve = (originalY, originalX, boardRef, dir) => {
 
-  const swerveValid = ({ y, x }) => {
+  const swerveValid = (y, x, dir, rotation) => {
     if (y < 0 || y > boardRef.length - 1) return { valid: false }
     if (x < 0 || x > boardRef[0].length - 1) return { valid: false }
+
+    if (dir === 'right') {
+      if (getCell(y, x - 1, boardRef).type !== 'floor') return { valid: false }
+    }
+    if (dir === 'down') {
+      if (getCell(y - 1, x, boardRef).type !== 'floor') return { valid: false }
+    }
+    if (dir === 'left') {
+      if (getCell(y, x + 1, boardRef).type !== 'floor') return { valid: false }
+    }
+    if (dir === 'up') {
+      if (getCell(y + 1, x, boardRef).type !== 'floor') return { valid: false }
+    }
+
     const cell = boardRef[y] && boardRef[y][x]
     if (!cell || cell.type !== 'floor') return { valid: false }
     return { valid: true, cell, y, x }
   }
 
-  const pickDirection = (y1, x1, y2, x2) => {
+  const pickDirection = (y1, x1, y2, x2, dir) => {
     const possibilities = []
-    if (swerveValid(y1, x1).valid) possibilities.push({ y: y1, x: x1 })
-    if (swerveValid(y2, x2).valid) possibilities.push({ y: y2, x: x2 })
+    // going "left" / "up"
+    if (swerveValid(y1, x1, dir).valid) possibilities.push({ y: y1, x: x1 })
+    // going "right" / "down"
+    if (swerveValid(y2, x2, dir).valid) possibilities.push({ y: y2, x: x2 })
     if (possibilities.length === 0) return { y: originalY, x: originalX }
+    console.log({ possibilities })
     return possibilities[Math.floor(Math.random() * possibilities.length)]
   }
 
   switch(dir) {
     case 'left':
-      return pickDirection(originalY + 1, originalX - 1, originalY + 1, originalX - 1)
+      return pickDirection(originalY + 1, originalX - 1, originalY - 1, originalX - 1, dir)
     case 'right':
-      return pickDirection(originalY + 1, originalX + 1, originalY + 1, originalX + 1)
+      return pickDirection(originalY - 1, originalX + 1, originalY + 1, originalX + 1, dir)
     case 'up':
-      return pickDirection(originalY - 1, originalX - 1, originalY - 1, originalX + 1)
+      return pickDirection(originalY - 1, originalX - 1, originalY - 1, originalX + 1, dir)
     case 'down':
-      return pickDirection(originalY + 1, originalX - 1, originalY + 1, originalX + 1)
+      return pickDirection(originalY + 1, originalX - 1, originalY + 1, originalX + 1, dir)
     default:
       return { y: originalY, x: originalX }
   }
@@ -69,8 +88,13 @@ const moveValidator = (current, desire, boardRef, dir) => {
     case 'left':
       return { y: current.y, x: current.x, status }
     case 'right':
-      console.log('swerve: ', swerve(current.y, current.x, boardRef, dir))
-      return { y: current.y, x: current.x, status }
+      if (!status) {
+        let swerved = swerve(current.y, current.x, boardRef, dir)
+        console.log('nah swerve that: ', swerved)
+        return { y: swerved.y, x: swerved.x, status: true }
+      }
+      console.log('*** Givin it what it wants ***')
+      return { y: desire.y, x: desire.x, status }
     case 'up':
       return { y: current.y, x: current.x, status }
     case 'down':
@@ -85,7 +109,6 @@ const moveValidator = (current, desire, boardRef, dir) => {
 export function mRight (y, x, boardRef, dir) {
   // Desired move (to right) is validated by a universal function
   const move = moveValidator({ y, x }, { y, x: x + 1 }, boardRef, dir)
-  // console.log(toBall, toBall.status)
   // The status attr returns is move is valid
   if (!move.status) return { y, x, status: false }
   // Validator may make an adjustment to the request (e.g changin object direction) so return y,x is used
