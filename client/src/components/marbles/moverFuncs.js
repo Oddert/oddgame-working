@@ -3,7 +3,7 @@
 
 const checkIsWall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'wall'
 const checkIsBall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'ball'
-const checkIsFloor = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'floor'
+// const checkIsFloor = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'floor'
 
 const getCell = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x]
 
@@ -80,9 +80,6 @@ const moveValidator = (current, desire, boardRef, dir) => {
   if (checkIsWall(desire.y, desire.x, boardRef)) status = false
   if (checkIsBall(desire.y, desire.x, boardRef)) status = false
   console.log(`### ${current.y}, ${current.x}, ${status} trying to move into: ${desire.y}, ${desire.x} (${boardRef[desire.y][desire.x].type})`)
-  console.log(`Is Wall: ${checkIsWall(desire.y, desire.x, boardRef)}, is ball: ${checkIsBall(desire.y, desire.x, boardRef)}, status: ${status}`)
-
-  // if (!status) return { y, x, status }
 
   switch (dir) {
     case 'left':
