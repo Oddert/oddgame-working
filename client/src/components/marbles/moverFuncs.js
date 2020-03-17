@@ -49,7 +49,31 @@ const swerve = (originalY, originalX, boardRef, dir) => {
     return { valid: true, cell, y, x }
   }
 
-  const pickDirection = (y1, x1, y2, x2, dir) => {
+  const pickDirection = (y1, x1, y2, x2, dir, originalY, originalX) => {
+
+    const infrontOfObstical = (dir, originalY, originalX) => {
+      const getOffset = (dir, y, x, inc) => {
+        switch (dir) {
+          case 'left':
+            return boardRef[y] && boardRef[y][x - inc] ? boardRef[y][x - inc] : { type: null }
+          case 'right':
+            return boardRef[y] && boardRef[y][x + inc] ? boardRef[y][x + inc] : { type: null }
+          case 'up':
+            return boardRef[y - inc] && boardRef[y - inc][x] ? boardRef[y - inc][x] : { type: null }
+          case 'down':
+            return boardRef[y + inc] && boardRef[y + inc][x] ? boardRef[y + inc][x] : { type: null }
+          default:
+            return { type: null }
+        }
+      }
+      const obstical = getOffset(dir, originalY, originalX, 1)
+      const infront = getOffset(dir, originalY, originalX, 2)
+      console.log(obstical, infront)
+      if (obstical.type === 'ball' && infront.type === 'floor') return true
+      return false
+    }
+
+    if (infrontOfObstical(dir, originalY, originalX)) return { y: originalY, x: originalX }
     const possibilities = []
     // going "left" / "up"
     if (swerveValid(y1, x1, dir).valid) possibilities.push({ y: y1, x: x1 })
@@ -62,13 +86,13 @@ const swerve = (originalY, originalX, boardRef, dir) => {
 
   switch(dir) {
     case 'left':
-      return pickDirection(originalY + 1, originalX - 1, originalY - 1, originalX - 1, dir)
+      return pickDirection(originalY + 1, originalX - 1, originalY - 1, originalX - 1, dir, originalY, originalX)
     case 'right':
-      return pickDirection(originalY - 1, originalX + 1, originalY + 1, originalX + 1, dir)
+      return pickDirection(originalY - 1, originalX + 1, originalY + 1, originalX + 1, dir, originalY, originalX)
     case 'up':
-      return pickDirection(originalY - 1, originalX - 1, originalY - 1, originalX + 1, dir)
+      return pickDirection(originalY - 1, originalX - 1, originalY - 1, originalX + 1, dir, originalY, originalX)
     case 'down':
-      return pickDirection(originalY + 1, originalX - 1, originalY + 1, originalX + 1, dir)
+      return pickDirection(originalY + 1, originalX - 1, originalY + 1, originalX + 1, dir, originalY, originalX)
     default:
       return { y: originalY, x: originalX }
   }
