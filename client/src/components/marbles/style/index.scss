@@ -1,4 +1,7 @@
 $rad: 50px;
+$sprite_size: 80%;
+
+$floor_colour: #ecf0f1;
 
 .row {
   display: flex;
@@ -11,14 +14,20 @@ $rad: 50px;
     align-items: center;
     justify-content: center;
     border: 1px solid #bec3c7;
+    img {
+      width: $sprite_size;
+      height: $sprite_size;
+      object-fit: contain;
+
+    }
     &.floor {
-      background: #ecf0f1;
+      background: $floor_colour;
     }
     &.wall {
       background: #bec3c7;
     }
     &.ball {
-      background: purple;
+      background: $floor_colour;
     }
   }
   // border: 1px solid steelblue;

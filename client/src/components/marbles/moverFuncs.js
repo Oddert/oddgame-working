@@ -51,26 +51,49 @@ const swerve = (originalY, originalX, boardRef, dir) => {
 
   const pickDirection = (y1, x1, y2, x2, dir, originalY, originalX) => {
 
+    // BUG: this code assumes the marble acting as obstical is going to move in the same direction as the marble
+    // which is deciding to halt. Direction must be read from target and 'infront' calculated from there
     const infrontOfObstical = (dir, originalY, originalX) => {
       const getOffset = (dir, y, x, inc) => {
         switch (dir) {
           case 'left':
-            return boardRef[y] && boardRef[y][x - inc] ? boardRef[y][x - inc] : { type: null }
+            // return boardRef[y] && boardRef[y][x - inc] ? { cell: boardRef[y][x - inc], y, x: x - inc } : { cell: { type: 'wall' }, y, x: x - inc }
+            return {
+              y,
+              x: x - inc,
+              cell: boardRef[y] && boardRef[y][x - inc] ? boardRef[y][x - inc] : { type: 'wall' }
+            }
           case 'right':
-            return boardRef[y] && boardRef[y][x + inc] ? boardRef[y][x + inc] : { type: null }
+            return {
+              y,
+              x: x - inc,
+              cell: boardRef[y] && boardRef[y][x + inc] ? boardRef[y][x + inc] : { type: 'wall' }
+            }
           case 'up':
-            return boardRef[y - inc] && boardRef[y - inc][x] ? boardRef[y - inc][x] : { type: null }
+            return {
+              y,
+              x: x - inc,
+              cell: boardRef[y] && boardRef[y - inc][x] ? boardRef[y - inc][x] : { type: 'wall' }
+            }
           case 'down':
-            return boardRef[y + inc] && boardRef[y + inc][x] ? boardRef[y + inc][x] : { type: null }
+            return {
+              y,
+              x: x - inc,
+              cell: boardRef[y] && boardRef[y + inc][x] ? boardRef[y + inc][x] : { type: 'wall' }
+            }
           default:
-            return { type: null }
+            return { cell: { type: 'wall' }, y, x }
         }
       }
       const obstical = getOffset(dir, originalY, originalX, 1)
-      const infront = getOffset(dir, originalY, originalX, 2)
-      console.log(obstical, infront)
-      if (obstical.type === 'ball' && infront.type === 'floor') return true
-      return false
+      // console.log(obstical)
+      if (obstical.cell.type === 'ball') {
+        const infront = getOffset(obstical.cell.direction, obstical.y, obstical.x, 1)
+        // console.log(obstical, infront)
+        if (infront.cell.type === 'floor' || infront.cell.type === 'ball') return true
+      } else {
+        return false
+      }
     }
 
     if (infrontOfObstical(dir, originalY, originalX)) return { y: originalY, x: originalX }
