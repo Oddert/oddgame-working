@@ -70,11 +70,11 @@ const Sentry = () => {
           case 'sentry':
             function moveSentry () {
               const moved = handleMove(r, c, col.direction, board)
-              if (moved.y === r && moved.x === c) return
+              if (moved.y === r && moved.x === c && moved.direction === col.direction) return
               if (nv[moved.y] && nv[moved.y][moved.x]) {
                 console.log(`swapping ${r}, ${c} to ${moved.y}, ${moved.x}`)
                 nv[moved.y][moved.x].type = 'sentry'
-                nv[moved.y][moved.x].direction = nv[r][c].direction
+                nv[moved.y][moved.x].direction = moved.direction
                 nv[r][c].type = 'floor'
                 delete nv[r][c].direction
               }
