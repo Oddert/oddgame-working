@@ -66,19 +66,19 @@ const swerve = (originalY, originalX, boardRef, dir) => {
           case 'right':
             return {
               y,
-              x: x - inc,
+              x: x + inc,
               cell: boardRef[y] && boardRef[y][x + inc] ? boardRef[y][x + inc] : { type: 'wall' }
             }
           case 'up':
             return {
-              y,
-              x: x - inc,
+              y: y - inc,
+              x,
               cell: boardRef[y] && boardRef[y - inc][x] ? boardRef[y - inc][x] : { type: 'wall' }
             }
           case 'down':
             return {
-              y,
-              x: x - inc,
+              y: y + inc,
+              x,
               cell: boardRef[y] && boardRef[y + inc][x] ? boardRef[y + inc][x] : { type: 'wall' }
             }
           default:

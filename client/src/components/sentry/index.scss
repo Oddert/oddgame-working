@@ -1,0 +1,37 @@
+$rad: 50px;
+$sprite_size: 80%;
+
+$floor_colour: #ecf0f1;
+
+.row {
+  display: flex;
+  .col {
+    display: flex;
+    // border: 1px dashed tomato;
+    width: $rad;
+    height: $rad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #bec3c7;
+    img {
+      width: $sprite_size;
+      height: $sprite_size;
+      object-fit: contain;
+
+    }
+    &.floor {
+      background: $floor_colour;
+    }
+    &.wall {
+      background: #bec3c7;
+    }
+    &.ball {
+      background: $floor_colour;
+    }
+    &.sentry {
+      background: $floor_colour;
+    }
+  }
+  // border: 1px solid steelblue;
+}
