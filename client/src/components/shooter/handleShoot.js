@@ -33,8 +33,8 @@ const targetCell = (y, x, dir, emit, boardRef) => {
 }
 
 const emitOpts = direction => ({
-  marble: { direction, type: 'ball' },
-  slider: { direction, type: 'slider' }
+  marble: { type: 'ball', direction },
+  slider: { type: 'slider', direction }
 })
 
 const handleShoot = (y, x, direction, emit, boardRef) => {

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Board from './Board/'
-import Dev from './Dev'
+// import Dev from './Dev'
 
 import handleShoot from './handleShoot'
 
@@ -30,7 +30,7 @@ const generateBoard = (sliderEmits) => {
   const getShooter = (emits) => {
     const sliderR = Math.floor(Math.random()*8) + 1
     const sliderC = Math.floor(Math.random()*8) + 1
-    if (out[sliderR][sliderC].type !== 'floor') return getShooter()
+    if (out[sliderR][sliderC].type !== 'floor') return getShooter(emits)
     else {
       out[sliderR][sliderC].type = 'shooter'
       out[sliderR][sliderC].direction = 'right'
@@ -40,23 +40,24 @@ const generateBoard = (sliderEmits) => {
 
   for (let i=0; i<3; i++) getShooter(sliderEmits)
 
+  // console.log({ initBoard: out })
   return out
 }
 
 
 const Slider = () => {
   const [board, setBoard] = React.useState(generateBoard('slider'))
-  const [painter, setPainter] = React.useState('shooter')
+  // const [painter, setPainter] = React.useState('shooter')
 
-  function handleSelectChange (e) {
-    setPainter(e)
-  }
+  // function handleSelectChange (e) {
+  //   setPainter(e)
+  // }
 
   function changeCell ({ y, x }) {
-    const nb = JSON.parse(JSON.stringify(board))
-    nb[y][x].type = painter
-    nb[y][x].direction = 'right'
-    setBoard(nb)
+  //   const nb = JSON.parse(JSON.stringify(board))
+  //   nb[y][x].type = painter
+  //   nb[y][x].direction = 'right'
+  //   setBoard(nb)
   }
 
   function loopAll () {

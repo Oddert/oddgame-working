@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Shooter from '../Entities/Shooter'
+
 import '../index.scss'
 
 import shooter_slider_left from '../../../resources/shooter_slider_left.svg'
@@ -27,23 +29,39 @@ const Board = ({ board, loopAll, changeCell }) => {
     shooter_marble_down
   }
 
+  const getCell = cell => {
+    switch(cell.type) {
+      case 'shooter':
+        return <Shooter imgs={imgs} {...cell} />
+      default:
+        return ''
+    }
+  }
+
+  function handleContextMenu (e, y, x) {
+    e.preventDefault()
+    changeCell({ y, x })
+  }
+
+  const cellWrapper = (cell, y, x) => (
+    <div
+      key={`${x}_${y}`}
+      className={`col ${cell.type}`}
+      onContextMenu={e => handleContextMenu(e, y, x)}
+    >
+      {
+        getCell(cell)
+      }
+    </div>
+  )
+
   function generateRows () {
     const cols = []
     for (let c=0; c<board.length; c++) {
       const rows = []
       for (let r=0; r<board[0].length; r++) {
-        rows.push(
-          <div key={r} className={`col ${board[c][r].type}`} onContextMenu={e => {
-            e.preventDefault()
-            changeCell({ y: c, x: r })
-          }}>
-            {
-              board[c][r].type === 'shooter'
-              ? <img className='shooter__img' src={imgs[`shooter_${board[c][r].emits}_${board[c][r].direction}`]} alt={`shooter ${board[c][r].direction}`} />
-              : ''
-            }
-          </div>
-        )
+        const cell = board[c][r]
+        rows.push(cellWrapper(cell, c, r))
       }
       cols.push(<div key={c} className='row'>{rows}</div>)
     }
