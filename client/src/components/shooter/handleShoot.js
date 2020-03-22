@@ -33,7 +33,7 @@ const targetCell = (y, x, dir, emit, boardRef) => {
 }
 
 const emitOpts = direction => ({
-  marble: { type: 'ball', direction },
+  marble: { type: 'marble', direction },
   slider: { type: 'slider', direction }
 })
 
