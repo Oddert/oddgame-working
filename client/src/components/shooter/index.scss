@@ -38,6 +38,9 @@ $floor_colour: #ecf0f1;
     &.shooter {
       background: $floor_colour;
     }
+    &.rotate {
+      background: $floor_colour;
+    }
   }
   // border: 1px solid steelblue;
 }

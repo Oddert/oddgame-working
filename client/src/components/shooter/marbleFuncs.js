@@ -1,5 +1,6 @@
 
 
+import { getClockwise, getAnticlockwise } from './Utils/rotate'
 
 const checkIsWall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'wall'
 const checkIsBall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'marble'
@@ -53,50 +54,61 @@ const swerve = (originalY, originalX, boardRef, dir) => {
 
     // BUG: this code assumes the marble acting as obstical is going to move in the same direction as the marble
     // which is deciding to halt. Direction must be read from target and 'infront' calculated from there
-    const infrontOfObstical = (dir, originalY, originalX) => {
-      const getOffset = (dir, y, x, inc) => {
-        switch (dir) {
-          case 'left':
-            // return boardRef[y] && boardRef[y][x - inc] ? { cell: boardRef[y][x - inc], y, x: x - inc } : { cell: { type: 'wall' }, y, x: x - inc }
-            return {
-              y,
-              x: x - inc,
-              cell: boardRef[y] && boardRef[y][x - inc] ? boardRef[y][x - inc] : { type: 'wall' }
-            }
-          case 'right':
-            return {
-              y,
-              x: x + inc,
-              cell: boardRef[y] && boardRef[y][x + inc] ? boardRef[y][x + inc] : { type: 'wall' }
-            }
-          case 'up':
-            return {
-              y: y - inc,
-              x,
-              cell: boardRef[y] && boardRef[y - inc][x] ? boardRef[y - inc][x] : { type: 'wall' }
-            }
-          case 'down':
-            return {
-              y: y + inc,
-              x,
-              cell: boardRef[y] && boardRef[y + inc][x] ? boardRef[y + inc][x] : { type: 'wall' }
-            }
-          default:
-            return { cell: { type: 'wall' }, y, x }
+    const getOffset = (dir, y, x, inc) => {
+      switch (dir) {
+        case 'left':
+        // return boardRef[y] && boardRef[y][x - inc] ? { cell: boardRef[y][x - inc], y, x: x - inc } : { cell: { type: 'wall' }, y, x: x - inc }
+        return {
+          y,
+          x: x - inc,
+          cell: boardRef[y] && boardRef[y][x - inc] ? boardRef[y][x - inc] : { type: 'wall' }
         }
+        case 'right':
+        return {
+          y,
+          x: x + inc,
+          cell: boardRef[y] && boardRef[y][x + inc] ? boardRef[y][x + inc] : { type: 'wall' }
+        }
+        case 'up':
+        return {
+          y: y - inc,
+          x,
+          cell: boardRef[y] && boardRef[y - inc][x] ? boardRef[y - inc][x] : { type: 'wall' }
+        }
+        case 'down':
+        return {
+          y: y + inc,
+          x,
+          cell: boardRef[y] && boardRef[y + inc][x] ? boardRef[y + inc][x] : { type: 'wall' }
+        }
+        default:
+        return { cell: { type: 'wall' }, y, x }
       }
+    }
+    const infrontOfObstical = (dir, originalY, originalX) => {
       const obstical = getOffset(dir, originalY, originalX, 1)
       // console.log(obstical)
       if (obstical.cell.type === 'marble') {
         const infront = getOffset(obstical.cell.direction, obstical.y, obstical.x, 1)
         // console.log(obstical, infront)
-        if (infront.cell.type === 'floor' || infront.cell.type === 'marble') return true
+        if (infront.cell.type === 'floor' || infront.cell.type === 'marble' || infront.cell.type === 'rotateX') return true
       } else {
         return false
       }
     }
 
+    console.log('#')
     if (infrontOfObstical(dir, originalY, originalX)) return { y: originalY, x: originalX }
+    console.log('##')
+    const obstical = getOffset(dir, originalY, originalX, 1)
+    console.log(obstical)
+    if (obstical.cell.type === 'rotate') {
+      return {
+        y: originalY,
+        x: originalX,
+        direction: obstical.cell.direction === 'clock' ? getClockwise(dir) : getAnticlockwise(dir)
+      }
+    }
     const possibilities = []
     // going "left" / "up"
     if (swerveValid(y1, x1, dir).valid) possibilities.push({ y: y1, x: x1 })
@@ -133,6 +145,7 @@ const moveValidator = (current, desire, boardRef, dir) => {
       return { y: current.y, x: current.x, status }
     case 'right':
       if (!status) {
+        console.log('528491')
         let swerved = swerve(current.y, current.x, boardRef, dir)
         console.log('nah swerve that: ', swerved)
         return { y: swerved.y, x: swerved.x, status: true }

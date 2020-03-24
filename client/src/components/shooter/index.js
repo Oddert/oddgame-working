@@ -1,11 +1,13 @@
 import React from 'react'
 
 import Board from './Board/'
-// import Dev from './Dev'
+import Dev from './Dev'
 
 import handleShoot from './handleShoot'
 import handleSliderMove from './handleSliderMove'
 import handleMarbleMove from './handleMarbleMove'
+
+const ran = arr => arr[Math.floor(Math.random() * arr.length)]
 
 const generateBoard = (sliderEmits) => {
   const out = []
@@ -29,18 +31,29 @@ const generateBoard = (sliderEmits) => {
 
   for (let i=0; i<5; i++) getWall()
 
-  const getShooter = (emits) => {
+  // const getShooter = emits => {
+  //   const sliderR = Math.floor(Math.random()*8) + 1
+  //   const sliderC = Math.floor(Math.random()*8) + 1
+  //   if (out[sliderR][sliderC].type !== 'floor') return getShooter(emits)
+  //   else {
+  //     out[sliderR][sliderC].type = 'shooter'
+  //     out[sliderR][sliderC].direction = 'right'
+  //     out[sliderR][sliderC].emits = emits
+  //   }
+  // }
+
+  const getRotate = direction => {
     const sliderR = Math.floor(Math.random()*8) + 1
     const sliderC = Math.floor(Math.random()*8) + 1
-    if (out[sliderR][sliderC].type !== 'floor') return getShooter(emits)
+    if (out[sliderR][sliderC].type !== 'floor') return getRotate(direction)
     else {
-      out[sliderR][sliderC].type = 'shooter'
-      out[sliderR][sliderC].direction = 'right'
-      out[sliderR][sliderC].emits = emits
+      out[sliderR][sliderC].type = 'rotate'
+      out[sliderR][sliderC].direction = direction
     }
   }
 
-  for (let i=0; i<3; i++) getShooter(sliderEmits)
+  // for (let i=0; i<3; i++) getShooter(sliderEmits)
+  for (let i=0; i<3; i++) getRotate(ran(['clock', 'anticlock']))
 
   console.log({ initBoard: out })
   return out
@@ -49,17 +62,18 @@ const generateBoard = (sliderEmits) => {
 
 const Slider = () => {
   const [board, setBoard] = React.useState(generateBoard('marble'))
-  // const [painter, setPainter] = React.useState('shooter')
+  const [painter, setPainter] = React.useState('shooter')
 
-  // function handleSelectChange (e) {
-  //   setPainter(e)
-  // }
+  function handleSelectChange (e) {
+    setPainter(e)
+  }
 
   function changeCell ({ y, x }) {
-  //   const nb = JSON.parse(JSON.stringify(board))
-  //   nb[y][x].type = painter
-  //   nb[y][x].direction = 'right'
-  //   setBoard(nb)
+    const nb = JSON.parse(JSON.stringify(board))
+    nb[y][x].type = painter
+    nb[y][x].direction = 'right'
+    if (painter === 'rotate') nb[y][x].direction = ran(['clock', 'anticlock'])
+    setBoard(nb)
   }
 
   function loopAll () {
@@ -102,6 +116,7 @@ const Slider = () => {
                 // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
                 // console.log('baw found')
                 const moved = handleMarbleMove(r, c, col.direction, board)
+                console.log(moved)
                 if (moved.y === r && moved.x === c) return
                 // console.log({ r, c  }, moved)
                 if (nv[moved.y] && nv[moved.y][moved.x]) {
@@ -144,7 +159,7 @@ const Slider = () => {
   return (
     <>
       <Board board={board} loopAll={loopAll} changeCell={changeCell} />
-      {/* <Dev board={board} setBoard={setBoard} handleSelectChange={handleSelectChange} painter={painter} /> */}
+      <Dev board={board} setBoard={setBoard} handleSelectChange={handleSelectChange} painter={painter} />
     </>
   )
 }

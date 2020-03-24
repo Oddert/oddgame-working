@@ -3,66 +3,30 @@ import React from 'react'
 import Shooter from '../Entities/Shooter'
 import Slider from '../Entities/Slider'
 import Marble from '../Entities/Marble'
+import Rotate from '../Entities/Rotate'
 
 import '../index.scss'
 
-import shooter_slider_left from '../../../resources/shooter_slider_left.svg'
-import shooter_slider_right from '../../../resources/shooter_slider_right.svg'
-import shooter_slider_up from '../../../resources/shooter_slider_up.svg'
-import shooter_slider_down from '../../../resources/shooter_slider_down.svg'
-
-import shooter_marble_left from '../../../resources/shooter_marble_left.svg'
-import shooter_marble_right from '../../../resources/shooter_marble_right.svg'
-import shooter_marble_up from '../../../resources/shooter_marble_up.svg'
-import shooter_marble_down from '../../../resources/shooter_marble_down.svg'
-
-import slider_left from '../../../resources/slider_left.svg'
-import slider_right from '../../../resources/slider_right.svg'
-import slider_up from '../../../resources/slider_up.svg'
-import slider_down from '../../../resources/slider_down.svg'
-
-import marble_left from '../../../resources/marble_left.svg'
-import marble_right from '../../../resources/marble_right.svg'
-import marble_up from '../../../resources/marble_up.svg'
-import marble_down from '../../../resources/marble_down.svg'
+import {
+  shooter_imgs,
+  slider_imgs,
+  marble_imgs,
+  rotate_imgs
+} from '../sprite_textures'
 
 const Board = ({ board, loopAll, changeCell }) => {
-
-  const shooter_imgs = {
-    shooter_slider_left,
-    shooter_slider_right,
-    shooter_slider_up,
-    shooter_slider_down,
-
-    shooter_marble_left,
-    shooter_marble_right,
-    shooter_marble_up,
-    shooter_marble_down
-  }
-
-  const slider_imgs = {
-    slider_left,
-    slider_right,
-    slider_up,
-    slider_down
-  }
-
-  const marble_imgs = {
-    marble_left,
-    marble_right,
-    marble_up,
-    marble_down
-  }
 
   const getCell = cell => {
     switch(cell.type) {
       case 'shooter':
-        console.log(cell.emits)
+        console.log(cell)
         return <Shooter imgs={shooter_imgs} {...cell} />
       case 'slider':
         return <Slider imgs={slider_imgs} {...cell} />
       case 'marble':
         return <Marble imgs={marble_imgs} {...cell} />
+      case 'rotate':
+        return <Rotate imgs={rotate_imgs} {...cell} />
       default:
         return ''
     }
