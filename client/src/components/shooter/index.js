@@ -61,6 +61,7 @@ const generateBoard = (sliderEmits) => {
 
 
 const Slider = () => {
+  // BUG: This should be in a useEffect???
   const [board, setBoard] = React.useState(generateBoard('marble'))
   const [painter, setPainter] = React.useState('marble')
 
@@ -99,8 +100,12 @@ const Slider = () => {
             function moveslider () {
               const moved = handleSliderMove(r, c, col.direction, board)
 
+              const directionUnchanged = !moved.direction || (moved.direction && moved.direction === col.direction)
               const positionUnMoved = moved.y === r && moved.x === c
-              if (positionUnMoved && moved.direction === col.direction) return
+              if (positionUnMoved) {
+                if (!directionUnchanged) nv[r][c].direction = moved.direction
+                return
+              }
               // console.log(`swapping ${r}, ${c}, ${board[r][c].direction} to ${moved.y}, ${moved.x}, ${moved.direction}`)
               nv[moved.y][moved.x].type = 'slider'
               nv[moved.y][moved.x].direction = nv[r][c].direction
