@@ -117,6 +117,11 @@ const Slider = () => {
                 // console.log('baw found')
                 const moved = handleMarbleMove(r, c, col.direction, board)
                 console.log(moved)
+                console.log(moved.direction && moved.direction !== col.direction)
+                if (moved.direction && moved.direction !== col.direction) {
+                  nv[moved.y][moved.x].direction = moved.direction
+                  return
+                }
                 if (moved.y === r && moved.x === c) return
                 // console.log({ r, c  }, moved)
                 if (nv[moved.y] && nv[moved.y][moved.x]) {

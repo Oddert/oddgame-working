@@ -4,6 +4,7 @@ import { getClockwise, getAnticlockwise } from './Utils/rotate'
 
 const checkIsWall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'wall'
 const checkIsBall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'marble'
+const checkIsRotate = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'rotate'
 // const checkIsFloor = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'floor'
 
 const getCell = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x]
@@ -138,6 +139,7 @@ const moveValidator = (current, desire, boardRef, dir) => {
   let status = true
   if (checkIsWall(desire.y, desire.x, boardRef)) status = false
   if (checkIsBall(desire.y, desire.x, boardRef)) status = false
+  if (checkIsRotate(desire.y, desire.x, boardRef)) status = false
   console.log(`### ${current.y}, ${current.x}, ${status} trying to move into: ${desire.y}, ${desire.x} (${boardRef[desire.y][desire.x].type})`)
 
   switch (dir) {
@@ -148,7 +150,7 @@ const moveValidator = (current, desire, boardRef, dir) => {
         console.log('528491')
         let swerved = swerve(current.y, current.x, boardRef, dir)
         console.log('nah swerve that: ', swerved)
-        return { y: swerved.y, x: swerved.x, status: true }
+        return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true }
       }
       console.log('*** Givin it what it wants ***')
       return { y: desire.y, x: desire.x, status }
@@ -169,5 +171,5 @@ export function mRight (y, x, boardRef, dir) {
   // The status attr returns is move is valid
   if (!move.status) return { y, x, status: false }
   // Validator may make an adjustment to the request (e.g changin object direction) so return y,x is used
-  return { x: move.x, y: move.y, status: true }
+  return { x: move.x, y: move.y, direction: move.direction, status: true }
 }
