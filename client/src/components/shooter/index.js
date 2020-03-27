@@ -62,7 +62,7 @@ const generateBoard = (sliderEmits) => {
 
 const Slider = () => {
   const [board, setBoard] = React.useState(generateBoard('marble'))
-  const [painter, setPainter] = React.useState('shooter')
+  const [painter, setPainter] = React.useState('marble')
 
   function handleSelectChange (e) {
     setPainter(e)
@@ -116,12 +116,15 @@ const Slider = () => {
                 // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
                 // console.log('baw found')
                 const moved = handleMarbleMove(r, c, col.direction, board)
-                console.log(moved)
+                console.log(r, c, moved)
                 console.log(moved.direction && moved.direction !== col.direction)
+
                 if (moved.direction && moved.direction !== col.direction) {
+                  console.log('direction changed')
                   nv[moved.y][moved.x].direction = moved.direction
                   return
                 }
+
                 if (moved.y === r && moved.x === c) return
                 // console.log({ r, c  }, moved)
                 if (nv[moved.y] && nv[moved.y][moved.x]) {

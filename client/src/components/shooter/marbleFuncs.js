@@ -10,21 +10,35 @@ const checkIsRotate = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && board
 const getCell = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x]
 
 export function mUp (y, x, boardRef, dir) {
-  if (checkIsWall(y - 1, x, boardRef)) return { y, x, status: false }
-  if (y - 1 < 0 || false) return { y, x, status: false }
-  return { x, y: y - 1, status: true }
+  const move = moveValidator({ y, x }, { y: y - 1, x }, boardRef, dir)
+  if (!move.status) return { y, x, status: false }
+  return { x: move.x, y: move.y, direction: move.direction, status: true }
 }
 
 export function mDown (y, x, boardRef, dir) {
-  if (checkIsWall(y + 1, x, boardRef)) return { y, x, status: false }
-  if (y + 1 >= boardRef[0].length) return { y, x, status: false }
-  return { x, y: y + 1, status: true }
+  // if (checkIsWall(y + 1, x, boardRef)) return { y, x, status: false }
+  // if (y + 1 >= boardRef[0].length) return { y, x, status: false }
+  // return { x, y: y + 1, status: true }
+
+  const move = moveValidator({ y, x }, { y: y + 1, x }, boardRef, dir)
+  if (!move.status) return { y, x, status: false }
+  return { x: move.x, y: move.y, direction: move.direction, status: true }
 }
 
 export function mLeft (y, x, boardRef, dir) {
-  if (checkIsWall(y, x - 1, boardRef)) return { y, x, status: false }
-  if (x - 1 < 0) return { y, x, status: false }
-  return { x: x - 1, y, status: true }
+  const move = moveValidator({ y, x }, { y, x: x - 1 }, boardRef, dir)
+  if (!move.status) return { y, x, status: false }
+  return { x: move.x, y: move.y, direction: move.direction, status: true }
+}
+
+// A move to the right is requested from the controller
+export function mRight (y, x, boardRef, dir) {
+  // Desired move (to right) is validated by a universal function
+  const move = moveValidator({ y, x }, { y, x: x + 1 }, boardRef, dir)
+  // The status attr returns is move is valid
+  if (!move.status) return { y, x, status: false }
+  // Validator may make an adjustment to the request (e.g changin object direction) so return y,x is used
+  return { x: move.x, y: move.y, direction: move.direction, status: true }
 }
 
 const swerve = (originalY, originalX, boardRef, dir) => {
@@ -133,7 +147,7 @@ const swerve = (originalY, originalX, boardRef, dir) => {
       return { y: originalY, x: originalX }
   }
 
-}
+} // swerve
 
 const moveValidator = (current, desire, boardRef, dir) => {
   let status = true
@@ -142,34 +156,38 @@ const moveValidator = (current, desire, boardRef, dir) => {
   if (checkIsRotate(desire.y, desire.x, boardRef)) status = false
   console.log(`### ${current.y}, ${current.x}, ${status} trying to move into: ${desire.y}, ${desire.x} (${boardRef[desire.y][desire.x].type})`)
 
-  switch (dir) {
-    case 'left':
-      return { y: current.y, x: current.x, status }
-    case 'right':
-      if (!status) {
-        console.log('528491')
-        let swerved = swerve(current.y, current.x, boardRef, dir)
-        console.log('nah swerve that: ', swerved)
-        return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true }
-      }
-      console.log('*** Givin it what it wants ***')
-      return { y: desire.y, x: desire.x, status }
-    case 'up':
-      return { y: current.y, x: current.x, status }
-    case 'down':
-      return { y: current.y, x: current.x, status }
-    default:
-      console.log('def')
-      return { y: current.y, x: current.x, status }
+  if (!status) {
+    let swerved = swerve(current.y, current.x, boardRef, dir)
+    console.log('nah swerve that: ', swerved)
+    return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true }
   }
-}
+  console.log('*** Givin it what it wants ***')
+  return { y: desire.y, x: desire.x, status }
 
-// A move to the right is requested from the controller
-export function mRight (y, x, boardRef, dir) {
-  // Desired move (to right) is validated by a universal function
-  const move = moveValidator({ y, x }, { y, x: x + 1 }, boardRef, dir)
-  // The status attr returns is move is valid
-  if (!move.status) return { y, x, status: false }
-  // Validator may make an adjustment to the request (e.g changin object direction) so return y,x is used
-  return { x: move.x, y: move.y, direction: move.direction, status: true }
+  // switch (dir) {
+  //   case 'left':
+  //     return { y: current.y, x: current.x, status }
+  //   case 'right':
+  //     if (!status) {
+  //       let swerved = swerve(current.y, current.x, boardRef, dir)
+  //       console.log('nah swerve that: ', swerved)
+  //       return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true }
+  //     }
+  //     console.log('*** Givin it what it wants ***')
+  //     return { y: desire.y, x: desire.x, status }
+  //   case 'up':
+  //     return { y: current.y, x: current.x, status }
+  //   case 'down':
+  //     if (!status) {
+  //       let swerved = swerve(current.y, current.x, boardRef, dir)
+  //       console.log('nah swerve that: ', swerved)
+  //       return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true }
+  //     }
+  //     console.log('*** Givin it what it wants ***')
+  //     return { y: desire.y, x: desire.x, status }
+  //     // return { y: current.y, x: current.x, status }
+  //   default:
+  //     console.log('def')
+  //     return { y: current.y, x: current.x, status }
+  // }
 }
