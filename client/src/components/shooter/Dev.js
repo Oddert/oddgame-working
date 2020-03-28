@@ -18,6 +18,7 @@ const Dev = ({ board, setBoard, handleSelectChange, painter }) => {
         <option value='slider'>Slider</option>
         <option value='sentry'>Sentry</option>
         <option value='rotate'>Rotate</option>
+        <option value='blackhole'>BlackHole</option>
       </select>
     </div>
   )

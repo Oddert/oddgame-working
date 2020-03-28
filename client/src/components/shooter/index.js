@@ -101,6 +101,10 @@ const Slider = () => {
             function moveslider () {
               const moved = handleSliderMove(r, c, col.direction, board)
               console.log(moved)
+              if (moved.toBeRemoved) {
+                nv[r][c] = { type: 'floor' }
+                return
+              }
               const directionUnchanged = !moved.direction || (moved.direction && moved.direction === col.direction)
               const positionUnMoved = moved.y === r && moved.x === c
               if (positionUnMoved) {
@@ -122,6 +126,10 @@ const Slider = () => {
               // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
               // console.log('baw found')
               const moved = handleMarbleMove(r, c, col.direction, board)
+              if (moved.toBeRemoved) {
+                nv[r][c] = { type: 'floor' }
+                return
+              }
               console.log(moved)
               console.log(r, c, moved)
               console.log(moved.direction && moved.direction !== col.direction)
@@ -148,6 +156,10 @@ const Slider = () => {
             function moveSentry () {
               const moved = handleSentryMove(r, c, col.direction, board)
               console.log(moved)
+              if (moved.toBeRemoved) {
+                nv[r][c] = { type: 'floor' }
+                return
+              }
 
               const positionUnMoved = moved.y === r && moved.x === c
               if (positionUnMoved && moved.direction === col.direction) return
