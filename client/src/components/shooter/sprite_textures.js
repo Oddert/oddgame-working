@@ -22,6 +22,11 @@ import marble_down from '../../resources/marble_down.svg'
 import rotate_clock from '../../resources/rotate_clock.svg'
 import rotate_anticlock from '../../resources/rotate_anticlock.svg'
 
+import sentry_right from '../../resources/sentry_right.svg'
+import sentry_left from '../../resources/sentry_left.svg'
+import sentry_up from '../../resources/sentry_up.svg'
+import sentry_down from '../../resources/sentry_down.svg'
+
 
 
 export const shooter_imgs = {
@@ -53,4 +58,11 @@ export const marble_imgs = {
 export const rotate_imgs = {
   rotate_clock,
   rotate_anticlock
+}
+
+export const sentry_imgs = {
+  sentry_right,
+  sentry_left,
+  sentry_up,
+  sentry_down
 }

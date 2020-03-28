@@ -6,6 +6,7 @@ import Dev from './Dev'
 import handleShoot from './handleShoot'
 import handleSliderMove from './handleSliderMove'
 import handleMarbleMove from './handleMarbleMove'
+import handleSentryMove from './handleSentryMove'
 
 const ran = arr => arr[Math.floor(Math.random() * arr.length)]
 
@@ -116,48 +117,48 @@ const Slider = () => {
             }
             callstack.push(moveslider)
             return
-            case 'marble':
-              function moveBall () {
-                // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
-                // console.log('baw found')
-                const moved = handleMarbleMove(r, c, col.direction, board)
-                console.log(r, c, moved)
-                console.log(moved.direction && moved.direction !== col.direction)
+          case 'marble':
+            function moveBall () {
+              // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
+              // console.log('baw found')
+              const moved = handleMarbleMove(r, c, col.direction, board)
+              console.log(r, c, moved)
+              console.log(moved.direction && moved.direction !== col.direction)
 
-                if (moved.direction && moved.direction !== col.direction) {
-                  console.log('direction changed')
-                  nv[moved.y][moved.x].direction = moved.direction
-                  return
-                }
-
-                if (moved.y === r && moved.x === c) return
-                // console.log({ r, c  }, moved)
-                if (nv[moved.y] && nv[moved.y][moved.x]) {
-                  console.log(`swapping ${r}, ${c} to ${moved.y}, ${moved.x}`)
-                  nv[moved.y][moved.x].type = 'marble'
-                  nv[moved.y][moved.x].direction = nv[r][c].direction
-                  nv[r][c].type = 'floor'
-                  delete nv[r][c].direction
-                }
+              if (moved.direction && moved.direction !== col.direction) {
+                console.log('direction changed')
+                nv[moved.y][moved.x].direction = moved.direction
+                return
               }
-              callstack.push(moveBall)
-              return
-          // case 'sentry':
-          //   function moveSentry () {
-          //     const moved = handleSentryMove(r, c, col.direction, board)
-          //
-          //     const positionUnMoved = moved.y === r && moved.x === c
-          //     if (positionUnMoved && moved.direction === col.direction) return
-          //     // console.log(`swapping ${r}, ${c}, ${board[r][c].direction} to ${moved.y}, ${moved.x}, ${moved.direction}`)
-          //     nv[moved.y][moved.x].type = 'sentry'
-          //     nv[moved.y][moved.x].direction = moved.direction
-          //     if (!positionUnMoved) {
-          //       nv[r][c].type = 'floor'
-          //       delete nv[r][c].direction
-          //     }
-          //   }
-          //   callstack.push(moveSentry)
-          //   return
+
+              if (moved.y === r && moved.x === c) return
+              // console.log({ r, c  }, moved)
+              if (nv[moved.y] && nv[moved.y][moved.x]) {
+                console.log(`swapping ${r}, ${c} to ${moved.y}, ${moved.x}`)
+                nv[moved.y][moved.x].type = 'marble'
+                nv[moved.y][moved.x].direction = nv[r][c].direction
+                nv[r][c].type = 'floor'
+                delete nv[r][c].direction
+              }
+            }
+            callstack.push(moveBall)
+            return
+          case 'sentry':
+            function moveSentry () {
+              const moved = handleSentryMove(r, c, col.direction, board)
+
+              const positionUnMoved = moved.y === r && moved.x === c
+              if (positionUnMoved && moved.direction === col.direction) return
+              // console.log(`swapping ${r}, ${c}, ${board[r][c].direction} to ${moved.y}, ${moved.x}, ${moved.direction}`)
+              nv[moved.y][moved.x].type = 'sentry'
+              nv[moved.y][moved.x].direction = moved.direction
+              if (!positionUnMoved) {
+                nv[r][c].type = 'floor'
+                delete nv[r][c].direction
+              }
+            }
+            callstack.push(moveSentry)
+            return
           default:
             return
         }

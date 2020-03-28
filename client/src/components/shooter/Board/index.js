@@ -4,6 +4,7 @@ import Shooter from '../Entities/Shooter'
 import Slider from '../Entities/Slider'
 import Marble from '../Entities/Marble'
 import Rotate from '../Entities/Rotate'
+import Sentry from '../Entities/Sentry'
 
 import '../index.scss'
 
@@ -11,7 +12,8 @@ import {
   shooter_imgs,
   slider_imgs,
   marble_imgs,
-  rotate_imgs
+  rotate_imgs,
+  sentry_imgs
 } from '../sprite_textures'
 
 const Board = ({ board, loopAll, changeCell }) => {
@@ -27,6 +29,8 @@ const Board = ({ board, loopAll, changeCell }) => {
         return <Marble imgs={marble_imgs} {...cell} />
       case 'rotate':
         return <Rotate imgs={rotate_imgs} {...cell} />
+      case 'sentry':
+        return <Sentry imgs={sentry_imgs} {...cell} />
       default:
         return ''
     }
