@@ -1,13 +1,8 @@
 
-import { getClockwise, getAnticlockwise } from './Utils/rotate'
+import { getRoatation } from '../Utils/rotate'
+import { checkIsFloor, checkIsRotate, checkIsBlackhole } from '../Utils/check'
 
 // OPTIMIZE: Double check these files for potential unused code / vars
-
-// const checkIsWall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'wall'
-// const checkIsBall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'ball'
-const checkIsFloor = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'floor'
-const checkIsRotate = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'rotate'
-
 
 const handleSliderMove = (y, x, direction, boardRef) => {
   switch (direction) {
@@ -42,21 +37,20 @@ function mDown(y, x, boardRef, direction) {
   return { y: move.y, x: move.x, direction: move.direction }
 }
 
-const getRoatation = (dir, desire, boardRef) => boardRef[desire.y][desire.x].direction === 'clock'
-  ? getClockwise(dir)
-  : getAnticlockwise(dir)
-
 function moveValidator (current, desire, boardRef) {
   let status = true
+  let toBeRemoved = false
+  if (checkIsBlackhole(desire.y, desire.x, boardRef)) toBeRemoved = true
   if (!checkIsFloor(desire.y, desire.x, boardRef)) status = false
   if (checkIsRotate(desire.y, desire.x, boardRef)) return {
     y: current.y,
     x: current.x,
-    direction: getRoatation(current.direction, desire, boardRef)
+    direction: getRoatation(current.direction, desire, boardRef),
+    toBeRemoved
   }
-  if (!status) return { y: current.y, x: current.x }
+  if (!status) return { y: current.y, x: current.x, toBeRemoved }
 
-  return { y: desire.y, x: desire.x }
+  return { y: desire.y, x: desire.x, toBeRemoved }
 }
 
 

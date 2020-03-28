@@ -1,44 +1,38 @@
 
 
-import { getClockwise, getAnticlockwise } from './Utils/rotate'
+import { getClockwise, getAnticlockwise } from '../Utils/rotate'
+import { checkIsWall, checkIsBall, checkIsRotate, checkIsBlackhole, getCell } from '../Utils/check'
 
-const checkIsWall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'wall'
-const checkIsBall = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'marble'
-const checkIsRotate = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'rotate'
-// const checkIsFloor = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'floor'
-
-const getCell = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x]
-
-export function mUp (y, x, boardRef, dir) {
+function mUp (y, x, boardRef, dir) {
   const move = moveValidator({ y, x }, { y: y - 1, x }, boardRef, dir)
-  if (!move.status) return { y, x, status: false }
-  return { x: move.x, y: move.y, direction: move.direction, status: true }
+  if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved }
+  return { x: move.x, y: move.y, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved }
 }
 
-export function mDown (y, x, boardRef, dir) {
+function mDown (y, x, boardRef, dir) {
   // if (checkIsWall(y + 1, x, boardRef)) return { y, x, status: false }
   // if (y + 1 >= boardRef[0].length) return { y, x, status: false }
   // return { x, y: y + 1, status: true }
 
   const move = moveValidator({ y, x }, { y: y + 1, x }, boardRef, dir)
-  if (!move.status) return { y, x, status: false }
-  return { x: move.x, y: move.y, direction: move.direction, status: true }
+  if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved }
+  return { x: move.x, y: move.y, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved }
 }
 
-export function mLeft (y, x, boardRef, dir) {
+function mLeft (y, x, boardRef, dir) {
   const move = moveValidator({ y, x }, { y, x: x - 1 }, boardRef, dir)
-  if (!move.status) return { y, x, status: false }
-  return { x: move.x, y: move.y, direction: move.direction, status: true }
+  if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved }
+  return { x: move.x, y: move.y, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved }
 }
 
 // A move to the right is requested from the controller
-export function mRight (y, x, boardRef, dir) {
+function mRight (y, x, boardRef, dir) {
   // Desired move (to right) is validated by a universal function
   const move = moveValidator({ y, x }, { y, x: x + 1 }, boardRef, dir)
   // The status attr returns is move is valid
-  if (!move.status) return { y, x, status: false }
+  if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved }
   // Validator may make an adjustment to the request (e.g changin object direction) so return y,x is used
-  return { x: move.x, y: move.y, direction: move.direction, status: true }
+  return { x: move.x, y: move.y, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved }
 }
 
 const swerve = (originalY, originalX, boardRef, dir) => {
@@ -151,18 +145,20 @@ const swerve = (originalY, originalX, boardRef, dir) => {
 
 const moveValidator = (current, desire, boardRef, dir) => {
   let status = true
+  let toBeRemoved = false
   if (checkIsWall(desire.y, desire.x, boardRef)) status = false
   if (checkIsBall(desire.y, desire.x, boardRef)) status = false
   if (checkIsRotate(desire.y, desire.x, boardRef)) status = false
+  if (checkIsBlackhole(desire.y, desire.x, boardRef)) toBeRemoved = true
   console.log(`### ${current.y}, ${current.x}, ${status} trying to move into: ${desire.y}, ${desire.x} (${boardRef[desire.y][desire.x].type})`)
 
   if (!status) {
     let swerved = swerve(current.y, current.x, boardRef, dir)
     console.log('nah swerve that: ', swerved)
-    return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true }
+    return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true, toBeRemoved }
   }
   console.log('*** Givin it what it wants ***')
-  return { y: desire.y, x: desire.x, status }
+  return { y: desire.y, x: desire.x, status, toBeRemoved }
 
   // switch (dir) {
   //   case 'left':
@@ -191,3 +187,21 @@ const moveValidator = (current, desire, boardRef, dir) => {
   //     return { y: current.y, x: current.x, status }
   // }
 }
+
+
+const handleMove = (y, x, dir, boardRef) => {
+  switch (dir) {
+    case 'up':
+      return mUp(y, x, boardRef, dir)
+    case 'down':
+      return mDown(y, x, boardRef, dir)
+    case 'left':
+      return mLeft(y, x, boardRef, dir)
+    case 'right':
+      return mRight(y, x, boardRef, dir)
+    default:
+       return { x, y }
+  }
+}
+
+export default handleMove

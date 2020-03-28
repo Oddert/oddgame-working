@@ -3,10 +3,10 @@ import React from 'react'
 import Board from './Board/'
 import Dev from './Dev'
 
-import handleShoot from './handleShoot'
-import handleSliderMove from './handleSliderMove'
-import handleMarbleMove from './handleMarbleMove'
-import handleSentryMove from './handleSentryMove'
+import handleShoot from './MoveHandlers/handleShoot'
+import handleSliderMove from './MoveHandlers/handleSliderMove'
+import handleMarbleMove from './MoveHandlers/handleMarbleMove'
+import handleSentryMove from './MoveHandlers/handleSentryMove'
 
 const ran = arr => arr[Math.floor(Math.random() * arr.length)]
 
@@ -100,7 +100,7 @@ const Slider = () => {
           case 'slider':
             function moveslider () {
               const moved = handleSliderMove(r, c, col.direction, board)
-
+              console.log(moved)
               const directionUnchanged = !moved.direction || (moved.direction && moved.direction === col.direction)
               const positionUnMoved = moved.y === r && moved.x === c
               if (positionUnMoved) {
@@ -122,6 +122,7 @@ const Slider = () => {
               // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
               // console.log('baw found')
               const moved = handleMarbleMove(r, c, col.direction, board)
+              console.log(moved)
               console.log(r, c, moved)
               console.log(moved.direction && moved.direction !== col.direction)
 
@@ -146,6 +147,7 @@ const Slider = () => {
           case 'sentry':
             function moveSentry () {
               const moved = handleSentryMove(r, c, col.direction, board)
+              console.log(moved)
 
               const positionUnMoved = moved.y === r && moved.x === c
               if (positionUnMoved && moved.direction === col.direction) return

@@ -1,4 +1,4 @@
-const checkIsFloor = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardRef[y][x].type === 'floor'
+import { checkIsFloor } from '../Utils/check'
 
 const targetCell = (y, x, dir, emit, boardRef) => {
 

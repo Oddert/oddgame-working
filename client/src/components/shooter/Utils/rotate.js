@@ -29,3 +29,7 @@ export const getAnticlockwise = dir => {
       return dir
   }
 }
+
+export const getRoatation = (dir, desire, boardRef) => boardRef[desire.y][desire.x].direction === 'clock'
+  ? getClockwise(dir)
+  : getAnticlockwise(dir)
