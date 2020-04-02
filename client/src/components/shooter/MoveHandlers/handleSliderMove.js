@@ -22,19 +22,19 @@ const handleSliderMove = (y, x, direction, boardRef) => {
 
 function mLeft(y, x, boardRef, direction) {
   const move = moveValidator({ y, x, direction }, { y, x: x - 1, direction }, boardRef)
-  return { y: move.y, x: move.x, direction: move.direction }
+  return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved }
 }
 function mRight(y, x, boardRef, direction) {
   const move = moveValidator({ y, x, direction }, { y, x: x + 1, direction }, boardRef)
-  return { y: move.y, x: move.x, direction: move.direction }
+  return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved }
 }
 function mUp(y, x, boardRef, direction) {
   const move = moveValidator({ y, x, direction }, { y: y - 1, x, direction }, boardRef)
-  return { y: move.y, x: move.x, direction: move.direction }
+  return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved }
 }
 function mDown(y, x, boardRef, direction) {
   const move = moveValidator({ y, x, direction }, { y: y + 1, x, direction }, boardRef)
-  return { y: move.y, x: move.x, direction: move.direction }
+  return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved }
 }
 
 function moveValidator (current, desire, boardRef) {

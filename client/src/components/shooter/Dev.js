@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 const Dev = ({ board, setBoard, handleSelectChange, painter }) => {
 
   const handleChange = e => {
@@ -19,6 +17,7 @@ const Dev = ({ board, setBoard, handleSelectChange, painter }) => {
         <option value='sentry'>Sentry</option>
         <option value='rotate'>Rotate</option>
         <option value='blackhole'>BlackHole</option>
+        <option value='timer'>Timer</option>
       </select>
     </div>
   )

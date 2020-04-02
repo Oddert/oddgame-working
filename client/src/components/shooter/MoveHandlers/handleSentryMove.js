@@ -1,5 +1,5 @@
 
-import { checkIsWall, checkIsBall, checkIsRotate, checkIsFloor, checkIsBlackhole } from '../Utils/check'
+import { checkIsRotate, checkIsFloor, checkIsBlackhole } from '../Utils/check'
 import { getRoatation } from '../Utils/rotate'
 
 const dirMap = {
