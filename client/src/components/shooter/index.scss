@@ -14,6 +14,7 @@ $floor_colour: #ecf0f1;
     align-items: center;
     justify-content: center;
     border: 1px solid #bec3c7;
+    position: relative;
     img {
       width: $sprite_size;
       height: $sprite_size;
@@ -40,6 +41,13 @@ $floor_colour: #ecf0f1;
     }
     &.rotate {
       background: $floor_colour;
+    }
+    &.blackhole {
+      background: $floor_colour;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
   // border: 1px solid steelblue;

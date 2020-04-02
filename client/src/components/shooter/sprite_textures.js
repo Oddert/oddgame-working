@@ -27,6 +27,18 @@ import sentry_left from '../../resources/sentry_left.svg'
 import sentry_up from '../../resources/sentry_up.svg'
 import sentry_down from '../../resources/sentry_down.svg'
 
+import blackhole from '../../resources/blackhole.svg'
+
+import timer_0 from '../../resources/timer_0.svg'
+import timer_1 from '../../resources/timer_1.svg'
+import timer_2 from '../../resources/timer_2.svg'
+import timer_3 from '../../resources/timer_3.svg'
+import timer_4 from '../../resources/timer_4.svg'
+import timer_5 from '../../resources/timer_5.svg'
+import timer_6 from '../../resources/timer_6.svg'
+import timer_7 from '../../resources/timer_7.svg'
+import timer_8 from '../../resources/timer_8.svg'
+import timer_9 from '../../resources/timer_9.svg'
 
 
 export const shooter_imgs = {
@@ -65,4 +77,19 @@ export const sentry_imgs = {
   sentry_left,
   sentry_up,
   sentry_down
+}
+
+export const blackhole_img = blackhole
+
+export const timer_imgs = {
+  timer_0,
+  timer_1,
+  timer_2,
+  timer_3,
+  timer_4,
+  timer_5,
+  timer_6,
+  timer_7,
+  timer_8,
+  timer_9,
 }

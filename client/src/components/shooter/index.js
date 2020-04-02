@@ -7,8 +7,10 @@ import handleShoot from './MoveHandlers/handleShoot'
 import handleSliderMove from './MoveHandlers/handleSliderMove'
 import handleMarbleMove from './MoveHandlers/handleMarbleMove'
 import handleSentryMove from './MoveHandlers/handleSentryMove'
+import handleTimer from './MoveHandlers/handleTimer'
 
 const ran = arr => arr[Math.floor(Math.random() * arr.length)]
+const ranNum = (min = 0, max = 9) => Math.floor(Math.random() * (max + 1 - min)) + min
 
 const generateBoard = (sliderEmits) => {
   const out = []
@@ -73,8 +75,9 @@ const Slider = () => {
   function changeCell ({ y, x }) {
     const nb = JSON.parse(JSON.stringify(board))
     nb[y][x].type = painter
-    nb[y][x].direction = 'right'
+    if (painter !== 'timer') nb[y][x].direction = 'right'
     if (painter === 'rotate') nb[y][x].direction = ran(['clock', 'anticlock'])
+    if (painter === 'timer') nb[y][x].time = ranNum(3, 9)
     setBoard(nb)
   }
 
@@ -172,6 +175,17 @@ const Slider = () => {
               }
             }
             callstack.push(moveSentry)
+            return
+          case 'timer':
+            function tickTock () {
+              const ticked = handleTimer(r, c, board, col.time)
+              if (ticked.toBeRemoved) {
+                nv[r][c] = { type: 'floor' }
+                return
+              }
+              nv[r][c].time = ticked.time
+            }
+            callstack.push(tickTock)
             return
           default:
             return

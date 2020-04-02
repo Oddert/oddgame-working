@@ -5,6 +5,8 @@ import Slider from '../Entities/Slider'
 import Marble from '../Entities/Marble'
 import Rotate from '../Entities/Rotate'
 import Sentry from '../Entities/Sentry'
+import Blackhole from '../Entities/Blackhole'
+import Timer from '../Entities/Timer'
 
 import '../index.scss'
 
@@ -13,7 +15,9 @@ import {
   slider_imgs,
   marble_imgs,
   rotate_imgs,
-  sentry_imgs
+  sentry_imgs,
+  blackhole_img,
+  timer_imgs
 } from '../sprite_textures'
 
 const Board = ({ board, loopAll, changeCell }) => {
@@ -31,6 +35,10 @@ const Board = ({ board, loopAll, changeCell }) => {
         return <Rotate imgs={rotate_imgs} {...cell} />
       case 'sentry':
         return <Sentry imgs={sentry_imgs} {...cell} />
+      case 'blackhole':
+        return <Blackhole img={blackhole_img} />
+      case 'timer':
+        return <Timer imgs={timer_imgs} {...cell} />
       default:
         return ''
     }
