@@ -1,7 +1,9 @@
 import React from 'react'
 
 import Board from './Board/'
-import Dev from './Dev'
+import Dev from './Dev/'
+
+import defaultBoards from './defaultBoards'
 
 import handleShoot from './MoveHandlers/handleShoot'
 import handleSliderMove from './MoveHandlers/handleSliderMove'
@@ -82,7 +84,7 @@ const Slider = () => {
   }
 
   function loopAll () {
-    // console.log('-=-=-=-=-=-=-=-=-=-=-=-')
+    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
     const nv = JSON.parse(JSON.stringify(board))//board.slice().map(row => row.slice().map(c => c))
 
     const callstack = []
@@ -125,17 +127,20 @@ const Slider = () => {
             callstack.push(moveslider)
             return
           case 'marble':
-            function moveBall () {
+            function moveMarble () {
               // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
               // console.log('baw found')
-              const moved = handleMarbleMove(r, c, col.direction, board)
+              const moved = handleMarbleMove(r, c, col.direction, board, col.halted)
+              console.log(moved, nv[r][c])
               if (moved.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
                 return
               }
-              console.log(moved)
-              console.log(r, c, moved)
-              console.log(moved.direction && moved.direction !== col.direction)
+
+              if (moved.halted) nv[r][c].halted = true
+              else delete nv[r][c].halted
+              // console.log(r, c, moved)
+              // console.log(moved.direction && moved.direction !== col.direction)
 
               if (moved.direction && moved.direction !== col.direction) {
                 console.log('direction changed')
@@ -153,7 +158,7 @@ const Slider = () => {
                 delete nv[r][c].direction
               }
             }
-            callstack.push(moveBall)
+            callstack.push(moveMarble)
             return
           case 'sentry':
             function moveSentry () {
@@ -200,8 +205,18 @@ const Slider = () => {
   }
   return (
     <>
-      <Board board={board} loopAll={loopAll} changeCell={changeCell} />
-      <Dev board={board} setBoard={setBoard} handleSelectChange={handleSelectChange} painter={painter} />
+      <Board
+        board={board}
+        loopAll={loopAll}
+        changeCell={changeCell}
+      />
+      <Dev
+        board={board}
+        handleSelectChange={handleSelectChange}
+        painter={painter}
+        defaultBoards={defaultBoards}
+        setBoard={setBoard}
+      />
     </>
   )
 }
