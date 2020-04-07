@@ -1,10 +1,12 @@
 import React from 'react'
 
-const Slider = ({ emits, direction, imgs }) => (
+import temp from '../../../resources/marble_right_halted.svg'
+
+const Slider = ({ emits, direction, imgs, halted }) => (
   <img
     className='marble__img'
-    src={imgs[`marble_${direction}`]}
-    alt={`marble ${direction}`} 
+    src={halted ? temp : imgs[`marble_${direction}`]}
+    alt={`marble ${direction}`}
   />
 
 )

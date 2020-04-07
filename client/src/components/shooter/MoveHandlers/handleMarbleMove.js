@@ -67,56 +67,58 @@ const swerve = (originalY, originalX, boardRef, dir, halted) => {
       switch (dir) {
         case 'left':
         // return boardRef[y] && boardRef[y][x - inc] ? { cell: boardRef[y][x - inc], y, x: x - inc } : { cell: { type: 'wall' }, y, x: x - inc }
-        return {
-          y,
-          x: x - inc,
-          cell: boardRef[y] && boardRef[y][x - inc] ? boardRef[y][x - inc] : { type: 'wall' }
-        }
+          return {
+            y,
+            x: x - inc,
+            cell: boardRef[y] && boardRef[y][x - inc] ? boardRef[y][x - inc] : { type: '' }
+          }
         case 'right':
-        return {
-          y,
-          x: x + inc,
-          cell: boardRef[y] && boardRef[y][x + inc] ? boardRef[y][x + inc] : { type: 'wall' }
-        }
+          return {
+            y,
+            x: x + inc,
+            cell: boardRef[y] && boardRef[y][x + inc] ? boardRef[y][x + inc] : { type: '' }
+          }
         case 'up':
-        return {
-          y: y - inc,
-          x,
-          cell: boardRef[y] && boardRef[y - inc][x] ? boardRef[y - inc][x] : { type: 'wall' }
-        }
+          return {
+            y: y - inc,
+            x,
+            cell: boardRef[y] && boardRef[y - inc][x] ? boardRef[y - inc][x] : { type: '' }
+          }
         case 'down':
-        return {
-          y: y + inc,
-          x,
-          cell: boardRef[y] && boardRef[y + inc][x] ? boardRef[y + inc][x] : { type: 'wall' }
-        }
+          return {
+            y: y + inc,
+            x,
+            cell: boardRef[y] && boardRef[y + inc][x] ? boardRef[y + inc][x] : { type: '' }
+          }
         default:
-        return { cell: { type: 'wall' }, y, x }
+          return { cell: { type: 'default' }, y, x }
       }
     }
 
-    const infrontOfObstical = (dir, originalY, originalX, halted) => {
-      // TODO: This is an OK workarround but causes unnecessary pauses and does only checks one step ahaead
-      // to assertain wether or not an obstical will move. A New algorithim will need to recursively check
-      // until an "unmovable" entitiy is found and make a judgment based on that.
-      
-      if (halted) console.log('[infrontOfObstical]: halted, returning false')
-      if (halted) return false
-      const obstical = getOffset(dir, originalY, originalX, 1)
-      // console.log(obstical)
-      if (obstical.cell.type === 'marble') {
-        const infront = getOffset(obstical.cell.direction, obstical.y, obstical.x, 1)
-        console.log(obstical, infront)
-        // const any = (target, arr) => arr.reduce((acc, each) => each === target ? true : acc, false)
-        const haltCellConditions = ['floor', 'marble', 'rotateX']
-        if (haltCellConditions.includes(infront.cell.type)) return true
-      } else {
+    const obsticalLikelyToMove = (dir, originalY, originalX, halted) => {
+
+      // console.log('+++++', originalY, originalX)
+      // if (halted) console.log('[obsticalLikelyToMove]: halted, returning false')
+      // if (halted) return false
+
+      function checkAheadRecurse (dir, previousY, previousX) {
+        // console.log('[checkAheadRecurse]', { dir, previousY, previousX })
+        const obstical = getOffset(dir, previousY, previousX, 1)
+        // console.log(obstical)
+
+        if (obstical.cell.type === 'floor') return true
+
+        // if (obstical.cell.type === 'marble') console.log('recursion begining...')
+        if (obstical.cell.type === 'marble') return checkAheadRecurse(obstical.cell.direction, obstical.y, obstical.x)
+
         return false
       }
+
+      return checkAheadRecurse (dir, originalY, originalX)
     }
 
     console.log('#')
-    if (infrontOfObstical(dir, originalY, originalX, halted)) return { y: originalY, x: originalX, halted: true }
+    if (obsticalLikelyToMove(dir, originalY, originalX, halted)) return { y: originalY, x: originalX, halted: true }
     console.log('##')
 
     const obstical = getOffset(dir, originalY, originalX, 1)
