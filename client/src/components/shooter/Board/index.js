@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Blackhole from '../Entities/Blackhole'
+import Block from '../Entities/Block'
 import Diamond from '../Entities/Diamond'
 import Marble from '../Entities/Marble'
 import Rotate from '../Entities/Rotate'
@@ -14,6 +15,7 @@ import '../index.scss'
 
 import {
   blackhole_img,
+  block_imgs,
   diamond_img,
   marble_imgs,
   rotate_imgs,
@@ -47,6 +49,8 @@ const Board = ({ board, loopAll, changeCell }) => {
         return <Timer imgs={timer_imgs} {...cell} />
       case 'diamond':
         return <Diamond img={diamond_img} />
+      case 'block':
+        return <Block imgs={block_imgs} {...cell} />
       default:
         return ''
     }

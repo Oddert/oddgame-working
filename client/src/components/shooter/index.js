@@ -81,6 +81,7 @@ const Slider = () => {
     if (painter !== 'timer') nb[y][x].direction = 'right'
     if (painter === 'rotate') nb[y][x].direction = ran(['clock', 'anticlock'])
     if (painter === 'timer') nb[y][x].time = ranNum(3, 9)
+    if (painter === 'block') nb[y][x].variant = ran(['soft', 'square', 'round'])
     setBoard(nb)
   }
 

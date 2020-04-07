@@ -45,6 +45,10 @@ import wall_round from '../../resources/wall_round.svg'
 
 import diamond from '../../resources/diamond.svg'
 
+import block_square from '../../resources/block_square.svg'
+import block_soft from '../../resources/block_soft.svg'
+import block_round from '../../resources/block_round.svg'
+
 
 export const shooter_imgs = {
   shooter_slider_left,
@@ -105,3 +109,9 @@ export const wall_imgs = {
 }
 
 export const diamond_img = diamond
+
+export const block_imgs = {
+  block_square,
+  block_soft,
+  block_round
+}

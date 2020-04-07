@@ -57,6 +57,9 @@ $floor_colour: #ecf0f1;
     &.diamond {
       background: $floor_colour;
     }
+    &.block {
+      background: $floor_colour;
+    }
   }
   // border: 1px solid steelblue;
 }

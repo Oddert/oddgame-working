@@ -16,6 +16,7 @@ const Painter = ({ handleSelectChange, painter }) => {
       <option value='rotate'>Rotate</option>
       <option value='blackhole'>BlackHole</option>
       <option value='timer'>Timer</option>
+      <option value='block'>Block</option>
     </select>
   )
 }
