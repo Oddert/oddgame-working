@@ -1,6 +1,6 @@
 import React from 'react'
 
-import temp from '../../../resources/marble_right_halted.svg'
+import temp from '../../../resources/marble_halted.svg'
 
 const Slider = ({ emits, direction, imgs, halted }) => (
   <img

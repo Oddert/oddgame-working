@@ -67,7 +67,8 @@ const generateBoard = (sliderEmits) => {
 
 const Slider = () => {
   // BUG: This should be in a useEffect???
-  const [board, setBoard] = React.useState(generateBoard('marble'))
+  // const [board, setBoard] = React.useState(generateBoard('marble'))
+  const [board, setBoard] = React.useState(defaultBoards[1].data)
   const [painter, setPainter] = React.useState('marble')
 
   function handleSelectChange (e) {
@@ -95,7 +96,7 @@ const Slider = () => {
           case 'shooter':
             function shootSlider () {
               const { direction, emits } = board[r][c]
-              const shoot = handleShoot(r, c, direction,  emits, board)
+              const shoot = handleShoot(r, c, direction,  emits, nv)
               console.log(shoot)
               if (!shoot.status) return
               nv[shoot.y][shoot.x] = shoot.data
@@ -104,7 +105,7 @@ const Slider = () => {
             return
           case 'slider':
             function moveslider () {
-              const moved = handleSliderMove(r, c, col.direction, board)
+              const moved = handleSliderMove(r, c, col.direction, nv)
               console.log(moved)
               if (moved.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
@@ -130,7 +131,7 @@ const Slider = () => {
             function moveMarble () {
               // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
               // console.log('baw found')
-              const moved = handleMarbleMove(r, c, col.direction, board, col.halted)
+              const moved = handleMarbleMove(r, c, col.direction, nv, col.halted)
               console.log(moved, nv[r][c])
               if (moved.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
@@ -162,7 +163,7 @@ const Slider = () => {
             return
           case 'sentry':
             function moveSentry () {
-              const moved = handleSentryMove(r, c, col.direction, board)
+              const moved = handleSentryMove(r, c, col.direction, nv)
               console.log(moved)
               if (moved.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
@@ -183,7 +184,7 @@ const Slider = () => {
             return
           case 'timer':
             function tickTock () {
-              const ticked = handleTimer(r, c, board, col.time)
+              const ticked = handleTimer(r, c, nv, col.time)
               if (ticked.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
                 return

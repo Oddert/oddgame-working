@@ -46,9 +46,15 @@ function mDown(y, x, boardRef, direction) {
 function moveValidator (current, desire, boardRef) {
   let status = true
   let toBeRemoved = false
+
   if (checkIsBlackhole(desire.y, desire.x, boardRef)) toBeRemoved = true
-  if (checkIsRotate(desire.y, desire.x, boardRef)) return { y: current.y, x: current.x, direction: getRoatation(current.direction, desire, boardRef), toBeRemoved }
+  if (checkIsRotate(desire.y, desire.x, boardRef)) return {
+    y: current.y,
+    x: current.x,
+    direction: getRoatation(current.direction, desire, boardRef), toBeRemoved
+  }
   if (!checkIsFloor(desire.y, desire.x, boardRef)) status = false
+
   if (!status) return { y: current.y, x: current.x, direction: dirMap[current.direction], toBeRemoved }
 
   return { y: desire.y, x: desire.x, direction: current.direction, toBeRemoved }
