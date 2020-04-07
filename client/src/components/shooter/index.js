@@ -218,6 +218,7 @@ const Slider = () => {
         painter={painter}
         defaultBoards={defaultBoards}
         setBoard={setBoard}
+        loopAll={loopAll}
       />
     </>
   )
