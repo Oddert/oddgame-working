@@ -156,7 +156,9 @@ const swerve = (originalY, originalX, boardRef, dir, halted) => {
 } // swerve
 
 const moveValidator = (current, desire, boardRef, dir) => {
+  const unswervables = ['diamondX', 'magnet', 'squareblock', 'softblock', 'wall']
   let status = true
+  let swervable = true
   let toBeRemoved = false
   // if (checkIsWall(desire.y, desire.x, boardRef)) status = false
   // if (checkIsBall(desire.y, desire.x, boardRef)) status = false
@@ -167,6 +169,13 @@ const moveValidator = (current, desire, boardRef, dir) => {
 
   // console.log({current})
   if (!status) {
+    const target = boardRef[desire.y] && boardRef[desire.y][desire.x]
+    if (target && unswervables.includes(target.type)) {
+      if (!(target.type === 'wall' && target.variant === 'round')) {
+        swervable = false
+      }
+    }
+    if (!swervable) return { y: current.y, x: current.x, status, toBeRemoved }
     let swerved = swerve(current.y, current.x, boardRef, dir, current.halted)
     console.log('nah swerve that: ', swerved)
     return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true, toBeRemoved, halted: swerved.halted }

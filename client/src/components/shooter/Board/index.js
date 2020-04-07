@@ -1,29 +1,35 @@
 import React from 'react'
 
-import Shooter from '../Entities/Shooter'
-import Slider from '../Entities/Slider'
+import Blackhole from '../Entities/Blackhole'
+import Diamond from '../Entities/Diamond'
 import Marble from '../Entities/Marble'
 import Rotate from '../Entities/Rotate'
 import Sentry from '../Entities/Sentry'
-import Blackhole from '../Entities/Blackhole'
+import Shooter from '../Entities/Shooter'
+import Slider from '../Entities/Slider'
 import Timer from '../Entities/Timer'
+import Wall from '../Entities/Wall'
 
 import '../index.scss'
 
 import {
-  shooter_imgs,
-  slider_imgs,
+  blackhole_img,
+  diamond_img,
   marble_imgs,
   rotate_imgs,
   sentry_imgs,
-  blackhole_img,
-  timer_imgs
+  shooter_imgs,
+  slider_imgs,
+  timer_imgs,
+  wall_imgs
 } from '../sprite_textures'
 
 const Board = ({ board, loopAll, changeCell }) => {
 
   const getCell = cell => {
     switch(cell.type) {
+      case 'wall':
+        return <Wall imgs={wall_imgs} {...cell} />
       case 'shooter':
         console.log(cell)
         return <Shooter imgs={shooter_imgs} {...cell} />
@@ -39,6 +45,8 @@ const Board = ({ board, loopAll, changeCell }) => {
         return <Blackhole img={blackhole_img} />
       case 'timer':
         return <Timer imgs={timer_imgs} {...cell} />
+      case 'diamond':
+        return <Diamond img={diamond_img} />
       default:
         return ''
     }
@@ -51,9 +59,10 @@ const Board = ({ board, loopAll, changeCell }) => {
 
   const cellWrapper = (cell, y, x) => (
     <div
-      key={`${x}_${y}`}
+      key={`${y}_${x}`}
       className={`col ${cell.type}`}
       onContextMenu={e => handleContextMenu(e, y, x)}
+      title={`${y}_${x}`}
     >
       {
         getCell(cell)

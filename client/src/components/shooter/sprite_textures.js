@@ -40,6 +40,11 @@ import timer_7 from '../../resources/timer_7.svg'
 import timer_8 from '../../resources/timer_8.svg'
 import timer_9 from '../../resources/timer_9.svg'
 
+import wall_square from '../../resources/wall_square.svg'
+import wall_round from '../../resources/wall_round.svg'
+
+import diamond from '../../resources/diamond.svg'
+
 
 export const shooter_imgs = {
   shooter_slider_left,
@@ -93,3 +98,10 @@ export const timer_imgs = {
   timer_8,
   timer_9,
 }
+
+export const wall_imgs = {
+  wall_square,
+  wall_round
+}
+
+export const diamond_img = diamond

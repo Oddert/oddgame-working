@@ -1,4 +1,4 @@
-$rad: 50px;
+$rad: 25px;
 $sprite_size: 80%;
 
 $floor_colour: #ecf0f1;
@@ -25,7 +25,12 @@ $floor_colour: #ecf0f1;
       background: $floor_colour;
     }
     &.wall {
-      background: #bec3c7;
+      // background: #bec3c7;
+      background: $floor_colour;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
     &.marble {
       background: $floor_colour;
@@ -48,6 +53,9 @@ $floor_colour: #ecf0f1;
         width: 100%;
         height: 100%;
       }
+    }
+    &.diamond {
+      background: $floor_colour;
     }
   }
   // border: 1px solid steelblue;
