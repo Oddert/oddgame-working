@@ -38,8 +38,11 @@ const PlaySpace = () => {
     if (painter === 'rotate') nb[y][x].direction = ranArr(['clock', 'anticlock'])
     if (painter === 'timer') nb[y][x].time = ranNum(3, 9)
     if (painter === 'block') nb[y][x].variant = ranArr(['soft', 'square', 'round'])
-    // setBoard(nb)
-    console.error('no such function as setboard, a charid')
+    if (painter === 'shooter') {
+      nb[y][x].direction = ranArr([ 'left', 'right', 'up', 'down' ])
+      nb[y][x].emits = ranArr([ 'slider', 'marble' ])
+    }
+    dispatch(boardWrite(nb))
   }
 
   function loopAll () {
@@ -172,8 +175,6 @@ const PlaySpace = () => {
   return (
     <div className='Play-Space'>
       <Board
-        board={board}
-        loopAll={loopAll}
         changeCell={changeCell}
       />
       <Dev

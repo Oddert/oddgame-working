@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import Blackhole from '../Entities/Blackhole'
 import Block from '../Entities/Block'
@@ -26,7 +27,8 @@ import {
   wall_imgs
 } from '../sprite_textures'
 
-const Board = ({ board, loopAll, changeCell }) => {
+const Board = ({ changeCell }) => {
+  const { board } = useSelector(state => state.play)
 
   const getCell = cell => {
     switch(cell.type) {
@@ -88,7 +90,7 @@ const Board = ({ board, loopAll, changeCell }) => {
   }
 
   return (
-    <div className='Board' onClick={loopAll}>
+    <div className='Board' >
       <div>{ generateRows() }</div>
     </div>
   )
