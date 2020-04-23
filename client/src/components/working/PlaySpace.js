@@ -1,7 +1,10 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Board from './Board/'
 import Dev from './Dev/'
+
+import { boardWrite } from '../../actions/'
 
 import defaultBoards from './defaultBoards'
 
@@ -17,8 +20,12 @@ import { ranArr, ranNum } from './Utils/randomisers'
 const PlaySpace = () => {
   // BUG: This should be in a useEffect???
   // const [board, setBoard] = React.useState(generateBoard('marble'))
-  const [board, setBoard] = React.useState(defaultBoards[1].data)
+  // const [boarda, setBoard] = React.useState(defaultBoards[1].data)
   const [painter, setPainter] = React.useState('marble')
+
+  const dispatch = useDispatch()
+
+  const { board } = useSelector(state => state.play)
 
   function handleSelectChange (e) {
     setPainter(e)
@@ -31,7 +38,8 @@ const PlaySpace = () => {
     if (painter === 'rotate') nb[y][x].direction = ranArr(['clock', 'anticlock'])
     if (painter === 'timer') nb[y][x].time = ranNum(3, 9)
     if (painter === 'block') nb[y][x].variant = ranArr(['soft', 'square', 'round'])
-    setBoard(nb)
+    // setBoard(nb)
+    console.error('no such function as setboard, a charid')
   }
 
   function loopAll () {
@@ -156,7 +164,8 @@ const PlaySpace = () => {
     callstack.forEach(e => e())
 
     console.log(board, nv)
-    setBoard(nv)
+    // setBoard(nv)
+    dispatch(boardWrite(nv))
   }
 
   // This file is basically your App.js, rendered as sole child of Provider
@@ -172,7 +181,7 @@ const PlaySpace = () => {
         handleSelectChange={handleSelectChange}
         painter={painter}
         defaultBoards={defaultBoards}
-        setBoard={setBoard}
+        setBoard={() => console.error('no such function as setboard, a charid')}
         loopAll={loopAll}
       />
     </div>
