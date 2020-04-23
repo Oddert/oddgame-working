@@ -3,7 +3,7 @@
   box-sizing: border-box;
 }
 
-.App {
+.App, .Play-Space {
   text-align: center;
   display: flex;
   align-items: flex-start;

@@ -1,0 +1,19 @@
+
+
+1. FIRST
+2. SECOND
+3. SLIDER
+4. ZOO
+5. DIAMOND
+6. COUNTERS
+7. BLOCKS
+8. CIRCUS
+9. GALLERY
+10. TRAPPER
+11. PINPOT
+12. GETOUT
+13. FALLIN
+14. ADOORABLE
+15. ROCKYV
+
+https://www.mobygames.com/game/win3x/kye/hints/hintId,6127/

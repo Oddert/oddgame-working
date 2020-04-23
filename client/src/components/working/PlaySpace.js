@@ -11,61 +11,10 @@ import handleMarbleMove from './MoveHandlers/handleMarbleMove'
 import handleSentryMove from './MoveHandlers/handleSentryMove'
 import handleTimer from './MoveHandlers/handleTimer'
 
-const ran = arr => arr[Math.floor(Math.random() * arr.length)]
-const ranNum = (min = 0, max = 9) => Math.floor(Math.random() * (max + 1 - min)) + min
-
-const generateBoard = (sliderEmits) => {
-  const out = []
-  for (let row = 0; row < 10; row++) {
-    const r = []
-    for (let col = 0; col < 10; col++) {
-      const cell = { type: 'floor' }
-      if (row === 0 || row === 9) cell.type = 'wall'
-      if (col === 0 || col === 9) cell.type = 'wall'
-      r.push(cell)
-    }
-    out.push(r)
-  }
-
-  const getWall = () => {
-    const r = Math.floor(Math.random()*8) + 1
-    const c = Math.floor(Math.random()*8) + 1
-    if (out[r][c].type !== 'floor') getWall()
-    else out[r][c].type = 'wall'
-  }
-
-  for (let i=0; i<5; i++) getWall()
-
-  // const getShooter = emits => {
-  //   const sliderR = Math.floor(Math.random()*8) + 1
-  //   const sliderC = Math.floor(Math.random()*8) + 1
-  //   if (out[sliderR][sliderC].type !== 'floor') return getShooter(emits)
-  //   else {
-  //     out[sliderR][sliderC].type = 'shooter'
-  //     out[sliderR][sliderC].direction = 'right'
-  //     out[sliderR][sliderC].emits = emits
-  //   }
-  // }
-
-  const getRotate = direction => {
-    const sliderR = Math.floor(Math.random()*8) + 1
-    const sliderC = Math.floor(Math.random()*8) + 1
-    if (out[sliderR][sliderC].type !== 'floor') return getRotate(direction)
-    else {
-      out[sliderR][sliderC].type = 'rotate'
-      out[sliderR][sliderC].direction = direction
-    }
-  }
-
-  // for (let i=0; i<3; i++) getShooter(sliderEmits)
-  for (let i=0; i<3; i++) getRotate(ran(['clock', 'anticlock']))
-
-  console.log({ initBoard: out })
-  return out
-}
+import { ranArr, ranNum } from './Utils/randomisers'
 
 
-const Slider = () => {
+const PlaySpace = () => {
   // BUG: This should be in a useEffect???
   // const [board, setBoard] = React.useState(generateBoard('marble'))
   const [board, setBoard] = React.useState(defaultBoards[1].data)
@@ -79,9 +28,9 @@ const Slider = () => {
     const nb = JSON.parse(JSON.stringify(board))
     nb[y][x].type = painter
     if (painter !== 'timer') nb[y][x].direction = 'right'
-    if (painter === 'rotate') nb[y][x].direction = ran(['clock', 'anticlock'])
+    if (painter === 'rotate') nb[y][x].direction = ranArr(['clock', 'anticlock'])
     if (painter === 'timer') nb[y][x].time = ranNum(3, 9)
-    if (painter === 'block') nb[y][x].variant = ran(['soft', 'square', 'round'])
+    if (painter === 'block') nb[y][x].variant = ranArr(['soft', 'square', 'round'])
     setBoard(nb)
   }
 
@@ -95,19 +44,20 @@ const Slider = () => {
       row.forEach((col, c) => {
         switch(col.type) {
           case 'shooter':
-            function shootSlider () {
-              const { direction, emits } = board[r][c]
-              const shoot = handleShoot(r, c, direction,  emits, nv)
+            function shootEntity () {
+              const { direction, emits } = col
+              const shoot = handleShoot(r, c, nv, direction, emits)
               console.log(shoot)
               if (!shoot.status) return
               nv[shoot.y][shoot.x] = shoot.data
             }
-            callstack.push(shootSlider)
+            callstack.push(shootEntity)
             return
           case 'slider':
             function moveslider () {
-              const moved = handleSliderMove(r, c, col.direction, nv)
-              console.log(moved)
+              const { direction } = col
+              const moved = handleSliderMove(r, c, nv, direction)
+              // console.log(moved)
               if (moved.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
                 return
@@ -132,7 +82,8 @@ const Slider = () => {
             function moveMarble () {
               // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
               // console.log('baw found')
-              const moved = handleMarbleMove(r, c, col.direction, nv, col.halted)
+              const { direction, halted } = col
+              const moved = handleMarbleMove(r, c, nv, direction, halted)
               console.log(moved, nv[r][c])
               if (moved.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
@@ -164,7 +115,8 @@ const Slider = () => {
             return
           case 'sentry':
             function moveSentry () {
-              const moved = handleSentryMove(r, c, col.direction, nv)
+              const { direction } = col
+              const moved = handleSentryMove(r, c, nv, direction)
               console.log(moved)
               if (moved.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
@@ -185,7 +137,8 @@ const Slider = () => {
             return
           case 'timer':
             function tickTock () {
-              const ticked = handleTimer(r, c, nv, col.time)
+              const { time } = col
+              const ticked = handleTimer(r, c, nv, time)
               if (ticked.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
                 return
@@ -205,8 +158,10 @@ const Slider = () => {
     console.log(board, nv)
     setBoard(nv)
   }
+
+  // This file is basically your App.js, rendered as sole child of Provider
   return (
-    <>
+    <div className='Play-Space'>
       <Board
         board={board}
         loopAll={loopAll}
@@ -220,8 +175,8 @@ const Slider = () => {
         setBoard={setBoard}
         loopAll={loopAll}
       />
-    </>
+    </div>
   )
 }
 
-export default Slider
+export default PlaySpace
