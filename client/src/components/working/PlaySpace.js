@@ -176,13 +176,14 @@ const PlaySpace = () => {
     <div className='Play-Space'>
       <Board
         changeCell={changeCell}
+        board={board}
       />
       <Dev
         board={board}
         handleSelectChange={handleSelectChange}
         painter={painter}
         defaultBoards={defaultBoards}
-        setBoard={() => console.error('no such function as setboard, a charid')}
+        setBoard={nb => dispatch(boardWrite(nb))}
         loopAll={loopAll}
       />
     </div>

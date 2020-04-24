@@ -1,0 +1,28 @@
+
+
+.Editor--wrapper {
+  &.one {
+    $marg: 2.5rem;
+    $margT: 2.5rem;
+    $margS: 1rem;
+    $pad: 2rem;
+    border: 1px dashed tomato;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,.5);
+    .Editor {
+      background: #fff;
+      border: 1px solid black;
+      margin: $margT $margS 0;
+      padding: $pad;
+      display: flex;
+    }
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .Editor--wrapper.one .Editor {
+    flex-direction: column-reverse;
+  }
+}

@@ -2,9 +2,10 @@
 import React, { useState } from 'react'
 
 import PlaySpace from './PlaySpace'
+import Editor from './Editor/'
 
 const Index = () => {
-  const [levelEditOpen, setLevelEditOpen] = useState (false)
+  const [levelEditOpen, setLevelEditOpen] = useState (true)
 
   const handleToggleEditor = () => setLevelEditOpen(!levelEditOpen)
 
@@ -14,8 +15,8 @@ const Index = () => {
       <PlaySpace />
       {
         levelEditOpen
-          ? 'edit time'
-          : ''
+          ? <Editor />
+          : 'certainly not edit time'
       }
     </>
   )

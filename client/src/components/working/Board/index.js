@@ -27,15 +27,13 @@ import {
   wall_imgs
 } from '../sprite_textures'
 
-const Board = ({ changeCell }) => {
-  const { board } = useSelector(state => state.play)
+const Board = ({ changeCell, board }) => {
 
   const getCell = cell => {
     switch(cell.type) {
       case 'wall':
         return <Wall imgs={wall_imgs} {...cell} />
       case 'shooter':
-        console.log(cell)
         return <Shooter imgs={shooter_imgs} {...cell} />
       case 'slider':
         return <Slider imgs={slider_imgs} {...cell} />
