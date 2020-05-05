@@ -1,6 +1,8 @@
 
 const types = {
-  BOARD_WRITE: 'BOARD_WRITE'
+  PLAY_BOARD_WRITE: 'PLAY_BOARD_WRITE',
+
+  EDIT_TOGGLE_OPEN: 'EDIT_TOGGLE_OPEN'
 }
 
 export default types

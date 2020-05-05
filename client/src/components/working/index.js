@@ -15,7 +15,7 @@ const Index = () => {
       <PlaySpace />
       {
         levelEditOpen
-          ? <Editor />
+          ? <Editor close={handleToggleEditor} />
           : 'certainly not edit time'
       }
     </>

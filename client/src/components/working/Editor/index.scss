@@ -1,15 +1,25 @@
 
+@mixin after_font {
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'PT Sans', 'Tahoma', 'Avant Garde', 'impact', 'ubuntu', 'sans serif';
+}
 
 .Editor--wrapper {
   .Editor {
     background: #fff;
     border: 1px solid black;
     display: flex;
+    :after {
+      content: "Editor";
+      position: fixed;
+      bottom: 1px;
+      left: 1px;
+      @include after_font;
+    }
   }
   &.one {
     $marg: 2.5rem;
     $margT: 2.5rem;
-    $margS: 1rem;
+    $margS: 1.5rem;
     $pad: 2rem;
     border: 1px dashed tomato;
     position: fixed;
@@ -19,6 +29,13 @@
     padding: $margT $margS 0;
     .Editor {
       padding: $pad;
+    }
+    :after {
+      content: "Editor Wrapper One";
+      position: fixed;
+      bottom: 10px;
+      left: 20px;
+      @include after_font;
     }
   }
 }

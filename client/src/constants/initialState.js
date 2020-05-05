@@ -7,7 +7,11 @@ const initialState = {
   // board: generateBoard()
   play: {
     board: defaultBoards[0].data
-  }
+  },
+  edit: {
+    open: true
+  },
+  // def: null
 }
 
 export default initialState

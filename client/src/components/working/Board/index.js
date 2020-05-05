@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 import Blackhole from '../Entities/Blackhole'
 import Block from '../Entities/Block'
@@ -27,7 +27,7 @@ import {
   wall_imgs
 } from '../sprite_textures'
 
-const Board = ({ changeCell, board }) => {
+const Board = ({ board, changeCell }) => {
 
   const getCell = cell => {
     switch(cell.type) {

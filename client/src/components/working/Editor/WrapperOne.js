@@ -2,10 +2,10 @@ import React from 'react'
 
 import Editor from './EditIndex'
 
-const WrapperOne = () => {
+const WrapperOne = props => {
   return (
-    <div className='Editor--wrapper one'>
-      <Editor />
+    <div className='Editor--wrapper one' onClick={e => {e.stopPropagation(); props.close()}}>
+      <Editor {...props} />
     </div>
   )
 }

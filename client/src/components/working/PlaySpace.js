@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Board from './Board/'
 import Dev from './Dev/'
 
-import { boardWrite } from '../../actions/'
+import { playBoardWrite } from '../../actions/'
 
 import defaultBoards from './defaultBoards'
 
@@ -42,7 +42,7 @@ const PlaySpace = () => {
       nb[y][x].direction = ranArr([ 'left', 'right', 'up', 'down' ])
       nb[y][x].emits = ranArr([ 'slider', 'marble' ])
     }
-    dispatch(boardWrite(nb))
+    dispatch(playBoardWrite(nb))
   }
 
   function loopAll () {
@@ -168,7 +168,7 @@ const PlaySpace = () => {
 
     console.log(board, nv)
     // setBoard(nv)
-    dispatch(boardWrite(nv))
+    dispatch(playBoardWrite(nv))
   }
 
   // This file is basically your App.js, rendered as sole child of Provider
@@ -183,7 +183,7 @@ const PlaySpace = () => {
         handleSelectChange={handleSelectChange}
         painter={painter}
         defaultBoards={defaultBoards}
-        setBoard={nb => dispatch(boardWrite(nb))}
+        setBoard={nb => dispatch(playBoardWrite(nb))}
         loopAll={loopAll}
       />
     </div>
