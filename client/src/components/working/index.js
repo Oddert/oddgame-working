@@ -1,21 +1,25 @@
 
-import React, { useState } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { editToggleOpen } from '../../actions'
 
 import PlaySpace from './PlaySpace'
 import Editor from './Editor/'
 
 const Index = () => {
-  const [levelEditOpen, setLevelEditOpen] = useState (true)
+  const open = useSelector(state => state.edit.open)
+  const dispatch = useDispatch()
 
-  const handleToggleEditor = () => setLevelEditOpen(!levelEditOpen)
+  const toggle = () => dispatch(editToggleOpen())
 
   return (
     <>
-      <button onClick={handleToggleEditor}>New Level +</button>
+      <button onClick={toggle}>New Level +</button>
       <PlaySpace />
       {
-        levelEditOpen
-          ? <Editor close={handleToggleEditor} />
+        open
+          ? <Editor />
           : 'certainly not edit time'
       }
     </>

@@ -3,8 +3,7 @@ import Board from '../Board/'
 
 import './index.scss'
 
-const Editor = (props) => {
-  console.log(props)
+const Editor = () => {
   return (
     <div className='Editor' onClick={e => {e.stopPropagation();}}>
       <div style={{ background: 'tomato', flex: 3 }}>
