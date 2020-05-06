@@ -8,9 +8,9 @@
     background: #fff;
     border: 1px solid black;
     display: flex;
-    :after {
+    &:after {
       content: "Editor";
-      position: fixed;
+      position: absolute;
       bottom: 1px;
       left: 1px;
       @include after_font;
@@ -30,13 +30,22 @@
     .Editor {
       padding: $pad;
     }
-    :after {
+    &:after {
       content: "Editor Wrapper One";
-      position: fixed;
-      bottom: 10px;
-      left: 20px;
+      position: absolute;
+      bottom: 20px;
+      left: 30px;
       @include after_font;
     }
+  }
+}
+
+.Rowcol {
+  display: flex;
+  border: 1px dashed tomato;
+  input {
+    width: 50px;
+    text-align: center;
   }
 }
 

@@ -9,7 +9,15 @@ const initialState = {
     board: defaultBoards[0].data
   },
   edit: {
-    open: true
+    open: true,
+    lastSave: null,
+    lastChange: null,
+    save: null,
+    data: {
+      title: '',
+      hint: '',
+      board: defaultBoards[0].data//[[]]
+    }
   },
   // def: null
 }

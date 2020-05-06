@@ -11,4 +11,20 @@ export const editToggleOpen = (override, value) => ({
   payload: { override, value }
 })
 
+export const editWriteBoardNew = (save = null) => ({
+  type: types.EDIT_WRITE_BOARD_NEW,
+  payload: { save }
+})
+
+export const editWriteCol = inc => ({
+  type: types.EDIT_WRITE_COL,
+  payload: { inc }
+})
+
+export const editWriteRow = inc => ({
+  type: types.EDIT_WRITE_ROW,
+  payload: { inc }
+})
+
+
 // const genericAction = ({ type, payload }) => ({})

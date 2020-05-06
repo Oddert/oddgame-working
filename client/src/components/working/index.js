@@ -2,7 +2,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { editToggleOpen } from '../../actions'
+import { editToggleOpen, editWriteBoardNew } from '../../actions'
 
 import PlaySpace from './PlaySpace'
 import Editor from './Editor/'
@@ -11,11 +11,14 @@ const Index = () => {
   const open = useSelector(state => state.edit.open)
   const dispatch = useDispatch()
 
-  const toggle = () => dispatch(editToggleOpen())
+  const newLevel = () => {
+    dispatch(editWriteBoardNew())
+    dispatch(editToggleOpen())
+  }
 
   return (
     <>
-      <button onClick={toggle}>New Level +</button>
+      <button onClick={newLevel}>New Level +</button>
       <PlaySpace />
       {
         open
