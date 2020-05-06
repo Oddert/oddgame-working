@@ -13,6 +13,7 @@ const edit = (state = initialState.edit, action) => {
     case types.EDIT_WRITE_BOARD_NEW: return writeBoardNew(state, payload)
     case types.EDIT_WRITE_ROW: return writeRow(state, payload)
     case types.EDIT_WRITE_COL: return writeCol(state, payload)
+    case types.EDIT_WRITE_ROWS_DIRECT: return writeRowsDirect(state, payload)
     default:
       if (!type.match(reducerFilter('edit'))) {
         console.warn(`[edit reducer]: default route taken in switch for type: ${type}`, { state, action })
@@ -46,16 +47,16 @@ function writeBoardNew (state, payload) {
   })
 }
 
+const blankRow = len => {
+  const row = [{ type: 'wall', variant: 'square' }]
+  for (let i=2; i<len; i++) row.push({ type: 'floor' })
+  row.push({ type: 'wall', variant: 'square' })
+  return row
+}
+
 function writeRow (state, payload) {
   const { inc } = payload
   const board = JSON.parse(JSON.stringify(state.data.board))
-
-  const blankRow = len => {
-    const row = [{ type: 'wall', variant: 'square' }]
-    for (let i=2; i<len; i++) row.push({ type: 'floor' })
-    row.push({ type: 'wall', variant: 'square' })
-    return row
-  }
 
   if (inc) board.splice(board.length-1, 0, blankRow(board[0].length))
   else board.splice(board.length-2, 1)
@@ -80,6 +81,28 @@ function writeCol (state, payload) {
     }
   })
 
+  return Object.assign({}, state, {
+    data: Object.assign({}, state.data, {
+      board
+    })
+  })
+}
+
+function writeRowsDirect (state, payload) {
+  const prevLen = state.data.board.length
+  const { value } = payload
+  const lenDiff = Math.abs(prevLen - value)
+  const board = JSON.parse(JSON.stringify(state.data.board))
+
+  if (value === prevLen) return state
+  if (value < prevLen) board.splice(board.length - 1 - lenDiff, lenDiff)
+  if (value > prevLen) {
+    const newRows = []
+    for (let i=0; i<lenDiff; i++) newRows.push(blankRow(board[0].length))
+    board.splice(board.length - 1, 0, ...newRows)
+  }
+
+  console.log(board)
   return Object.assign({}, state, {
     data: Object.assign({}, state.data, {
       board

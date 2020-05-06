@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { editWriteRow, editWriteCol } from '../../../actions'
+import { editWriteRow, editWriteCol, writeRowsDirect } from '../../../actions'
 
 const RowCol = ({ orientation }) => {
   const dispatch = useDispatch()
@@ -12,6 +12,13 @@ const RowCol = ({ orientation }) => {
   const incdec = inc => {
     if (orientation === 'width') dispatch(editWriteCol(inc))
     else dispatch(editWriteRow(inc))
+  }
+
+  const directSet = e => {
+    const { value } = e.target
+    if (value < 3) return
+    if (orientation === 'width') return
+    else dispatch(writeRowsDirect(value))
   }
 
   const style = {
@@ -28,7 +35,7 @@ const RowCol = ({ orientation }) => {
       <input
         type='number'
         value={orientation === 'height' ? board.length : board[0].length}
-        onChange={()=>{}}
+        onChange={directSet}
       />
       <button
         onClick={() => incdec(false)}

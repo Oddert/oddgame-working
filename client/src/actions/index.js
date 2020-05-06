@@ -26,5 +26,9 @@ export const editWriteRow = inc => ({
   payload: { inc }
 })
 
+export const writeRowsDirect = value => ({
+  type: types.EDIT_WRITE_ROWS_DIRECT,
+  payload: { value }
+})
 
 // const genericAction = ({ type, payload }) => ({})
