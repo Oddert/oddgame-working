@@ -31,4 +31,9 @@ export const writeRowsDirect = value => ({
   payload: { value }
 })
 
+export const writeColsDirect = value => ({
+  type: types.EDIT_WRITE_COLS_DIRECT,
+  payload: { value }
+})
+
 // const genericAction = ({ type, payload }) => ({})

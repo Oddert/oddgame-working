@@ -14,6 +14,7 @@ const edit = (state = initialState.edit, action) => {
     case types.EDIT_WRITE_ROW: return writeRow(state, payload)
     case types.EDIT_WRITE_COL: return writeCol(state, payload)
     case types.EDIT_WRITE_ROWS_DIRECT: return writeRowsDirect(state, payload)
+    case types.EDIT_WRITE_COLS_DIRECT: return writeColsDirect(state, payload)
     default:
       if (!type.match(reducerFilter('edit'))) {
         console.warn(`[edit reducer]: default route taken in switch for type: ${type}`, { state, action })
@@ -89,12 +90,14 @@ function writeCol (state, payload) {
 }
 
 function writeRowsDirect (state, payload) {
-  const prevLen = state.data.board.length
-  const { value } = payload
-  const lenDiff = Math.abs(prevLen - value)
   const board = JSON.parse(JSON.stringify(state.data.board))
+  const prevLen = board.length
+  const { value } = payload
 
   if (value === prevLen) return state
+
+  const lenDiff = Math.abs(prevLen - value)
+
   if (value < prevLen) board.splice(board.length - 1 - lenDiff, lenDiff)
   if (value > prevLen) {
     const newRows = []
@@ -103,6 +106,34 @@ function writeRowsDirect (state, payload) {
   }
 
   console.log(board)
+  return Object.assign({}, state, {
+    data: Object.assign({}, state.data, {
+      board
+    })
+  })
+}
+
+function writeColsDirect (state, payload) {
+  const board = JSON.parse(JSON.stringify(state.data.board))
+  const prevLen = board[0].length
+  const { value } = payload
+
+  if (value === prevLen) return state
+
+  const lenDiff = Math.abs(prevLen - value)
+
+  if (value < prevLen) {
+    board.forEach(row => row.splice(board[0].length - lenDiff, lenDiff))
+  }
+  if (value > prevLen) {
+    board.forEach((row, idx) => {
+      const insert = (idx === 0 || idx === board.length - 1) ? { type: 'wall', variant: 'square' } : { type: 'floor' }
+      const insertToEachRow = []
+      for (let i=0; i<lenDiff; i++) insertToEachRow.push(insert)
+      row.splice(row.length - 2, 0, ...insertToEachRow)
+    })
+  }
+
   return Object.assign({}, state, {
     data: Object.assign({}, state.data, {
       board

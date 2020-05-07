@@ -1,12 +1,11 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { editWriteRow, editWriteCol, writeRowsDirect } from '../../../actions'
+import { editWriteRow, editWriteCol, writeRowsDirect, writeColsDirect } from '../../../actions'
 
 const RowCol = ({ orientation }) => {
   const dispatch = useDispatch()
   const board = useSelector(state => state.edit.data.board)
-  console.log(board)
 
   // OPTIMIZE: Component imports action creators for both height and width but will only ever use one set
   const incdec = inc => {
@@ -14,10 +13,11 @@ const RowCol = ({ orientation }) => {
     else dispatch(editWriteRow(inc))
   }
 
+  // OPTIMIZE: Make this use koos and await user enter key (also allow intenable values (e.g 0))
   const directSet = e => {
     const { value } = e.target
     if (value < 3) return
-    if (orientation === 'width') return
+    if (orientation === 'width') return dispatch(writeColsDirect(value))
     else dispatch(writeRowsDirect(value))
   }
 
@@ -25,6 +25,7 @@ const RowCol = ({ orientation }) => {
     flexDirection: orientation === 'width' ? 'row-reverse' : 'column',
     alignItems: orientation === 'width' ? 'center' : 'stretch'
   }
+
   return (
     <div className='Rowcol' style={style}>
       <button
