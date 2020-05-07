@@ -4,6 +4,7 @@
 }
 
 .Editor--wrapper {
+  overflow-y: auto;
   .Editor {
     background: #fff;
     border: 1px solid black;

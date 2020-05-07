@@ -23,7 +23,6 @@ const edit = (state = initialState.edit, action) => {
   }
 }
 
-// IDEA: name conflict, consider resolve
 function toggleOpen (state, payload) {
   const { open } = state
   const { value, override } = payload

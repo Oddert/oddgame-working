@@ -15,11 +15,22 @@ const Editor = () => {
         <Board board={board} />
       </div>
       <div style={{ background: 'steelblue', flex: 2 }}>
-        Edit Tools
+        <h3>Edit Tools</h3>
+        <hr />
+        <h4>Game Details</h4>
+        <p>Title Change</p>
+        <p>Hint Change</p>
+        <hr />
+        <h4>Board Dimensions</h4>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <RowCol orientation={'height'} />
           <RowCol orientation={'width'} />
         </div>
+        <hr />
+        <h4>Cells</h4>
+        <p>Array Selector</p>
+        <p>Attribute(s)</p>
+
       </div>
     </div>
   )
