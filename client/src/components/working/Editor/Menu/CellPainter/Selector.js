@@ -1,4 +1,7 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { changePainterSelect } from '../../../../../actions'
 
 import Blackhole from '../../../Entities/Blackhole'
 import Block from '../../../Entities/Block'
@@ -27,6 +30,10 @@ import {
 
 
 const Selector = () => {
+  const entities = useSelector(state => state.edit.entities)
+  const selected = useSelector(state => state.edit.painter.selected)
+
+  const dispatch = useDispatch()
 
   const getCell = cell => {
     switch(cell.type) {
@@ -56,60 +63,45 @@ const Selector = () => {
   }
 
 
-  const cellWrapper = cell => (
-    <div
+  const cellWrapper = (cell, selected) => (
+    <button
       key={`${cell.type}_${cell.variant || cell.emits || cell.direction || 'default'}`}
-      className={`col ${cell.type}`}
-      style={{ dispaly: 'inline-block', width: '50px' }}
+      className={`col ${cell.type} ${selected === cell.idx ? 'selected' : ''}`}
       title={`${cell.type}_${cell.variant || cell.emits || cell.direction || 'default'}`}
+      onClick={() => select(selected, cell.idx)}
     >
       {
         getCell(cell)
       }
-    </div>
+    </button>
   )
 
-  const structural = {
-    displayName: 'Structural',
-    ent: [
-      { type: 'floor' },
-      { type: 'wall', variant: 'square' },
-      { type: 'wall', variant: 'round' },
-      { type: 'block', variant: 'round' },
-      { type: 'block', variant: 'soft' },
-      { type: 'block', variant: 'square' },
-    ]
-  }
 
-  const obsticals = {
-    displayName: 'Obsticals',
-    ent: [
-      { type: 'blackhole' },
-      { type: 'marble', direction: 'left' },
-      { type: 'rotate', direction: 'clock' },
-      { type: 'sentry', direction: 'left' },
-      { type: 'shooter', direction: 'left', emits: 'slider' },
-      { type: 'slider', direction: 'left' },
-      { type: 'timer', time: 6 },
-    ]
-  }
+  const cattegories = entities.reduce((acc, each, idx) => {
+    if (!acc.hasOwnProperty(each.catt)) console.error('No such key on accumulator, Selector.js pre-render', { acc, each })
+    each.idx = idx
+    acc[each.catt].ent.push(each)
+    return acc
+  }, {
+    structural: { displayName: 'Structural', ent: [] },
+    obstical: { displayName: 'Obsticals', ent: [] },
+    gameplay: { displayName: 'Gameplay', ent: [] }
+  })
 
-  const gameplay = {
-    displayName: 'Gameplay',
-    ent: [
-      { type: 'diamond' },
-    ]
+  const select = (selected, idx) => {
+    console.log('whodyoudo', { selected, idx }, selected !== idx)
+    if (selected !== idx) dispatch(changePainterSelect(idx))
   }
 
   return (
-    <div>
+    <div className='Selector'>
       {
-        [structural, obsticals, gameplay].map((catt, c_i) =>
+        Object.keys(cattegories).map((catt, c_i) =>
           <div key={`catt_${c_i}`}>
-            <h5>{ catt.displayName }</h5>
-            <div style={{ display: 'flex' }}>
+            <h5 className='Selector__cattegory--title'>{ cattegories[catt].displayName }</h5>
+            <div className='Selector__cattegory'>
               {
-                catt.ent.map(entity => cellWrapper(entity))
+                cattegories[catt].ent.map(entity => cellWrapper(entity, selected))
               }
             </div>
           </div>

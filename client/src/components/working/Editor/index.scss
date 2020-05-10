@@ -41,6 +41,37 @@
   }
 }
 
+.Selector {
+  .Selector__cattegory--title {
+    text-align: left;
+    margin: 0;
+  }
+  .Selector__cattegory {
+    display: flex;
+    box-sizing: border-box;
+    .col {
+      box-sizing: border-box;
+      background: #ecf0f1;
+      border: 3px solid #bec3c7;
+      margin: 4px;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 80%;
+        height: 80%;
+      }
+      &.selected {
+        border: 3px solid #39B8FF;
+      }
+    }
+  }
+}
+
 .Rowcol {
   display: flex;
   border: 1px dashed tomato;

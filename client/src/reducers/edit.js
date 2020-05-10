@@ -15,6 +15,7 @@ const edit = (state = initialState.edit, action) => {
     case types.EDIT_WRITE_COL: return writeCol(state, payload)
     case types.EDIT_WRITE_ROWS_DIRECT: return writeRowsDirect(state, payload)
     case types.EDIT_WRITE_COLS_DIRECT: return writeColsDirect(state, payload)
+    case types.EDIT_CHANGE_PAINTER_SELECT: return changePainterSelect(state, payload)
     default:
       if (!type.match(reducerFilter('edit'))) {
         console.warn(`[edit reducer]: default route taken in switch for type: ${type}`, { state, action })
@@ -139,5 +140,15 @@ function writeColsDirect (state, payload) {
     })
   })
 }
+
+function changePainterSelect (state, payload) {
+  const { selected } = payload
+  return Object.assign({}, state, {
+    painter: Object.assign({}, state.painter, {
+      selected
+    })
+  })
+}
+
 
 export default edit

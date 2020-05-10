@@ -36,4 +36,9 @@ export const writeColsDirect = value => ({
   payload: { value }
 })
 
+export const changePainterSelect = selected => ({
+  type: types.EDIT_CHANGE_PAINTER_SELECT,
+  payload: { selected }
+})
+
 // const genericAction = ({ type, payload }) => ({})
