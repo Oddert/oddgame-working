@@ -16,6 +16,7 @@ const edit = (state = initialState.edit, action) => {
     case types.EDIT_WRITE_ROWS_DIRECT: return writeRowsDirect(state, payload)
     case types.EDIT_WRITE_COLS_DIRECT: return writeColsDirect(state, payload)
     case types.EDIT_CHANGE_PAINTER_SELECT: return changePainterSelect(state, payload)
+    case types.EDIT_CHANGE_CELL: return changeCell(state, payload)
     default:
       if (!type.match(reducerFilter('edit'))) {
         console.warn(`[edit reducer]: default route taken in switch for type: ${type}`, { state, action })
@@ -146,6 +147,24 @@ function changePainterSelect (state, payload) {
   return Object.assign({}, state, {
     painter: Object.assign({}, state.painter, {
       selected
+    })
+  })
+}
+
+function changeCell (state, payload) {
+  const board = JSON.parse(JSON.stringify(state.data.board))
+  const { y, x, cell } = payload
+  console.log('>>', board)
+
+  const removeKeys = Object.keys(board[y][x])
+  const addKeys = Object.keys(cell)
+  for (let each of removeKeys) delete board[y][x][each]
+  for (let each of addKeys) board[y][x][each] = cell[each]
+
+  console.log('>>', board)
+  return Object.assign({}, state, {
+    data: Object.assign({}, state.data, {
+      board
     })
   })
 }

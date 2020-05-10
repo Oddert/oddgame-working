@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { changePainterSelect } from '../../../../../actions'
+import { editChangePainterSelect } from '../../../../../actions'
 
 import Blackhole from '../../../Entities/Blackhole'
 import Block from '../../../Entities/Block'
@@ -90,7 +90,7 @@ const Selector = () => {
 
   const select = (selected, idx) => {
     console.log('whodyoudo', { selected, idx }, selected !== idx)
-    if (selected !== idx) dispatch(changePainterSelect(idx))
+    if (selected !== idx) dispatch(editChangePainterSelect(idx))
   }
 
   return (

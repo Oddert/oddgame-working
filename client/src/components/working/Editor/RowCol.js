@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { editWriteRow, editWriteCol, writeRowsDirect, writeColsDirect } from '../../../actions'
+import { editWriteRow, editWriteCol, editWriteRowsDirect, editWriteColsDirect } from '../../../actions'
 
 const RowCol = ({ orientation }) => {
   const dispatch = useDispatch()
@@ -17,8 +17,8 @@ const RowCol = ({ orientation }) => {
   const directSet = e => {
     const { value } = e.target
     if (value < 3) return
-    if (orientation === 'width') return dispatch(writeColsDirect(value))
-    else dispatch(writeRowsDirect(value))
+    if (orientation === 'width') return dispatch(editWriteColsDirect(value))
+    else dispatch(editWriteRowsDirect(value))
   }
 
   const style = {

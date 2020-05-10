@@ -26,19 +26,24 @@ export const editWriteRow = inc => ({
   payload: { inc }
 })
 
-export const writeRowsDirect = value => ({
+export const editWriteRowsDirect = value => ({
   type: types.EDIT_WRITE_ROWS_DIRECT,
   payload: { value }
 })
 
-export const writeColsDirect = value => ({
+export const editWriteColsDirect = value => ({
   type: types.EDIT_WRITE_COLS_DIRECT,
   payload: { value }
 })
 
-export const changePainterSelect = selected => ({
+export const editChangePainterSelect = selected => ({
   type: types.EDIT_CHANGE_PAINTER_SELECT,
   payload: { selected }
+})
+
+export const editChangeCell = (y, x, cell) => ({
+  type: types.EDIT_CHANGE_CELL,
+  payload: { y, x, cell }
 })
 
 // const genericAction = ({ type, payload }) => ({})
