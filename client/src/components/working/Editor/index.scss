@@ -55,15 +55,21 @@
       border: 3px solid #bec3c7;
       margin: 4px;
       padding: 0;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
+      transition: .1s linear;
       img {
-        width: 80%;
-        height: 80%;
+        width: 70%;
+        height: 70%;
+      }
+      &:hover {
+        // background: #bcc9cc;
+        background: #bec3c7;
       }
       &.selected {
         border: 3px solid #39B8FF;
