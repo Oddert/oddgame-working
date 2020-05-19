@@ -27,7 +27,7 @@ import {
   wall_imgs
 } from '../sprite_textures'
 
-const Board = ({ board, changeCell, focus, handleMouseEnter }) => {
+const Board = ({ board, handleCellClick, focus, handleMouseEnter }) => {
 
   const getCell = cell => {
     switch(cell.type) {
@@ -58,7 +58,7 @@ const Board = ({ board, changeCell, focus, handleMouseEnter }) => {
 
   function handleClick (e, y, x) {
     e.preventDefault()
-    changeCell({ y, x })
+    handleCellClick({ y, x })
   }
 
   const focused = (y, x) => {

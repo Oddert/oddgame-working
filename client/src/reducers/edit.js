@@ -9,20 +9,58 @@ const edit = (state = initialState.edit, action) => {
   const { payload, type } = action
 
   switch(type) {
-    case types.EDIT_TOGGLE_OPEN: return toggleOpen(state, payload)
-    case types.EDIT_WRITE_BOARD_NEW: return writeBoardNew(state, payload)
-    case types.EDIT_WRITE_ROW: return writeRow(state, payload)
-    case types.EDIT_WRITE_COL: return writeCol(state, payload)
-    case types.EDIT_WRITE_ROWS_DIRECT: return writeRowsDirect(state, payload)
-    case types.EDIT_WRITE_COLS_DIRECT: return writeColsDirect(state, payload)
-    case types.EDIT_CHANGE_PAINTER_SELECT: return changePainterSelect(state, payload)
     case types.EDIT_CHANGE_CELL: return changeCell(state, payload)
+    case types.EDIT_PAINTMODE_TOGGLE: return paintmodeToggle(state, payload)
+    case types.EDIT_TOGGLE_OPEN: return toggleOpen(state, payload)
+    case types.EDIT_WRITE_COL: return writeCol(state, payload)
+    case types.EDIT_WRITE_ROW: return writeRow(state, payload)
+    case types.EDIT_WRITE_BOARD_NEW: return writeBoardNew(state, payload)
+    case types.EDIT_WRITE_COLS_DIRECT: return writeColsDirect(state, payload)
+    case types.EDIT_WRITE_ROWS_DIRECT: return writeRowsDirect(state, payload)
+    case types.EDIT_PAINTER_FOCUS_UPDATE: return painterFocusUpdate(state, payload)
+    case types.EDIT_PAINTER_SELECT_CHANGE: return changePainterSelect(state, payload)
+    case types.EDIT_PAINTER_MODE_SWITCH: return painterModeSwitch(state, payload)
     default:
       if (!type.match(reducerFilter('edit'))) {
         console.warn(`[edit reducer]: default route taken in switch for type: ${type}`, { state, action })
       }
       return state
   }
+}
+
+
+const blankRow = len => {
+  const row = [{ type: 'wall', variant: 'square' }]
+  for (let i=2; i<len; i++) row.push({ type: 'floor' })
+  row.push({ type: 'wall', variant: 'square' })
+  return row
+}
+
+
+function changeCell (state, payload) {
+  const board = JSON.parse(JSON.stringify(state.data.board))
+  const { y, x, cell } = payload
+
+  const removeKeys = Object.keys(board[y][x])
+  const addKeys = Object.keys(cell)
+  for (let each of removeKeys) delete board[y][x][each]
+  for (let each of addKeys) board[y][x][each] = cell[each]
+
+  return Object.assign({}, state, {
+    data: Object.assign({}, state.data, {
+      board
+    }),
+    painter: Object.assign({}, state.painter, {
+      focus: { y, x }
+    })
+  })
+}
+
+function paintmodeToggle (state, payload = {}) {
+  const { mode } = payload
+  return Object.assign({}, state, {
+    paintMode: typeof mode === 'boolean' ? mode : !state.paintMode
+  })
 }
 
 function toggleOpen (state, payload) {
@@ -34,39 +72,6 @@ function toggleOpen (state, payload) {
   })
   return Object.assign({}, state, {
     open: override ? !!value : !open
-  })
-}
-
-function writeBoardNew (state, payload) {
-  const { save } = payload
-  return Object.assign({}, state, {
-    lastChange: Date.now(),
-    save,
-    title: 'New Game',
-    data: Object.assign({}, state.data, {
-      board: defaultBoards[2].data//[[]]
-    })
-  })
-}
-
-const blankRow = len => {
-  const row = [{ type: 'wall', variant: 'square' }]
-  for (let i=2; i<len; i++) row.push({ type: 'floor' })
-  row.push({ type: 'wall', variant: 'square' })
-  return row
-}
-
-function writeRow (state, payload) {
-  const { inc } = payload
-  const board = JSON.parse(JSON.stringify(state.data.board))
-
-  if (inc) board.splice(board.length-1, 0, blankRow(board[0].length))
-  else board.splice(board.length-2, 1)
-
-  return Object.assign({}, state, {
-    data: Object.assign({}, state.data, {
-      board
-    })
   })
 }
 
@@ -90,26 +95,28 @@ function writeCol (state, payload) {
   })
 }
 
-function writeRowsDirect (state, payload) {
+function writeRow (state, payload) {
+  const { inc } = payload
   const board = JSON.parse(JSON.stringify(state.data.board))
-  const prevLen = board.length
-  const { value } = payload
 
-  if (value === prevLen) return state
+  if (inc) board.splice(board.length-1, 0, blankRow(board[0].length))
+  else board.splice(board.length-2, 1)
 
-  const lenDiff = Math.abs(prevLen - value)
-
-  if (value < prevLen) board.splice(board.length - 1 - lenDiff, lenDiff)
-  if (value > prevLen) {
-    const newRows = []
-    for (let i=0; i<lenDiff; i++) newRows.push(blankRow(board[0].length))
-    board.splice(board.length - 1, 0, ...newRows)
-  }
-
-  console.log(board)
   return Object.assign({}, state, {
     data: Object.assign({}, state.data, {
       board
+    })
+  })
+}
+
+function writeBoardNew (state, payload) {
+  const { save } = payload
+  return Object.assign({}, state, {
+    lastChange: Date.now(),
+    save,
+    title: 'New Game',
+    data: Object.assign({}, state.data, {
+      board: defaultBoards[2].data//[[]]
     })
   })
 }
@@ -142,6 +149,41 @@ function writeColsDirect (state, payload) {
   })
 }
 
+function writeRowsDirect (state, payload) {
+  const board = JSON.parse(JSON.stringify(state.data.board))
+  const prevLen = board.length
+  const { value } = payload
+
+  if (value === prevLen) return state
+
+  const lenDiff = Math.abs(prevLen - value)
+
+  if (value < prevLen) board.splice(board.length - 1 - lenDiff, lenDiff)
+  if (value > prevLen) {
+    const newRows = []
+    for (let i=0; i<lenDiff; i++) newRows.push(blankRow(board[0].length))
+    board.splice(board.length - 1, 0, ...newRows)
+  }
+
+  console.log(board)
+  return Object.assign({}, state, {
+    data: Object.assign({}, state.data, {
+      board
+    })
+  })
+}
+
+function painterFocusUpdate (state, payload) {
+  const { y, x } = payload
+  return Object.assign({}, state, {
+    painter: Object.assign({}, state.painter, {
+      focus: Object.assign({}, state.painter.focus, {
+        y, x
+      })
+    })
+  })
+}
+
 function changePainterSelect (state, payload) {
   const { selected } = payload
   return Object.assign({}, state, {
@@ -151,25 +193,13 @@ function changePainterSelect (state, payload) {
   })
 }
 
-function changeCell (state, payload) {
-  const board = JSON.parse(JSON.stringify(state.data.board))
-  const { y, x, cell } = payload
-
-  console.log(y, x)
-  const removeKeys = Object.keys(board[y][x])
-  const addKeys = Object.keys(cell)
-  for (let each of removeKeys) delete board[y][x][each]
-  for (let each of addKeys) board[y][x][each] = cell[each]
-
+function painterModeSwitch (state, payload) {
+  const { mode } = payload
   return Object.assign({}, state, {
-    data: Object.assign({}, state.data, {
-      board
-    }),
     painter: Object.assign({}, state.painter, {
-      focus: { y, x }
+      mode
     })
   })
 }
-
 
 export default edit

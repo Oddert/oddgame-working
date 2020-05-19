@@ -37,7 +37,7 @@ export const editWriteColsDirect = value => ({
 })
 
 export const editChangePainterSelect = selected => ({
-  type: types.EDIT_CHANGE_PAINTER_SELECT,
+  type: types.EDIT_PAINTER_SELECT_CHANGE,
   payload: { selected }
 })
 
@@ -52,6 +52,21 @@ export const uiMousedownHigh = () => ({
 
 export const uiMousedownLow = () => ({
   type: types.UI_MOUSEDOWN_LOW
+})
+
+export const editPaintmodeToggle = mode => ({
+  type: types.EDIT_PAINTMODE_TOGGLE,
+  payload: { mode }
+})
+
+export const editPainterModeSwitch = mode => ({
+  type: types.EDIT_PAINTER_MODE_SWITCH,
+  payload: { mode }
+})
+
+export const editPainterFocusUpdate = (y, x) => ({
+  type: types.EDIT_PAINTER_FOCUS_UPDATE,
+  payload: { y, x }
 })
 
 // const genericAction = ({ type, payload }) => ({})

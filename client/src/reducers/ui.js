@@ -3,7 +3,7 @@ import initialState from '../constants/initialState'
 import reducerFilter from '../constants/reducerFilter'
 
 const ui = (state = initialState.ui, action) => {
-  const { payload, type } = action
+  const { type } = action
 
   switch (type) {
     case types.UI_MOUSEDOWN_HIGH: return mousedownHigh(state)

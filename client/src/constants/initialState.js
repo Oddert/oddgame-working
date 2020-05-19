@@ -38,6 +38,7 @@ const initialState = {
       { type: 'diamond', catt: 'gameplay' },
     ],
     painter: {
+      mode: 'brush',
       selected: 1,
       focus: {
         x: null,

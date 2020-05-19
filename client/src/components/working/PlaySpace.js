@@ -31,7 +31,7 @@ const PlaySpace = () => {
     setPainter(e)
   }
 
-  function changeCell ({ y, x }) {
+  function handleCellClick ({ y, x }) {
     const nb = JSON.parse(JSON.stringify(board))
     nb[y][x].type = painter
     if (painter !== 'timer') nb[y][x].direction = 'right'
@@ -175,7 +175,7 @@ const PlaySpace = () => {
   return (
     <div className='Play-Space'>
       <Board
-        changeCell={changeCell}
+        handleCellClick={handleCellClick}
         board={board}
       />
       <Dev
