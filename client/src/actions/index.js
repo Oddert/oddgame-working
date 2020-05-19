@@ -46,4 +46,12 @@ export const editChangeCell = (y, x, cell) => ({
   payload: { y, x, cell }
 })
 
+export const uiMousedownHigh = () => ({
+  type: types.UI_MOUSEDOWN_HIGH
+})
+
+export const uiMousedownLow = () => ({
+  type: types.UI_MOUSEDOWN_LOW
+})
+
 // const genericAction = ({ type, payload }) => ({})

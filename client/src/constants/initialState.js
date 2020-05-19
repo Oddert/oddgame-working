@@ -8,6 +8,9 @@ const initialState = {
   play: {
     board: defaultBoards[0].data
   },
+  ui: {
+    mouseIsDown: false
+  },
   edit: {
     open: true,
     lastSave: null,
@@ -35,7 +38,11 @@ const initialState = {
       { type: 'diamond', catt: 'gameplay' },
     ],
     painter: {
-      selected: 0
+      selected: 1,
+      focus: {
+        x: null,
+        y: null
+      }
     }
   },
   // def: null

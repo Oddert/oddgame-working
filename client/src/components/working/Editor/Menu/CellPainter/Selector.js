@@ -89,7 +89,6 @@ const Selector = () => {
   })
 
   const select = (selected, idx) => {
-    console.log('whodyoudo', { selected, idx }, selected !== idx)
     if (selected !== idx) dispatch(editChangePainterSelect(idx))
   }
 

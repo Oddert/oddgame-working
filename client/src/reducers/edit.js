@@ -154,17 +154,19 @@ function changePainterSelect (state, payload) {
 function changeCell (state, payload) {
   const board = JSON.parse(JSON.stringify(state.data.board))
   const { y, x, cell } = payload
-  console.log('>>', board)
 
+  console.log(y, x)
   const removeKeys = Object.keys(board[y][x])
   const addKeys = Object.keys(cell)
   for (let each of removeKeys) delete board[y][x][each]
   for (let each of addKeys) board[y][x][each] = cell[each]
 
-  console.log('>>', board)
   return Object.assign({}, state, {
     data: Object.assign({}, state.data, {
       board
+    }),
+    painter: Object.assign({}, state.painter, {
+      focus: { y, x }
     })
   })
 }

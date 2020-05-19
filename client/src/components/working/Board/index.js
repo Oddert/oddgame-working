@@ -27,12 +27,12 @@ import {
   wall_imgs
 } from '../sprite_textures'
 
-const Board = ({ board, changeCell, debug }) => {
+const Board = ({ board, changeCell, focus, handleMouseEnter }) => {
 
   const getCell = cell => {
     switch(cell.type) {
       case 'wall':
-        return <Wall imgs={wall_imgs} {...cell} debug={debug} />
+        return <Wall imgs={wall_imgs} {...cell} />
       case 'shooter':
         return <Shooter imgs={shooter_imgs} {...cell} />
       case 'slider':
@@ -61,12 +61,23 @@ const Board = ({ board, changeCell, debug }) => {
     changeCell({ y, x })
   }
 
+  const focused = (y, x) => {
+    if (focus && focus.x && focus.y) {
+      return focus.x === x && focus.y === y ? 'focused' : ''
+    } else return ''
+  }
+
+  const mouseDidEnter = (e, y, x) => {
+    if (handleMouseEnter) handleMouseEnter(e, y, x)
+  }
+
   const cellWrapper = (cell, y, x) => (
     <div
       key={`${y}_${x}`}
-      className={`col ${cell.type} ${cell.variant}`}
-      onClick={e => handleClick(e, y, x)}
+      className={`col ${cell.type} ${cell.variant} ${focused(y, x)}`}
+      onMouseDown={e => handleClick(e, y, x)}
       title={`${y}_${x}`}
+      onMouseEnter={e => mouseDidEnter(e, y, x)}
     >
       {
         getCell(cell)

@@ -1,5 +1,6 @@
 import React from 'react'
 
+import CellAttributes from '../CellAttributes/'
 import Selector from './Selector'
 
 const CellPainter = () => {
@@ -8,7 +9,7 @@ const CellPainter = () => {
       <hr />
       <h4>Cell Painter</h4>
       <Selector />
-      <p>Attribute(s)</p>
+      <CellAttributes />
     </>
   )
 }

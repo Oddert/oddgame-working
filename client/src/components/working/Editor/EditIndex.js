@@ -11,21 +11,26 @@ import './index.scss'
 const Editor = () => {
   const dispatch = useDispatch()
 
-  const board = useSelector(state => state.edit.data.board)
-  const entities = useSelector(state => state.edit.entities)
-  const selected = useSelector(state => state.edit.painter.selected)
+  const { board } = useSelector(state => state.edit.data)
+  const {
+    entities,
+    painter: {
+      selected,
+      focus
+    }
+  } = useSelector(state => state.edit)
+  const { mouseIsDown } = useSelector(state => state.ui)
 
-  const changeCell = ({ y, x }) => {
-    console.log(entities[selected])
-    dispatch(editChangeCell(y, x, entities[selected]))
+  const changeCell = ({ y, x }) => dispatch(editChangeCell(y, x, entities[selected]))
+
+  const handleMouseEnter = (e, y, x) => {
+    if (mouseIsDown) dispatch(editChangeCell(y, x, entities[selected]))
   }
 
-  console.log(board)
-
   return (
-    <div className='Editor' onClick={e => {e.stopPropagation();}}>
+    <div className='Editor' onClick={e => {e.stopPropagation()}}>
       <div style={{ background: 'tomato', flex: 3, display: 'flex', justifyContent: 'center' }}>
-        <Board board={board} changeCell={changeCell} debug={true} />
+        <Board board={board} changeCell={changeCell} focus={focus} handleMouseEnter={handleMouseEnter} />
       </div>
       <div style={{ background: 'steelblue', flex: 2 }}>
         <Menu />

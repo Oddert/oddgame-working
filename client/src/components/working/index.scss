@@ -60,6 +60,9 @@ $floor_colour: #ecf0f1;
     &.block {
       background: $floor_colour;
     }
+    &.focused {
+      border: 1px solid #39B8FF;
+    }
   }
   // border: 1px solid steelblue;
 }
