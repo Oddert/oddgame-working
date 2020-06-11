@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import Board from './Board/'
@@ -21,7 +21,7 @@ const PlaySpace = () => {
   // BUG: This should be in a useEffect???
   // const [board, setBoard] = React.useState(generateBoard('marble'))
   // const [boarda, setBoard] = React.useState(defaultBoards[1].data)
-  const [painter, setPainter] = React.useState('marble')
+  const [painter, setPainter] = useState('marble')
 
   const dispatch = useDispatch()
 

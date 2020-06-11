@@ -11,6 +11,11 @@ export const editToggleOpen = (override, value) => ({
   payload: { override, value }
 })
 
+export const editWriteBoard = board => ({
+  type: types.EDIT_WRITE_BOARD,
+  payload: { board }
+})
+
 export const editWriteBoardNew = (save = null) => ({
   type: types.EDIT_WRITE_BOARD_NEW,
   payload: { save }

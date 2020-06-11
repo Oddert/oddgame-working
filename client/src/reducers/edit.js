@@ -14,6 +14,7 @@ const edit = (state = initialState.edit, action) => {
     case types.EDIT_TOGGLE_OPEN: return toggleOpen(state, payload)
     case types.EDIT_WRITE_COL: return writeCol(state, payload)
     case types.EDIT_WRITE_ROW: return writeRow(state, payload)
+    case types.EDIT_WRITE_BOARD: return writeBoard(state, payload)
     case types.EDIT_WRITE_BOARD_NEW: return writeBoardNew(state, payload)
     case types.EDIT_WRITE_COLS_DIRECT: return writeColsDirect(state, payload)
     case types.EDIT_WRITE_ROWS_DIRECT: return writeRowsDirect(state, payload)
@@ -105,6 +106,17 @@ function writeRow (state, payload) {
   return Object.assign({}, state, {
     data: Object.assign({}, state.data, {
       board
+    })
+  })
+}
+
+function writeBoard (state, payload) {
+  const { board } = payload
+  console.log(state, payload)
+  return Object.assign({}, state, {
+    lastChange: Date.now(),
+    data: Object.assign({}, state.data, {
+      board: JSON.parse(JSON.stringify(board))
     })
   })
 }

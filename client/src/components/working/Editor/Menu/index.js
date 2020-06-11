@@ -4,6 +4,7 @@ import BoardSetup from './BoardSetup'
 import CellPainter from './CellPainter/'
 import Cursor from './Cursor'
 // import GameDetials from './GameDetials'
+import Parser from './Parser/'
 
 const Menu = () => {
   return (
@@ -13,6 +14,7 @@ const Menu = () => {
       {/* <GameDetials /> */}
       <Cursor />
       <CellPainter />
+      <Parser />
     </>
   )
 }

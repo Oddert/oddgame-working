@@ -51,6 +51,8 @@ const Board = ({ board, handleCellClick, focus, handleMouseEnter }) => {
         return <Diamond img={diamond_img} />
       case 'block':
         return <Block imgs={block_imgs} {...cell} />
+      case 'toBeDeCoded':
+        return '?'
       default:
         return ''
     }
@@ -74,9 +76,9 @@ const Board = ({ board, handleCellClick, focus, handleMouseEnter }) => {
   const cellWrapper = (cell, y, x) => (
     <div
       key={`${y}_${x}`}
-      className={`col ${cell.type} ${cell.variant} ${focused(y, x)}`}
+      className={`col ${cell.type} ${cell.variant || 'default'} ${focused(y, x)}`}
       onMouseDown={e => handleClick(e, y, x)}
-      title={`${y}_${x}`}
+      title={`${y}_${x} ${cell.info || cell.type}`}
       onMouseEnter={e => mouseDidEnter(e, y, x)}
     >
       {
