@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import LoadBoard from './LoadBoard'
 
@@ -11,7 +12,7 @@ const Loader = ({ defaultBoards, setBoard }) => (
           board={each.data}
           idx={idx}
           setBoard={setBoard}
-        />) 
+        />)
       }
   </div>
 )

@@ -67,15 +67,13 @@ const KyeCode = () => {
     "~": entity_list.enemy("snake"),
   }
 
-  const convertOne = each => {
-    if (mapping[each]) return mapping[each]
-    else return { type: 'somebs' }
-  }
-
   const convert = str => {
     console.log(str.split(/\n/gi))
     const out = str.split(/\n/gi).map(row =>
-      row.split('').map(convertOne)
+      row.split('').map(each => {
+        if (mapping[each]) return mapping[each]
+        else return { type: 'somebs' }
+      })
     )
     return out
   }
@@ -90,7 +88,7 @@ const KyeCode = () => {
       <button onClick={send}>
         Print me level: {lazy}, {levels[`l_${lazy}`].title}
       </button>
-      <button onClick={() => dispatch(playBoardWrite(t))}>
+      <button onClick={() => dispatch(playBoardWrite(convert(t)))}>
         put on real board (crime)
       </button>
     </>
