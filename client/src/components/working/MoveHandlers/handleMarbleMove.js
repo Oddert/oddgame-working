@@ -67,7 +67,7 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
     }
     const possibilities = []
     // going "left" / "up"
-    console.log({ obstical })
+    // console.log({ obstical })
     if (swerveValid(y1, x1, dir, null, obstical).valid) possibilities.push({ y: y1, x: x1 })
     // going "right" / "down"
     if (swerveValid(y2, x2, dir, null, obstical).valid) possibilities.push({ y: y2, x: x2 })

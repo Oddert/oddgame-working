@@ -26,6 +26,7 @@ const PlaySpace = () => {
   const dispatch = useDispatch()
 
   const { board } = useSelector(state => state.play)
+  const { entity_list } = useSelector(state => state.edit)
 
   function handleSelectChange (e) {
     setPainter(e)
@@ -139,6 +140,11 @@ const PlaySpace = () => {
               // console.log(`swapping ${r}, ${c}, ${board[r][c].direction} to ${moved.y}, ${moved.x}, ${moved.direction}`)
               nv[moved.y][moved.x].type = 'sentry'
               nv[moved.y][moved.x].direction = moved.direction
+              if (moved.bounce) {
+                const { target, source } = moved.bounce
+                nv[target.y][target.x] = { ...nv[source.y][source.x] }
+                nv[source.y][source.x] = entity_list.floor()
+              }
               if (!positionUnMoved) {
                 nv[r][c].type = 'floor'
                 delete nv[r][c].direction

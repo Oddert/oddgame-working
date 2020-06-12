@@ -7,7 +7,7 @@ import { levels } from '../../../defaultKye.js'
 
 const KyeCode = () => {
   const dispatch = useDispatch()
-  const { entity_list } = useSelector(state => state.edit)
+  const { entity_list, data: { board } } = useSelector(state => state.edit)
 
   const lazy = 4
   const t = levels[`l_${lazy}`].data
@@ -43,9 +43,9 @@ const KyeCode = () => {
     "U": entity_list.sentry("up"),
     "[": entity_list.enemy("cross"),
     "^": entity_list.marble("up"),
-    "a": entity_list.rotate("anticlock"),
+    "a": entity_list.rotate("clock"),
     "b": entity_list.block_square(),
-    "c": entity_list.rotate("clock"),
+    "c": entity_list.rotate("anticlock"),
     "d": entity_list.slider("down"),
     "e": entity_list.block_soft(),
     "f": entity_list.forcefield("right"),
@@ -68,7 +68,6 @@ const KyeCode = () => {
   }
 
   const convert = str => {
-    console.log(str.split(/\n/gi))
     const out = str.split(/\n/gi).map(row =>
       row.split('').map(each => {
         if (mapping[each]) return mapping[each]
@@ -88,7 +87,7 @@ const KyeCode = () => {
       <button onClick={send}>
         Print me level: {lazy}, {levels[`l_${lazy}`].title}
       </button>
-      <button onClick={() => dispatch(playBoardWrite(convert(t)))}>
+      <button onClick={() => dispatch(playBoardWrite(board))}>
         put on real board (crime)
       </button>
     </>
