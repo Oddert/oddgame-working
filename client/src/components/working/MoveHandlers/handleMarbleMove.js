@@ -52,12 +52,12 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
 
   function pickDirection (y1, x1, y2, x2, dir, originalY, originalX, halted) {
 
-    console.log('#')
+    // console.log('#')
     if (obsticalLikelyToMove(dir, originalY, originalX, halted)) return { y: originalY, x: originalX, halted: true }
-    console.log('##')
+    // console.log('##')
 
     const obstical = getOffset(dir, originalY, originalX, 1)
-    console.log(obstical)
+    // console.log(obstical)
     if (obstical.cell.type === 'rotate') {
       return {
         y: originalY,
@@ -67,11 +67,12 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
     }
     const possibilities = []
     // going "left" / "up"
-    if (swerveValid(y1, x1, dir).valid) possibilities.push({ y: y1, x: x1 })
+    console.log({ obstical })
+    if (swerveValid(y1, x1, dir, null, obstical).valid) possibilities.push({ y: y1, x: x1 })
     // going "right" / "down"
-    if (swerveValid(y2, x2, dir).valid) possibilities.push({ y: y2, x: x2 })
+    if (swerveValid(y2, x2, dir, null, obstical).valid) possibilities.push({ y: y2, x: x2 })
     if (possibilities.length === 0) return { y: originalY, x: originalX }
-    console.log({ possibilities })
+    // console.log({ possibilities })
     return possibilities[Math.floor(Math.random() * possibilities.length)]
 
 
@@ -127,20 +128,63 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
 
   } // pickDirection
 
-  function swerveValid (y, x, dir, rotation, offset) {
+  function swerveValid (y, x, dir, rotation, obstical) {
+    // called on both possible target cells the marble could swerve into
+    // this function checks for obsticals and if the move is "valid" e.g. avoiding 'jumping diagonals'
+    // "move marble right ->"
+    // [ ][ ][?]
+    // [ ][x][#]
+    // [ ][ ][?]
     if (y < 0 || y > boardRef.length - 1) return { valid: false }
     if (x < 0 || x > boardRef[0].length - 1) return { valid: false }
 
     if (dir === 'right') {
+      if (obstical.cell.type === 'wall') {
+        if (y < obstical.y && ![4, 7, 8].includes(obstical.cell.direction)) {
+          return { valid: false }
+        }
+        if (y > obstical.y && ![1, 2, 4].includes(obstical.cell.direction)) {
+          return { valid: false }
+        }
+      }
       if (getCell(y, x - 1, boardRef).type !== 'floor') return { valid: false }
     }
     if (dir === 'down') {
+      if (obstical.cell.type === 'wall') {
+        if (x < obstical.x && ![4, 7, 8].includes(obstical.cell.direction)) {
+          return { valid: false }
+        }
+        if (x > obstical.x && ![6, 8, 9].includes(obstical.cell.direction)) {
+          return { valid: false }
+        }
+      }
       if (getCell(y - 1, x, boardRef).type !== 'floor') return { valid: false }
     }
     if (dir === 'left') {
+      // if the obstical is a wall we must determine it's type (direction) and validate this vs our marble's direction
+      if (obstical.cell.type === 'wall') {
+        // if the target y is smaller then the obstical is "above", the movement is a vector poiting top right.
+        if (y < obstical.y && ![6, 8, 9].includes(obstical.cell.direction)) {
+          // reference the encoding guidelines for which wall types 6, 8, and 9 are
+          return { valid: false }
+        }
+        // we repeat the process for the cell "under" the obstical
+        if (y > obstical.y && ![2, 3, 6].includes(obstical.cell.direction)) {
+          return { valid: false }
+        }
+      }
+      // assuming this does not disqualify the route, the getCell function is used to check that the tartget is clear
       if (getCell(y, x + 1, boardRef).type !== 'floor') return { valid: false }
     }
     if (dir === 'up') {
+      if (obstical.cell.type === 'wall') {
+        if (x < obstical.x && ![1, 2, 4].includes(obstical.cell.direction)) {
+          return { valid: false }
+        }
+        if (x > obstical.x && ![2, 3, 6].includes(obstical.cell.direction)) {
+          return { valid: false }
+        }
+      }
       if (getCell(y + 1, x, boardRef).type !== 'floor') return { valid: false }
     }
 
@@ -161,7 +205,7 @@ const moveValidator = (current, desire, boardRef, dir) => {
   // if (checkIsRotate(desire.y, desire.x, boardRef)) status = false
   if (!checkIsFloor(desire.y, desire.x, boardRef)) status = false
   if (checkIsBlackhole(desire.y, desire.x, boardRef)) toBeRemoved = true
-  console.log(`### ${current.y}, ${current.x}, ${status} trying to move into: ${desire.y}, ${desire.x} (${boardRef[desire.y][desire.x].type})`)
+  // console.log(`### ${current.y}, ${current.x}, ${status} trying to move into: ${desire.y}, ${desire.x} (${boardRef[desire.y][desire.x].type})`)
 
   // console.log({current})
   if (!status) {
@@ -176,10 +220,10 @@ const moveValidator = (current, desire, boardRef, dir) => {
     }
     if (!swervable) return { y: current.y, x: current.x, status, toBeRemoved }
     const swerved = swerve(current.y, current.x, boardRef, dir, current.halted)
-    console.log('nah swerve that: ', swerved)
+    // console.log('nah swerve that: ', swerved)
     return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true, toBeRemoved, halted: swerved.halted }
   }
-  console.log('*** Givin it what it wants ***')
+  // console.log('*** Givin it what it wants ***')
   return { y: desire.y, x: desire.x, status, toBeRemoved, halted: desire.halted }
 
   // switch (dir) {

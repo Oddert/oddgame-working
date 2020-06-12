@@ -95,7 +95,7 @@ const PlaySpace = () => {
               // console.log('baw found')
               const { direction, halted } = col
               const moved = handleMarbleMove(r, c, nv, direction, halted)
-              console.log(moved, nv[r][c])
+              // console.log(moved, nv[r][c])
               if (moved.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
                 return

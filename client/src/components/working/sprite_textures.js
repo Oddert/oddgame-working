@@ -72,6 +72,8 @@ import  forcefield_right from '../../resources/forcefield_right.gif'
 import magnet_vertical from '../../resources/magnet_vertical.svg'
 import magnet_horizontal from '../../resources/magnet_horizontal.svg'
 
+import kye_default from '../../resources/kye_default.svg'
+
 
 export const shooter_imgs = {
   shooter_slider_left,
@@ -170,4 +172,8 @@ export const forcefield_imgs = {
 export const magnet_imgs = {
   magnet_vertical,
   magnet_horizontal,
+}
+
+export const kye_imgs = {
+  kye_default,
 }

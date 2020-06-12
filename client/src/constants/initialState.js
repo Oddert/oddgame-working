@@ -54,6 +54,9 @@ const entity_list = {
   magnet: (direction = "vertical") => ({
     type: 'magnet', direction, catt: 'gameplay',
   }),
+  kye: () => ({
+    type: 'kye', catt: 'gameplay'
+  }),
 }
 
 const initialState = {

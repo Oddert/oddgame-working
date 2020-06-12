@@ -9,7 +9,7 @@ const KyeCode = () => {
   const dispatch = useDispatch()
   const { entity_list } = useSelector(state => state.edit)
 
-  const lazy = 2
+  const lazy = 4
   const t = levels[`l_${lazy}`].data
 
   const mapping = {
@@ -35,7 +35,7 @@ const KyeCode = () => {
     "E": entity_list.enemy("teeth"),
     "F": entity_list.shooter("down", "marble"),
     "H": entity_list.blackhole(),
-    "K": { type: 'toBeDeCoded', info: 'Kye' },
+    "K": entity_list.kye(),
     "L": entity_list.sentry("left"),
     "R": entity_list.sentry("right"),
     "S": entity_list.magnet("horizontal"),

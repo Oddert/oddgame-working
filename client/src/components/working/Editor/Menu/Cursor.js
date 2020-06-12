@@ -7,7 +7,7 @@ const Cursor = () => {
   const dispatch = useDispatch()
   const { mode } = useSelector(state => state.edit.painter)
 
-  const modes = ['brush', 'selector']
+  const modes = ['selector', 'brush']
 
   const handleChange = m => dispatch(editPainterModeSwitch(m))
 
