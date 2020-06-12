@@ -67,7 +67,8 @@ $floor_colour: #ecf0f1;
       background: #00fc00;
     }
     &.focused {
-      border: 1px solid #39B8FF;
+      outline: 3px solid #39B8FF;
+      z-index: 90;
     }
     &.enemy {
       background: $floor_colour;

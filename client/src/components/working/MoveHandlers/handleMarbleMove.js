@@ -97,18 +97,15 @@ const swerve = (originalY, originalX, boardRef, dir, halted) => {
 
     const obsticalLikelyToMove = (dir, originalY, originalX, halted) => {
 
-      // console.log('+++++', originalY, originalX)
       // if (halted) console.log('[obsticalLikelyToMove]: halted, returning false')
       // if (halted) return false
 
       function checkAheadRecurse (dir, previousY, previousX) {
         // console.log('[checkAheadRecurse]', { dir, previousY, previousX })
         const obstical = getOffset(dir, previousY, previousX, 1)
-        // console.log(obstical)
 
         if (obstical.cell.type === 'floor') return true
 
-        // if (obstical.cell.type === 'marble') console.log('recursion begining...')
         if (obstical.cell.type === 'marble') return checkAheadRecurse(obstical.cell.direction, obstical.y, obstical.x)
 
         return false

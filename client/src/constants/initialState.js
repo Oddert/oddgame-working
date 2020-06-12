@@ -93,7 +93,7 @@ const initialState = {
       ...Object.keys(entity_list).map(e => entity_list[e]())
     ],
     painter: {
-      mode: 'brush',
+      mode: 'selector',
       selected: 1,
       focus: {
         x: null,
