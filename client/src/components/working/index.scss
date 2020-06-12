@@ -47,6 +47,9 @@ $floor_colour: #ecf0f1;
     &.rotate {
       background: $floor_colour;
     }
+    &.timer {
+      background: $floor_colour;
+    }
     &.blackhole {
       background: $floor_colour;
       img {

@@ -49,6 +49,8 @@ import block_square from '../../resources/block_square.svg'
 import block_soft from '../../resources/block_soft.svg'
 import block_round from '../../resources/block_round.svg'
 
+import enemy_cloud from '../../resources/enemy_cloud.gif'
+
 
 export const shooter_imgs = {
   shooter_slider_left,
@@ -114,4 +116,8 @@ export const block_imgs = {
   block_square,
   block_soft,
   block_round
+}
+
+export const enemy_imgs = {
+  enemy_cloud
 }

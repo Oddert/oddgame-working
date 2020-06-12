@@ -45,6 +45,9 @@ const entity_list = {
   diamond: () => ({
     type: 'diamond', catt: 'gameplay'
   }),
+  enemy: (variant = 'cloud') => ({
+    type: 'enemy', variant, catt: 'gameplay'
+  }),
 }
 
 const initialState = {

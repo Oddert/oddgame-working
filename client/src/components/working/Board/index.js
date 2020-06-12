@@ -4,6 +4,7 @@ import React from 'react'
 import Blackhole from '../Entities/Blackhole'
 import Block from '../Entities/Block'
 import Diamond from '../Entities/Diamond'
+import Enemy from '../Entities/Enemy'
 import Marble from '../Entities/Marble'
 import Rotate from '../Entities/Rotate'
 import Sentry from '../Entities/Sentry'
@@ -18,13 +19,14 @@ import {
   blackhole_img,
   block_imgs,
   diamond_img,
+  enemy_imgs,
   marble_imgs,
   rotate_imgs,
   sentry_imgs,
   shooter_imgs,
   slider_imgs,
   timer_imgs,
-  wall_imgs
+  wall_imgs,
 } from '../sprite_textures'
 
 const Board = ({ board, handleCellClick, focus, handleMouseEnter }) => {
@@ -51,6 +53,8 @@ const Board = ({ board, handleCellClick, focus, handleMouseEnter }) => {
         return <Diamond img={diamond_img} />
       case 'block':
         return <Block imgs={block_imgs} {...cell} />
+      case 'enemy':
+        return <Enemy imgs={enemy_imgs} {...cell} />
       case 'toBeDeCoded':
         return '?'
       default:
