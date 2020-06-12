@@ -31,16 +31,16 @@ const KyeCode = () => {
     "B": entity_list.block_round(),
     "C": entity_list.enemy("cloud"),
     "D": entity_list.sentry("down"),
-    "E": { type: 'toBeDeCoded', info: 'teeth enemy' },
+    "E": entity_list.enemy("teeth"),
     "F": entity_list.shooter("down", "marble"),
     "H": entity_list.blackhole(),
     "K": { type: 'toBeDeCoded', info: 'Kye' },
     "L": entity_list.sentry("left"),
     "R": entity_list.sentry("right"),
     "S": { type: 'toBeDeCoded', info: 'magnet on side' },
-    "T": { type: 'toBeDeCoded', info: 'cross shape eye enemy' },
+    "T": entity_list.enemy("wheel"),
     "U": entity_list.sentry("up"),
-    "[": { type: 'toBeDeCoded', info: 'crosshair enemy' },
+    "[": entity_list.enemy("cross"),
     "^": entity_list.marble("up"),
     "a": entity_list.rotate("anticlock"),
     "b": entity_list.block_square(),
@@ -63,7 +63,7 @@ const KyeCode = () => {
     "{": entity_list.timer(5),
     "|": entity_list.timer(4),
     "}": entity_list.timer(3),
-    "~": { type: 'toBeDeCoded', info: 'snake enemy' },
+    "~": entity_list.enemy("snake"),
   }
 
   const convertOne = each => {

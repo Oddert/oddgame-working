@@ -50,6 +50,10 @@ import block_soft from '../../resources/block_soft.svg'
 import block_round from '../../resources/block_round.svg'
 
 import enemy_cloud from '../../resources/enemy_cloud.gif'
+import enemy_cross from '../../resources/enemy_cross.gif'
+import enemy_wheel from '../../resources/enemy_wheel.gif'
+import enemy_teeth from '../../resources/enemy_teeth.gif'
+import enemy_snake from '../../resources/enemy_snake.gif'
 
 
 export const shooter_imgs = {
@@ -119,5 +123,9 @@ export const block_imgs = {
 }
 
 export const enemy_imgs = {
-  enemy_cloud
+  enemy_cloud,
+  enemy_cross,
+  enemy_wheel,
+  enemy_teeth,
+  enemy_snake,
 }
