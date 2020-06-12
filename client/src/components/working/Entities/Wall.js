@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Wall = ({ imgs, variant, debug }) => (
+const Wall = ({ imgs, variant, direction, debug }) => (
   <img
     className='wall__img'
-    src={imgs[`wall_${variant}`]}
-    alt={`wall ${variant}`}
+    src={imgs[variant === 'square' ? 'wall_square' : `wall_${variant}_${direction}`]}
+    alt={`wall ${variant} ${direction}`}
   />
 )
 

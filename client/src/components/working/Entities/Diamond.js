@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Diamond = ({ img }) => (
+const Diamond = ({ imgs }) => (
   <img
     className='diamond__img'
-    src={img}
+    src={imgs['diamond']}
     alt='diamond'
   />
 )

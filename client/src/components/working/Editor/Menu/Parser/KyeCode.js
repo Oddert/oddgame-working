@@ -9,7 +9,7 @@ const KyeCode = () => {
   const dispatch = useDispatch()
   const { entity_list } = useSelector(state => state.edit)
 
-  const lazy = 1
+  const lazy = 2
   const t = levels[`l_${lazy}`].data
 
   const mapping = {
@@ -17,15 +17,16 @@ const KyeCode = () => {
     "!": entity_list.timer(2),
     "\"": entity_list.timer(1),
     "*": entity_list.diamond(),
-    "1": entity_list.wall_round(),
-    "2": entity_list.wall_round(),
-    "3": entity_list.wall_round(),
-    "4": entity_list.wall_round(),
-    "5": entity_list.wall_square(),
-    "6": entity_list.wall_round(),
-    "7": entity_list.wall_round(),
-    "8": entity_list.wall_round(),
-    "9": entity_list.wall_round(),
+    "1": entity_list.wall_round(1),
+    "2": entity_list.wall_round(2),
+    "3": entity_list.wall_round(3),
+    "4": entity_list.wall_round(4),
+    "5": entity_list.wall_square(5),
+    // "5": entity_list.wall_round(5),
+    "6": entity_list.wall_round(6),
+    "7": entity_list.wall_round(7),
+    "8": entity_list.wall_round(8),
+    "9": entity_list.wall_round(9),
     "<": entity_list.marble("left"),
     ">": entity_list.marble("right"),
     "B": entity_list.block_round(),

@@ -19,9 +19,9 @@ import Wall from '../../../Entities/Wall'
 
 
 import {
-  blackhole_img,
+  blackhole_imgs,
   block_imgs,
-  diamond_img,
+  diamond_imgs,
   enemy_imgs,
   forcefield_imgs,
   magnet_imgs,
@@ -56,11 +56,11 @@ const Selector = () => {
       case 'sentry':
         return <Sentry imgs={sentry_imgs} {...cell} />
       case 'blackhole':
-        return <Blackhole img={blackhole_img} />
+        return <Blackhole imgs={blackhole_imgs} />
       case 'timer':
         return <Timer imgs={timer_imgs} {...cell} />
       case 'diamond':
-        return <Diamond img={diamond_img} />
+        return <Diamond imgs={diamond_imgs} />
       case 'block':
         return <Block imgs={block_imgs} {...cell} />
       case 'enemy':

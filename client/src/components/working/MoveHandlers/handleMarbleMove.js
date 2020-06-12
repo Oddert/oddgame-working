@@ -35,35 +35,50 @@ function mRight (y, x, boardRef, dir, halted) {
   return { y: move.y, x: move.x, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved, halted: move.halted }
 }
 
-const swerve = (originalY, originalX, boardRef, dir, halted) => {
-  // BUG: Implament halted plz
-  const swerveValid = (y, x, dir, rotation) => {
-    if (y < 0 || y > boardRef.length - 1) return { valid: false }
-    if (x < 0 || x > boardRef[0].length - 1) return { valid: false }
+function swerve (originalY, originalX, boardRef, dir, halted) {
 
-    if (dir === 'right') {
-      if (getCell(y, x - 1, boardRef).type !== 'floor') return { valid: false }
-    }
-    if (dir === 'down') {
-      if (getCell(y - 1, x, boardRef).type !== 'floor') return { valid: false }
-    }
-    if (dir === 'left') {
-      if (getCell(y, x + 1, boardRef).type !== 'floor') return { valid: false }
-    }
-    if (dir === 'up') {
-      if (getCell(y + 1, x, boardRef).type !== 'floor') return { valid: false }
-    }
-
-    const cell = boardRef[y] && boardRef[y][x]
-    if (!cell || cell.type !== 'floor') return { valid: false }
-    return { valid: true, cell, y, x }
+  switch(dir) {
+    case 'left':
+      return pickDirection(originalY + 1, originalX - 1, originalY - 1, originalX - 1, dir, originalY, originalX, halted)
+    case 'right':
+      return pickDirection(originalY - 1, originalX + 1, originalY + 1, originalX + 1, dir, originalY, originalX, halted)
+    case 'up':
+      return pickDirection(originalY - 1, originalX - 1, originalY - 1, originalX + 1, dir, originalY, originalX, halted)
+    case 'down':
+      return pickDirection(originalY + 1, originalX - 1, originalY + 1, originalX + 1, dir, originalY, originalX, halted)
+    default:
+      return { y: originalY, x: originalX }
   }
 
-  const pickDirection = (y1, x1, y2, x2, dir, originalY, originalX, halted) => {
+  function pickDirection (y1, x1, y2, x2, dir, originalY, originalX, halted) {
+
+    console.log('#')
+    if (obsticalLikelyToMove(dir, originalY, originalX, halted)) return { y: originalY, x: originalX, halted: true }
+    console.log('##')
+
+    const obstical = getOffset(dir, originalY, originalX, 1)
+    console.log(obstical)
+    if (obstical.cell.type === 'rotate') {
+      return {
+        y: originalY,
+        x: originalX,
+        direction: obstical.cell.direction === 'clock' ? getClockwise(dir) : getAnticlockwise(dir)
+      }
+    }
+    const possibilities = []
+    // going "left" / "up"
+    if (swerveValid(y1, x1, dir).valid) possibilities.push({ y: y1, x: x1 })
+    // going "right" / "down"
+    if (swerveValid(y2, x2, dir).valid) possibilities.push({ y: y2, x: x2 })
+    if (possibilities.length === 0) return { y: originalY, x: originalX }
+    console.log({ possibilities })
+    return possibilities[Math.floor(Math.random() * possibilities.length)]
+
+
     // Note from future: is this true????? ->
     // BUG: this code assumes the marble acting as obstical is going to move in the same direction as the marble
     // which is deciding to halt. Direction must be read from target and 'infront' calculated from there
-    const getOffset = (dir, y, x, inc) => {
+    function getOffset (dir, y, x, inc) {
       switch (dir) {
         case 'left':
         // return boardRef[y] && boardRef[y][x - inc] ? { cell: boardRef[y][x - inc], y, x: x - inc } : { cell: { type: 'wall' }, y, x: x - inc }
@@ -95,60 +110,44 @@ const swerve = (originalY, originalX, boardRef, dir, halted) => {
       }
     }
 
-    const obsticalLikelyToMove = (dir, originalY, originalX, halted) => {
-
+    function obsticalLikelyToMove (dir, originalY, originalX, halted) {
       // if (halted) console.log('[obsticalLikelyToMove]: halted, returning false')
       // if (halted) return false
-
       function checkAheadRecurse (dir, previousY, previousX) {
         // console.log('[checkAheadRecurse]', { dir, previousY, previousX })
         const obstical = getOffset(dir, previousY, previousX, 1)
 
         if (obstical.cell.type === 'floor') return true
-
         if (obstical.cell.type === 'marble') return checkAheadRecurse(obstical.cell.direction, obstical.y, obstical.x)
 
         return false
       }
-
       return checkAheadRecurse (dir, originalY, originalX)
     }
 
-    console.log('#')
-    if (obsticalLikelyToMove(dir, originalY, originalX, halted)) return { y: originalY, x: originalX, halted: true }
-    console.log('##')
-
-    const obstical = getOffset(dir, originalY, originalX, 1)
-    console.log(obstical)
-    if (obstical.cell.type === 'rotate') {
-      return {
-        y: originalY,
-        x: originalX,
-        direction: obstical.cell.direction === 'clock' ? getClockwise(dir) : getAnticlockwise(dir)
-      }
-    }
-    const possibilities = []
-    // going "left" / "up"
-    if (swerveValid(y1, x1, dir).valid) possibilities.push({ y: y1, x: x1 })
-    // going "right" / "down"
-    if (swerveValid(y2, x2, dir).valid) possibilities.push({ y: y2, x: x2 })
-    if (possibilities.length === 0) return { y: originalY, x: originalX }
-    console.log({ possibilities })
-    return possibilities[Math.floor(Math.random() * possibilities.length)]
   } // pickDirection
 
-  switch(dir) {
-    case 'left':
-      return pickDirection(originalY + 1, originalX - 1, originalY - 1, originalX - 1, dir, originalY, originalX, halted)
-    case 'right':
-      return pickDirection(originalY - 1, originalX + 1, originalY + 1, originalX + 1, dir, originalY, originalX, halted)
-    case 'up':
-      return pickDirection(originalY - 1, originalX - 1, originalY - 1, originalX + 1, dir, originalY, originalX, halted)
-    case 'down':
-      return pickDirection(originalY + 1, originalX - 1, originalY + 1, originalX + 1, dir, originalY, originalX, halted)
-    default:
-      return { y: originalY, x: originalX }
-  }
+  function swerveValid (y, x, dir, rotation, offset) {
+    if (y < 0 || y > boardRef.length - 1) return { valid: false }
+    if (x < 0 || x > boardRef[0].length - 1) return { valid: false }
+
+    if (dir === 'right') {
+      if (getCell(y, x - 1, boardRef).type !== 'floor') return { valid: false }
+    }
+    if (dir === 'down') {
+      if (getCell(y - 1, x, boardRef).type !== 'floor') return { valid: false }
+    }
+    if (dir === 'left') {
+      if (getCell(y, x + 1, boardRef).type !== 'floor') return { valid: false }
+    }
+    if (dir === 'up') {
+      if (getCell(y + 1, x, boardRef).type !== 'floor') return { valid: false }
+    }
+
+    const cell = boardRef[y] && boardRef[y][x]
+    if (!cell || cell.type !== 'floor') return { valid: false }
+    return { valid: true, cell, y, x }
+  } // swerveValid
 
 } // swerve
 
@@ -176,7 +175,7 @@ const moveValidator = (current, desire, boardRef, dir) => {
       }
     }
     if (!swervable) return { y: current.y, x: current.x, status, toBeRemoved }
-    let swerved = swerve(current.y, current.x, boardRef, dir, current.halted)
+    const swerved = swerve(current.y, current.x, boardRef, dir, current.halted)
     console.log('nah swerve that: ', swerved)
     return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true, toBeRemoved, halted: swerved.halted }
   }

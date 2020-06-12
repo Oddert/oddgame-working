@@ -9,8 +9,8 @@ const entity_list = {
   wall_square: () => ({
     type: 'wall', variant: 'square', catt: 'structural'
   }),
-  wall_round: () => ({
-    type: 'wall', variant: 'round', catt: 'structural'
+  wall_round: (direction = 5) => ({
+    type: 'wall', variant: 'round', direction, catt: 'structural'
   }),
   block_round: () => ({
     type: 'block', variant: 'round', catt: 'structural'

@@ -42,6 +42,15 @@ import timer_9 from '../../resources/timer_9.svg'
 
 import wall_square from '../../resources/wall_square.svg'
 import wall_round from '../../resources/wall_round.svg'
+import wall_round_1 from '../../resources/wall_round_1.svg'
+import wall_round_2 from '../../resources/wall_round_2.svg'
+import wall_round_3 from '../../resources/wall_round_3.svg'
+import wall_round_4 from '../../resources/wall_round_4.svg'
+import wall_round_5 from '../../resources/wall_round_5.svg'
+import wall_round_6 from '../../resources/wall_round_6.svg'
+import wall_round_7 from '../../resources/wall_round_7.svg'
+import wall_round_8 from '../../resources/wall_round_8.svg'
+import wall_round_9 from '../../resources/wall_round_9.svg'
 
 import diamond from '../../resources/diamond.svg'
 
@@ -92,17 +101,19 @@ export const marble_imgs = {
 
 export const rotate_imgs = {
   rotate_clock,
-  rotate_anticlock
+  rotate_anticlock,
 }
 
 export const sentry_imgs = {
   sentry_right,
   sentry_left,
   sentry_up,
-  sentry_down
+  sentry_down,
 }
 
-export const blackhole_img = blackhole
+export const blackhole_imgs = {
+  blackhole,
+}
 
 export const timer_imgs = {
   timer_0,
@@ -119,10 +130,21 @@ export const timer_imgs = {
 
 export const wall_imgs = {
   wall_square,
-  wall_round
+  wall_round,
+  wall_round_1,
+  wall_round_2,
+  wall_round_3,
+  wall_round_4,
+  wall_round_5,
+  wall_round_6,
+  wall_round_7,
+  wall_round_8,
+  wall_round_9,
 }
 
-export const diamond_img = diamond
+export const diamond_imgs = {
+  diamond,
+}
 
 export const block_imgs = {
   block_square,

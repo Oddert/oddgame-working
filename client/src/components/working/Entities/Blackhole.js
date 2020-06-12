@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Blackhole = ({ img }) => (
+const Blackhole = ({ imgs }) => (
   <img
     className='blackhole__img'
     data-img={`blackhole`}
-    src={img}
+    src={imgs['blackhole']}
     alt={`blackhole`}
   />
 )
