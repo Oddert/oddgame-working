@@ -5,6 +5,8 @@ import Blackhole from '../Entities/Blackhole'
 import Block from '../Entities/Block'
 import Diamond from '../Entities/Diamond'
 import Enemy from '../Entities/Enemy'
+import Forcefield from '../Entities/Forcefield'
+import Magnet from '../Entities/Magnet'
 import Marble from '../Entities/Marble'
 import Rotate from '../Entities/Rotate'
 import Sentry from '../Entities/Sentry'
@@ -20,6 +22,8 @@ import {
   block_imgs,
   diamond_img,
   enemy_imgs,
+  forcefield_imgs,
+  magnet_imgs,
   marble_imgs,
   rotate_imgs,
   sentry_imgs,
@@ -55,6 +59,10 @@ const Board = ({ board, handleCellClick, focus, handleMouseEnter }) => {
         return <Block imgs={block_imgs} {...cell} />
       case 'enemy':
         return <Enemy imgs={enemy_imgs} {...cell} />
+      case 'forcefield':
+        return <Forcefield imgs={forcefield_imgs} {...cell} />
+      case 'magnet':
+        return <Magnet imgs={magnet_imgs} {...cell} />
       case 'toBeDeCoded':
         return '?'
       default:

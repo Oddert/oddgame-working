@@ -55,6 +55,14 @@ import enemy_wheel from '../../resources/enemy_wheel.gif'
 import enemy_teeth from '../../resources/enemy_teeth.gif'
 import enemy_snake from '../../resources/enemy_snake.gif'
 
+import  forcefield_up from '../../resources/forcefield_up.gif'
+import  forcefield_down from '../../resources/forcefield_down.gif'
+import  forcefield_left from '../../resources/forcefield_left.gif'
+import  forcefield_right from '../../resources/forcefield_right.gif'
+
+import magnet_vertical from '../../resources/magnet_vertical.svg'
+import magnet_horizontal from '../../resources/magnet_horizontal.svg'
+
 
 export const shooter_imgs = {
   shooter_slider_left,
@@ -128,4 +136,16 @@ export const enemy_imgs = {
   enemy_wheel,
   enemy_teeth,
   enemy_snake,
+}
+
+export const forcefield_imgs = {
+  forcefield_up,
+  forcefield_down,
+  forcefield_left,
+  forcefield_right,
+}
+
+export const magnet_imgs = {
+  magnet_vertical,
+  magnet_horizontal,
 }

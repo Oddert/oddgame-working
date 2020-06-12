@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { editWriteBoard } from '../../../../../actions'
+import { editWriteBoard, playBoardWrite } from '../../../../../actions'
 
 import { levels } from '../../../defaultKye.js'
 
@@ -9,7 +9,7 @@ const KyeCode = () => {
   const dispatch = useDispatch()
   const { entity_list } = useSelector(state => state.edit)
 
-  const lazy = 4
+  const lazy = 1
   const t = levels[`l_${lazy}`].data
 
   const mapping = {
@@ -37,7 +37,7 @@ const KyeCode = () => {
     "K": { type: 'toBeDeCoded', info: 'Kye' },
     "L": entity_list.sentry("left"),
     "R": entity_list.sentry("right"),
-    "S": { type: 'toBeDeCoded', info: 'magnet on side' },
+    "S": entity_list.magnet("horizontal"),
     "T": entity_list.enemy("wheel"),
     "U": entity_list.sentry("up"),
     "[": entity_list.enemy("cross"),
@@ -47,13 +47,13 @@ const KyeCode = () => {
     "c": entity_list.rotate("clock"),
     "d": entity_list.slider("down"),
     "e": entity_list.block_soft(),
-    "f": { type: 'toBeDeCoded', info: 'forcefield vertical dir1' },
-    "g": { type: 'toBeDeCoded', info: 'forcefield vertical dir2' },
-    "h": { type: 'toBeDeCoded', info: 'forcefield horizontal dir2' },
-    "i": { type: 'toBeDeCoded', info: 'forcefield horizontal dir1' },
+    "f": entity_list.forcefield("right"),
+    "g": entity_list.forcefield("left"),
+    "h": entity_list.forcefield("down"),
+    "i": entity_list.forcefield("up"),
     "l": entity_list.slider("left"),
     "r": entity_list.slider("right"),
-    "s": { type: 'toBeDeCoded', info: 'magnet upright' },
+    "s": entity_list.magnet("vertical"),
     "u": entity_list.slider("up"),
     "v": entity_list.marble("down"),
     "w": entity_list.timer(9),
@@ -88,6 +88,9 @@ const KyeCode = () => {
       <button onClick={() => convert(t)}>Show me the thing</button>
       <button onClick={send}>
         Print me level: {lazy}, {levels[`l_${lazy}`].title}
+      </button>
+      <button onClick={() => dispatch(playBoardWrite(t))}>
+        put on real board (crime)
       </button>
     </>
   )

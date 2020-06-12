@@ -48,6 +48,12 @@ const entity_list = {
   enemy: (variant = 'cloud') => ({
     type: 'enemy', variant, catt: 'gameplay'
   }),
+  forcefield: (direction = 'right') => ({
+    type: 'forcefield', direction, catt: 'obstical'
+  }),
+  magnet: (direction = "vertical") => ({
+    type: 'magnet', direction, catt: 'gameplay',
+  }),
 }
 
 const initialState = {

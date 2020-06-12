@@ -171,7 +171,10 @@ const moveValidator = (current, desire, boardRef, dir) => {
   if (!status) {
     const target = boardRef[desire.y] && boardRef[desire.y][desire.x]
     if (target && unswervables.includes(target.type)) {
-      if (!(target.type === 'wall' && target.variant === 'round') && !(target.type === 'block' && target.variant === 'round')) {
+      if (
+        !(target.type === 'wall' && target.variant === 'round') &&
+        !(target.type === 'block' && target.variant === 'round')
+      ) {
         swervable = false
       }
     }
