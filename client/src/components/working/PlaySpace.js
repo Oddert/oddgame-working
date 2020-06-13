@@ -15,6 +15,7 @@ import handleSentryMove from './MoveHandlers/handleSentryMove'
 import handleTimer from './MoveHandlers/handleTimer'
 
 import { ranArr, ranNum } from './Utils/randomisers'
+import { getAnticlockwise } from './Utils/rotate'
 
 
 const PlaySpace = () => {
@@ -59,6 +60,13 @@ const PlaySpace = () => {
             function shootEntity () {
               const { direction, emits } = col
               const shoot = handleShoot(r, c, nv, direction, emits)
+              // const maximumCallStackSizeExceeded = {
+              //   'right': 'up',
+              //   'up': 'left',
+              //   'left': 'down',
+              //   'down': 'right'
+              // }
+              nv[r][c].direction = getAnticlockwise(nv[r][c].direction)
               console.log(shoot)
               if (!shoot.status) return
               nv[shoot.y][shoot.x] = shoot.data
@@ -71,7 +79,7 @@ const PlaySpace = () => {
               const moved = handleSliderMove(r, c, nv, direction)
               // console.log(moved)
               if (moved.toBeRemoved) {
-                nv[r][c] = { type: 'floor' }
+                nv[r][c] = entity_list.floor()
                 return
               }
               const directionUnchanged = !moved.direction || (moved.direction && moved.direction === col.direction)
@@ -116,7 +124,7 @@ const PlaySpace = () => {
               if (moved.y === r && moved.x === c) return
               // console.log({ r, c  }, moved)
               if (nv[moved.y] && nv[moved.y][moved.x]) {
-                console.log(`swapping ${r}, ${c} to ${moved.y}, ${moved.x}`)
+                // console.log(`swapping ${r}, ${c} to ${moved.y}, ${moved.x}`)
                 nv[moved.y][moved.x].type = 'marble'
                 nv[moved.y][moved.x].direction = nv[r][c].direction
                 nv[r][c].type = 'floor'

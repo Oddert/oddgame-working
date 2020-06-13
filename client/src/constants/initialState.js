@@ -33,7 +33,7 @@ const entity_list = {
   sentry: (direction = 'left') => ({
     type: 'sentry', direction, catt: 'obstical'
   }),
-  shooter: (direction = 'left', emits = 'slider') => ({
+  shooter: (direction = 'right', emits = 'slider') => ({
     type: 'shooter', direction, emits, catt: 'obstical'
   }),
   slider: (direction = 'left') => ({

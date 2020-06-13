@@ -28,6 +28,10 @@ import sentry_up from '../../resources/sentry_up.svg'
 import sentry_down from '../../resources/sentry_down.svg'
 
 import blackhole from '../../resources/blackhole.svg'
+import blackhole_1 from '../../resources/blackhole_1.svg'
+import blackhole_2 from '../../resources/blackhole_2.svg'
+import blackhole_3 from '../../resources/blackhole_3.svg'
+import blackhole_4 from '../../resources/blackhole_4.svg'
 
 import timer_0 from '../../resources/timer_0.svg'
 import timer_1 from '../../resources/timer_1.svg'
@@ -53,6 +57,10 @@ import wall_round_8 from '../../resources/wall_round_8.svg'
 import wall_round_9 from '../../resources/wall_round_9.svg'
 
 import diamond from '../../resources/diamond.svg'
+// import diamond_1 from '../../resources/diamond_1.svg'
+// import diamond_2 from '../../resources/diamond_2.svg'
+// import diamond_3 from '../../resources/diamond_3.svg'
+// import diamond_4 from '../../resources/diamond_4.svg'
 
 import block_square from '../../resources/block_square.svg'
 import block_soft from '../../resources/block_soft.svg'
@@ -115,6 +123,10 @@ export const sentry_imgs = {
 
 export const blackhole_imgs = {
   blackhole,
+  blackhole_1,
+  blackhole_2,
+  blackhole_3,
+  blackhole_4,
 }
 
 export const timer_imgs = {
@@ -146,6 +158,10 @@ export const wall_imgs = {
 
 export const diamond_imgs = {
   diamond,
+  // diamond_1,
+  // diamond_2,
+  // diamond_3,
+  // diamond_4,
 }
 
 export const block_imgs = {

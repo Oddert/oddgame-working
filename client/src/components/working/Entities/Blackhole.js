@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Blackhole = ({ imgs }) => (
+const Blackhole = ({ imgs, cooldown }) => (
   <img
     className='blackhole__img'
-    data-img={`blackhole`}
-    src={imgs['blackhole']}
-    alt={`blackhole`}
+    data-img={`blackhole ${cooldown}`}
+    src={imgs[cooldown ? `blackhole_${cooldown}` : `blackhole`]}
+    alt={`blackhole ${cooldown}`}
   />
 )
 
