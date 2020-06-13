@@ -114,12 +114,21 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
     function obsticalLikelyToMove (dir, originalY, originalX, halted) {
       // if (halted) console.log('[obsticalLikelyToMove]: halted, returning false')
       // if (halted) return false
+      const recursionMem = {}
+      const recHash = (y, x, type) => `${y}_${x}_${type}`
       function checkAheadRecurse (dir, previousY, previousX) {
         // console.log('[checkAheadRecurse]', { dir, previousY, previousX })
         const obstical = getOffset(dir, previousY, previousX, 1)
 
         if (obstical.cell.type === 'floor') return true
-        if (obstical.cell.type === 'marble') return checkAheadRecurse(obstical.cell.direction, obstical.y, obstical.x)
+        if (obstical.cell.type === 'marble') {
+          if (recursionMem.hasOwnProperty(recHash(obstical.y, obstical.x, obstical.type))) {
+            return false
+          } else {
+            recursionMem[recHash(obstical.y, obstical.x, obstical.type)] = true
+            return checkAheadRecurse(obstical.cell.direction, obstical.y, obstical.x)
+          }
+        }
 
         return false
       }
