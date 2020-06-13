@@ -37,7 +37,7 @@ const emitOpts = direction => ({
   slider: { type: 'slider', direction }
 })
 
-const handleShoot = (y, x, boardRef, direction, emit) => {
+const handleShoot = (y, x, boardRef, tick, direction, emit) => {
   const target = targetCell(y, x, direction, emit, boardRef)
   if (!target) return { status: false, data: { type: 'floor' } }
   return target

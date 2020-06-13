@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import Board from './Board/'
@@ -18,20 +18,40 @@ import { ranArr, ranNum } from './Utils/randomisers'
 import { getAnticlockwise } from './Utils/rotate'
 
 
+function useInterval(callback, delay) {
+  const cbRef = useRef()
+
+  useEffect(() => {
+    cbRef.current = callback
+  }, [callback])
+
+  useEffect(() => {
+    const tick = () => cbRef.current()
+    if (delay) {
+      let id = setInterval(tick, delay)
+      return () => clearInterval(id)
+    }
+  }, [delay])
+
+}
+
 const PlaySpace = () => {
   // BUG: This should be in a useEffect???
   // const [board, setBoard] = React.useState(generateBoard('marble'))
   // const [boarda, setBoard] = React.useState(defaultBoards[1].data)
   const [painter, setPainter] = useState('marble')
+  const [gameTicker, setGameTicker] = useState(null)
+  const [tickLength, setTickLength] = useState(null)
 
   const dispatch = useDispatch()
 
-  const { board } = useSelector(state => state.play)
+  const { board, tick } = useSelector(state => state.play)
   const { entity_list } = useSelector(state => state.edit)
 
   function handleSelectChange (e) {
     setPainter(e)
   }
+
 
   function handleCellClick ({ y, x }) {
     const nb = JSON.parse(JSON.stringify(board))
@@ -47,6 +67,16 @@ const PlaySpace = () => {
     dispatch(playBoardWrite(nb))
   }
 
+  const startTick = () => {
+    setTickLength(1000)
+  }
+
+  useInterval(loopAll, tickLength)
+
+  function stopTick() {
+    setTickLength(null)
+  }
+
   function loopAll () {
     console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
     const nv = JSON.parse(JSON.stringify(board))//board.slice().map(row => row.slice().map(c => c))
@@ -59,7 +89,7 @@ const PlaySpace = () => {
           case 'shooter':
             function shootEntity () {
               const { direction, emits } = col
-              const shoot = handleShoot(r, c, nv, direction, emits)
+              const shoot = handleShoot(r, c, nv, direction, tick, emits)
               // const maximumCallStackSizeExceeded = {
               //   'right': 'up',
               //   'up': 'left',
@@ -76,7 +106,7 @@ const PlaySpace = () => {
           case 'slider':
             function moveslider () {
               const { direction } = col
-              const moved = handleSliderMove(r, c, nv, direction)
+              const moved = handleSliderMove(r, c, nv, tick, direction)
               // console.log(moved)
               if (moved.toBeRemoved) {
                 nv[r][c] = entity_list.floor()
@@ -103,7 +133,7 @@ const PlaySpace = () => {
               // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
               // console.log('baw found')
               const { direction, halted } = col
-              const moved = handleMarbleMove(r, c, nv, direction, halted)
+              const moved = handleMarbleMove(r, c, nv, direction, tick, halted)
               // console.log(moved, nv[r][c])
               if (moved.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
@@ -136,7 +166,7 @@ const PlaySpace = () => {
           case 'sentry':
             function moveSentry () {
               const { direction } = col
-              const moved = handleSentryMove(r, c, nv, direction)
+              const moved = handleSentryMove(r, c, nv, tick, direction)
               console.log(moved)
               if (moved.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
@@ -163,7 +193,7 @@ const PlaySpace = () => {
           case 'timer':
             function tickTock () {
               const { time } = col
-              const ticked = handleTimer(r, c, nv, time)
+              const ticked = handleTimer(r, c, nv, tick, time)
               if (ticked.toBeRemoved) {
                 nv[r][c] = { type: 'floor' }
                 return
@@ -199,6 +229,8 @@ const PlaySpace = () => {
         defaultBoards={defaultBoards}
         setBoard={nb => dispatch(playBoardWrite(nb))}
         loopAll={loopAll}
+        startTick={startTick}
+        stopTick={stopTick}
       />
     </div>
   )

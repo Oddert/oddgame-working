@@ -264,7 +264,7 @@ const moveValidator = (current, desire, boardRef, dir) => {
 }
 
 
-const handleMove = (y, x, boardRef, dir, halted) => {
+const handleMove = (y, x, boardRef, tick, dir, halted) => {
   switch (dir) {
     case 'up':
       return mUp(y, x, boardRef, dir, halted)

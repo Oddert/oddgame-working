@@ -62,7 +62,8 @@ const entity_list = {
 const initialState = {
   // board: generateBoard()
   play: {
-    board: defaultBoards[0].data
+    board: defaultBoards[0].data,
+    tick: 0,
   },
   ui: {
     mouseIsDown: false

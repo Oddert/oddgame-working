@@ -17,8 +17,13 @@ const play = (state = initialState.play, action) => {
 }
 
 function boardWrite (state, payload) {
-  const { board } = payload
-  return Object.assign({}, state, { board })
+  const { tick } = state
+  const { board, resetTick } = payload
+
+  return Object.assign({}, state, {
+    board,
+    tick: resetTick ? 0 : tick + 1
+  })
 }
 
 export default play

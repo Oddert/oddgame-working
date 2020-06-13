@@ -4,7 +4,7 @@ import { checkIsFloor, checkIsRotate, checkIsBlackhole } from '../Utils/check'
 
 // OPTIMIZE: Double check these files for potential unused code / vars
 
-const handleSliderMove = (y, x, boardRef, direction) => {
+const handleSliderMove = (y, x, boardRef, tick, direction) => {
   switch (direction) {
     case 'left':
       return mLeft(y, x, boardRef, direction)

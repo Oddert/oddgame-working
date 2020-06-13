@@ -9,7 +9,7 @@ const dirMap = {
   down: 'up',
 }
 
-const handleMove = (y, x, boardRef, direction) => {
+const handleMove = (y, x, boardRef, tick, direction) => {
   switch (direction) {
     case 'left':
       return mLeft(y, x, boardRef, direction)
