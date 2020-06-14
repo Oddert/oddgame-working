@@ -33,7 +33,7 @@ function boardWrite (state, payload) {
           'forcefield',
         ].includes(col.type)) {
           if (!out[col.type]) out[col.type] = []
-          out[col.type].push({ y, x, ...col })
+          out[col.type].push({ y, x, r: y, c: x, ...col })
         }
       })
     })
