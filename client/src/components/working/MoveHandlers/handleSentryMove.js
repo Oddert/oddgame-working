@@ -9,7 +9,8 @@ const dirMap = {
   down: 'up',
 }
 
-const handleMove = (y, x, boardRef, tick, direction) => {
+const handleMove = (y, x, boardRef, tick, direction, speed = 4) => {
+  if (tick % speed) return { x, y, direction }
   switch (direction) {
     case 'left':
       return mLeft(y, x, boardRef, direction)
@@ -44,7 +45,7 @@ function mDown(y, x, boardRef, direction) {
 }
 
 function checkIsBounce (targetY, targetX, boardRef, dir) {
-  if (!['block'].includes(boardRef[targetY][targetX].type)) return null
+  if (!['block', 'timer', 'marble', 'slider'].includes(boardRef[targetY][targetX].type)) return null
 
   let valid = false
   let x = targetX
@@ -79,7 +80,7 @@ function checkIsBounce (targetY, targetX, boardRef, dir) {
       console.error(`[handleSentryMove > checkIsBounce] No such direction type ${dir}`)
   }
 
-  console.log('nope')
+  // console.log('nope')
   if (valid) return {
     source: {
       y: targetY,

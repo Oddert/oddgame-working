@@ -18,11 +18,32 @@ const play = (state = initialState.play, action) => {
 
 function boardWrite (state, payload) {
   const { tick } = state
-  const { board, resetTick } = payload
+  const { board, resetTick, resetRegistry } = payload
+
+  function createRegister () {
+    const out = {}
+    board.forEach((row, y) => {
+      row.forEach((col, x) => {
+        if (![
+          'floor',
+          'wall',
+          'block',
+          'diamond',
+          'magnet',
+          'forcefield',
+        ].includes(col.type)) {
+          if (!out[col.type]) out[col.type] = []
+          out[col.type].push({ y, x, ...col })
+        }
+      })
+    })
+    return out
+  }
 
   return Object.assign({}, state, {
     board,
-    tick: resetTick ? 0 : tick + 1
+    tick: resetTick ? 0 : tick + 1,
+    registry: resetRegistry ? createRegister() : { ...state.registry }
   })
 }
 

@@ -1,9 +1,9 @@
 
 import types from './types'
 
-export const playBoardWrite = board => ({
+export const playBoardWrite = (board, resetTick, resetRegistry) => ({
   type: types.PLAY_BOARD_WRITE,
-  payload: { board }
+  payload: { board, resetTick, resetRegistry }
 })
 
 export const editToggleOpen = (override, value) => ({

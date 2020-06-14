@@ -5,7 +5,7 @@ import { getCell } from '../Utils/entityCellCreator'
 
 import '../index.scss'
 
-const Board = ({ board, handleCellClick, focus, handleMouseEnter }) => {
+const Board = ({ board, handleCellClick, focus, handleMouseEnter, cache }) => {
 
   function handleClick (e, y, x) {
     e.preventDefault()
@@ -17,6 +17,13 @@ const Board = ({ board, handleCellClick, focus, handleMouseEnter }) => {
       return focus.x === x && focus.y === y ? 'focused' : ''
     } else return ''
   }
+
+  React.useEffect(() => {
+    if (cache) {
+      cache()
+    }
+    return () => console.log('BOARD UNMOUNT')
+  })
 
   const mouseDidEnter = (e, y, x) => {
     if (handleMouseEnter) handleMouseEnter(e, y, x)

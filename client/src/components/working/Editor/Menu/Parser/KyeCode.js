@@ -9,7 +9,7 @@ const KyeCode = () => {
   const dispatch = useDispatch()
   const { entity_list, data: { board } } = useSelector(state => state.edit)
 
-  const lazy = 14
+  const lazy = 11
   const t = levels[`l_${lazy}`].data
 
   const initialPositionShooter = x => {
@@ -94,7 +94,7 @@ const KyeCode = () => {
       <button onClick={send}>
         Print me level: {lazy}, {levels[`l_${lazy}`].title}
       </button>
-      <button onClick={() => dispatch(playBoardWrite(board))}>
+      <button onClick={() => dispatch(playBoardWrite(board, true, true))}>
         put on real board (crime)
       </button>
     </>

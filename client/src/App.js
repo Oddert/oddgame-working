@@ -4,9 +4,6 @@ import { Provider } from 'react-redux'
 
 import store from './constants/store'
 
-// import Marbles from './components/marbles/'
-// import Sentry from './components/sentry/'
-// import Slider from './components/slider/'
 import Index from './components/working/'
 
 function App() {

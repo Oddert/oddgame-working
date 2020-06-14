@@ -6,7 +6,6 @@ const targetCell = (y, x, dir, emit, boardRef) => {
   if (y < 0) return false
   if (x > boardRef[0].length) return false
   if (x < 0) return false
-
   let status = true
   let target
   switch(dir) {

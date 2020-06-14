@@ -39,8 +39,8 @@ const entity_list = {
   slider: (direction = 'left') => ({
     type: 'slider', direction, catt: 'obstical'
   }),
-  timer: (time = 6) => ({
-    type: 'timer', time, catt: 'obstical'
+  timer: (time = 6, speed = 6) => ({
+    type: 'timer', time, speed, catt: 'obstical'
   }),
   diamond: () => ({
     type: 'diamond', catt: 'gameplay'
@@ -63,6 +63,9 @@ const initialState = {
   // board: generateBoard()
   play: {
     board: defaultBoards[0].data,
+    registry: {
+
+    },
     tick: 0,
   },
   ui: {

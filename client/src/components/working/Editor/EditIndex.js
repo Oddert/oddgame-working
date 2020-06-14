@@ -34,7 +34,12 @@ const Editor = () => {
   return (
     <div className='Editor' onClick={e => {e.stopPropagation()}}>
       <div style={{ background: 'tomato', flex: 3, display: 'flex', justifyContent: 'center' }}>
-        <Board board={board} handleCellClick={handleCellClick} focus={focus} handleMouseEnter={handleMouseEnter} />
+        <Board
+          board={board}
+          focus={focus}
+          handleCellClick={handleCellClick}
+          handleMouseEnter={handleMouseEnter} 
+        />
       </div>
       <div style={{ background: 'steelblue', flex: 2 }}>
         <Menu />
