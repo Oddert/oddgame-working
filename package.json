@@ -8,5 +8,5 @@
     "dev": "cd client && npm run start"
   },
   "author": "Robyn Felicity Heather Veitch",
-  "license": "ISC"
+  "license": "AGPL-3.0-or-later"
 }
