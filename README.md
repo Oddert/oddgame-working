@@ -7,7 +7,7 @@ A working project for an implamentation of the old windows game [Kye](https://en
 ```
 $ git clone https://github.com/Oddert/oddgame-working.git
 $ cd oddgame-working
-$ npm i
+$ npm run install-client
 $ npm start
 ```
 
@@ -15,3 +15,4 @@ $ npm start
 | script | command | action
 |--------|---------|----------|
 | dev | cd client && npm run start | runs the development server |
+| install-client | cd client && npm i | installs the client development environment |
