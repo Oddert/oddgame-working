@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 // import { useSelector } from 'react-redux'
 
 import { getCell } from '../Utils/entityCellCreator'
@@ -18,12 +18,12 @@ const Board = ({ board, handleCellClick, focus, handleMouseEnter, cache }) => {
     } else return ''
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (cache) {
       cache()
     }
     return () => console.log('BOARD UNMOUNT')
-  })
+  }, [cache])
 
   const mouseDidEnter = (e, y, x) => {
     if (handleMouseEnter) handleMouseEnter(e, y, x)
