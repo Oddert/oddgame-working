@@ -34,37 +34,37 @@ import {
 
 export const getCell = cell => {
     switch(cell.type) {
-    case 'wall':
-        return <Wall imgs={wall_imgs} {...cell} />
-    case 'shooter':
-        return <Shooter imgs={shooter_imgs} {...cell} />
-    case 'slider':
-        return <Slider imgs={slider_imgs} {...cell} />
-    case 'marble':
-        return <Marble imgs={marble_imgs} {...cell} />
-    case 'rotate':
-        return <Rotate imgs={rotate_imgs} {...cell} />
-    case 'sentry':
-        return <Sentry imgs={sentry_imgs} {...cell} />
-    case 'blackhole':
-        return <Blackhole imgs={blackhole_imgs} />
-    case 'timer':
-        return <Timer imgs={timer_imgs} {...cell} />
-    case 'diamond':
-        return <Diamond imgs={diamond_imgs} />
-    case 'block':
-        return <Block imgs={block_imgs} {...cell} />
-    case 'enemy':
-        return <Enemy imgs={enemy_imgs} {...cell} />
-    case 'forcefield':
-        return <Forcefield imgs={forcefield_imgs} {...cell} />
-    case 'magnet':
-        return <Magnet imgs={magnet_imgs} {...cell} />
-    case 'kye':
-        return <Kye imgs={kye_imgs} />
-    case 'toBeDeCoded':
-        return '?'
-    default:
-        return ''
+        case 'wall':
+            return <Wall imgs={wall_imgs} {...cell} />
+        case 'shooter':
+            return <Shooter imgs={shooter_imgs} {...cell} />
+        case 'slider':
+            return <Slider imgs={slider_imgs} {...cell} />
+        case 'marble':
+            return <Marble imgs={marble_imgs} {...cell} />
+        case 'rotate':
+            return <Rotate imgs={rotate_imgs} {...cell} />
+        case 'sentry':
+            return <Sentry imgs={sentry_imgs} {...cell} />
+        case 'blackhole':
+            return <Blackhole imgs={blackhole_imgs} />
+        case 'timer':
+            return <Timer imgs={timer_imgs} {...cell} />
+        case 'diamond':
+            return <Diamond imgs={diamond_imgs} />
+        case 'block':
+            return <Block imgs={block_imgs} {...cell} />
+        case 'enemy':
+            return <Enemy imgs={enemy_imgs} {...cell} />
+        case 'forcefield':
+            return <Forcefield imgs={forcefield_imgs} {...cell} />
+        case 'magnet':
+            return <Magnet imgs={magnet_imgs} {...cell} />
+        case 'kye':
+            return <Kye imgs={kye_imgs} />
+        case 'toBeDeCoded':
+            return '?'
+        default:
+            return ''
     }
 }

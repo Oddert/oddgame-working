@@ -2,7 +2,7 @@ import React from 'react'
 
 import LoadBoard from './LoadBoard'
 
-const Loader = ({ defaultBoards, setBoard }) => (
+const Loader = ({ defaultBoards, setBoard, }) => (
     <div>
         {
             defaultBoards.map((each, idx) =>

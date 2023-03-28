@@ -1,5 +1,7 @@
 const reducerFilter = type => {
-    const types = ['edit', 'play', 'ui']
+    const types = [
+        'edit', 'play', 'ui', 
+    ]
 
     const processedTypes = types
         .filter(e => type ? e !== type.toLowerCase() : true)

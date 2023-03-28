@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Slider = ({ emits, direction, imgs }) => (
+const Slider = ({ emits, direction, imgs, }) => (
     <img
         className='slider__img'
         src={imgs[`slider_${direction}`]}

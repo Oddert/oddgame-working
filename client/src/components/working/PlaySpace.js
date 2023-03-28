@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState, useEffect, useRef, } from 'react'
+import { useSelector, useDispatch, } from 'react-redux'
 
 import Board from './Board/'
 import Dev from './Dev/'
 
-import { playBoardWrite } from '../../actions/'
+import { playBoardWrite, } from '../../actions/'
 
 import defaultBoards from './defaultBoards'
 
@@ -14,8 +14,8 @@ import handleMarbleMove from './MoveHandlers/handleMarbleMove'
 import handleSentryMove from './MoveHandlers/handleSentryMove'
 import handleTimer from './MoveHandlers/handleTimer'
 
-import { ranArr, ranNum } from './Utils/randomisers'
-import { getAnticlockwise } from './Utils/rotate'
+import { ranArr, ranNum, } from './Utils/randomisers'
+import { getAnticlockwise, } from './Utils/rotate'
 
 
 function useInterval(callback, delay) {
@@ -23,7 +23,7 @@ function useInterval(callback, delay) {
 
     useEffect(() => {
         cbRef.current = callback
-    }, [callback])
+    }, [ callback, ])
 
     useEffect(() => {
         const tick = () => cbRef.current()
@@ -31,7 +31,7 @@ function useInterval(callback, delay) {
             let id = setInterval(tick, delay)
             return () => clearInterval(id)
         }
-    }, [delay])
+    }, [ delay, ])
 
 }
 
@@ -52,38 +52,42 @@ function useInterval(callback, delay) {
 // }
 
 // eslint-disable-next-line no-unused-vars
-const parseHash = ({ y, x, type }) => ({
+const parseHash = ({ y, x, type, }) => ({
     x, y, type,
-    hash: `${y}_${x}_${type}`
+    hash: `${y}_${x}_${type}`,
 })
 
 const PlaySpace = () => {
     // BUG: This should be in a useEffect???
     // const [board, setBoard] = React.useState(generateBoard('marble'))
     // const [boarda, setBoard] = React.useState(defaultBoards[1].data)
-    const [painter, setPainter] = useState('marble')
-    const [tickLength, setTickLength] = useState(null)
+    const [ painter, setPainter, ] = useState('marble')
+    const [ tickLength, setTickLength, ] = useState(null)
 
     const dispatch = useDispatch()
 
-    const { board, /*registry,*/ tick } = useSelector(state => state.play)
-    const { entity_list } = useSelector(state => state.edit)
+    const { board, /*registry,*/ tick, } = useSelector(state => state.play)
+    const { entity_list, } = useSelector(state => state.edit)
 
     function handleSelectChange (e) {
         setPainter(e)
     }
 
 
-    function handleCellClick ({ y, x }) {
+    function handleCellClick ({ y, x, }) {
         const nb = JSON.parse(JSON.stringify(board))
         nb[y][x].type = painter
         if (painter !== 'timer') nb[y][x].direction = 'right'
-        if (painter === 'rotate') nb[y][x].direction = ranArr(['clock', 'anticlock'])
+        if (painter === 'rotate') nb[y][x].direction = ranArr([ 'clock', 'anticlock', ])
         if (painter === 'timer') nb[y][x].time = ranNum(3, 9)
-        if (painter === 'block') nb[y][x].variant = ranArr(['soft', 'square', 'round'])
+        if (painter === 'block') nb[y][x].variant = ranArr([
+            'soft', 'square', 'round', 
+        ])
         if (painter === 'shooter') {
-            nb[y][x].direction = ranArr([ 'left', 'right', 'up', 'down' ])
-            nb[y][x].emits = ranArr([ 'slider', 'marble' ])
+            nb[y][x].direction = ranArr([
+                'left', 'right', 'up', 'down', 
+            ])
+            nb[y][x].emits = ranArr([ 'slider', 'marble', ])
         }
         dispatch(playBoardWrite(nb))
     }
@@ -236,14 +240,14 @@ const PlaySpace = () => {
             // }
         })
 
-        const reg = (r, c, entity) => ({ y: r, x: c, r, c, ...entity })
+        const reg = (r, c, entity) => ({ y: r, x: c, r, c, ...entity, })
 
         board.forEach((row, r) => {
             row.forEach((col, c) => {
                 switch(col.type) {
                     case 'shooter':
                         function shootEntity () {
-                            const { direction, emits } = col
+                            const { direction, emits, } = col
                             const shoot = handleShoot(r, c, nv, tick, direction, emits)
                             nv[r][c].direction = getAnticlockwise(nv[r][c].direction)
 
@@ -257,7 +261,7 @@ const PlaySpace = () => {
                         return
                     case 'slider':
                         function moveslider () {
-                            const { direction } = col
+                            const { direction, } = col
                             const moved = handleSliderMove(r, c, nv, tick, direction)
                             // console.log(moved)
                             if (moved.toBeRemoved) {
@@ -289,11 +293,11 @@ const PlaySpace = () => {
                         function moveMarble () {
                         // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
                         // console.log('baw found')
-                            const { direction, halted } = col
+                            const { direction, halted, } = col
                             const moved = handleMarbleMove(r, c, nv, tick, direction, halted)
                             // console.log(moved, nv[r][c])
                             if (moved.toBeRemoved) {
-                                nv[r][c] = { type: 'floor' }
+                                nv[r][c] = { type: 'floor', }
                                 return
                             }
 
@@ -322,11 +326,11 @@ const PlaySpace = () => {
                         return
                     case 'sentry':
                         function moveSentry () {
-                            const { direction } = col
+                            const { direction, } = col
                             const moved = handleSentryMove(r, c, nv, tick, direction)
                             // console.log(moved)
                             if (moved.toBeRemoved) {
-                                nv[r][c] = { type: 'floor' }
+                                nv[r][c] = { type: 'floor', }
                                 return
                             }
 
@@ -338,8 +342,8 @@ const PlaySpace = () => {
                             nv[moved.y][moved.x].type = 'sentry'
                             nv[moved.y][moved.x].direction = moved.direction
                             if (moved.bounce) {
-                                const { target, source } = moved.bounce
-                                nv[target.y][target.x] = { ...nv[source.y][source.x] }
+                                const { target, source, } = moved.bounce
+                                nv[target.y][target.x] = { ...nv[source.y][source.x], }
                                 nv[source.y][source.x] = entity_list.floor()
                             }
                             if (!positionUnMoved) {
@@ -351,10 +355,10 @@ const PlaySpace = () => {
                         return
                     case 'timer':
                         function tickTock () {
-                            const { time, speed } = col
+                            const { time, speed, } = col
                             const ticked = handleTimer(r, c, nv, tick, time, speed)
                             if (ticked.toBeRemoved) {
-                                nv[r][c] = { type: 'floor' }
+                                nv[r][c] = { type: 'floor', }
                                 return
                             }
                             nv[r][c].time = ticked.time
@@ -371,10 +375,10 @@ const PlaySpace = () => {
 
         // console.log(board, nv)
         // setBoard(nv)
-        console.log({ createRegisterDynamic })
+        console.log({ createRegisterDynamic, })
         dispatch(playBoardWrite(nv))
         const end = Date.now()
-        console.log(end-start)
+        console.log(end - start)
     }
 
     // React.useEffect(() => {

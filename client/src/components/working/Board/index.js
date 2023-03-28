@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, } from 'react'
 // import { useSelector } from 'react-redux'
 
-import { getCell } from '../Utils/entityCellCreator'
+import { getCell, } from '../Utils/entityCellCreator'
 
 import '../index.scss'
 
-const Board = ({ board, handleCellClick, focus, handleMouseEnter, cache }) => {
+const Board = ({ board, handleCellClick, focus, handleMouseEnter, cache, }) => {
 
     function handleClick (e, y, x) {
         e.preventDefault()
-        handleCellClick({ y, x })
+        handleCellClick({ y, x, })
     }
 
     const focused = (y, x) => {
@@ -23,7 +23,7 @@ const Board = ({ board, handleCellClick, focus, handleMouseEnter, cache }) => {
             cache()
         }
         return () => console.log('BOARD UNMOUNT')
-    }, [cache])
+    }, [ cache, ])
 
     const mouseDidEnter = (e, y, x) => {
         if (handleMouseEnter) handleMouseEnter(e, y, x)
@@ -45,9 +45,9 @@ const Board = ({ board, handleCellClick, focus, handleMouseEnter, cache }) => {
 
     function generateRows () {
         const cols = []
-        for (let c=0; c<board.length; c++) {
+        for (let c = 0; c < board.length; c++) {
             const rows = []
-            for (let r=0; r<board[0].length; r++) {
+            for (let r = 0; r < board[0].length; r++) {
                 const cell = board[c][r]
                 rows.push(cellWrapper(cell, c, r))
             }

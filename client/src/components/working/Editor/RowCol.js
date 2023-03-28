@@ -1,9 +1,9 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, } from 'react-redux'
 
-import { editWriteRow, editWriteCol, editWriteRowsDirect, editWriteColsDirect } from '../../../actions'
+import { editWriteRow, editWriteCol, editWriteRowsDirect, editWriteColsDirect, } from '../../../actions'
 
-const RowCol = ({ orientation }) => {
+const RowCol = ({ orientation, }) => {
     const dispatch = useDispatch()
     const board = useSelector(state => state.edit.data.board)
 
@@ -15,7 +15,7 @@ const RowCol = ({ orientation }) => {
 
     // OPTIMIZE: Make this use koos and await user enter key (also allow intenable values (e.g 0))
     const directSet = e => {
-        const { value } = e.target
+        const { value, } = e.target
         if (value < 3) return
         if (orientation === 'width') return dispatch(editWriteColsDirect(value))
         else dispatch(editWriteRowsDirect(value))
@@ -23,7 +23,7 @@ const RowCol = ({ orientation }) => {
 
     const style = {
         flexDirection: orientation === 'width' ? 'row-reverse' : 'column',
-        alignItems: orientation === 'width' ? 'center' : 'stretch'
+        alignItems: orientation === 'width' ? 'center' : 'stretch',
     }
 
     return (

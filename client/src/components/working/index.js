@@ -1,12 +1,13 @@
 
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, } from 'react-redux'
 
 import {
     editToggleOpen,
     editWriteBoardNew,
     uiMousedownLow,
-    uiMousedownHigh } from '../../actions'
+    uiMousedownHigh,
+} from '../../actions'
 
 import PlaySpace from './PlaySpace'
 import Editor from './Editor/'
@@ -14,8 +15,8 @@ import Editor from './Editor/'
 const Index = () => {
     const dispatch = useDispatch()
 
-    const { open } = useSelector(state => state.edit)
-    const { mouseIsDown } = useSelector(state => state.ui)
+    const { open, } = useSelector(state => state.edit)
+    const { mouseIsDown, } = useSelector(state => state.ui)
 
     const handleMouseDown = e => {
         if (!mouseIsDown) dispatch(uiMousedownHigh())

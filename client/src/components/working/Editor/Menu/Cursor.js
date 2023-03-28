@@ -1,13 +1,13 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, } from 'react-redux'
 
-import { editPainterModeSwitch } from '../../../../actions'
+import { editPainterModeSwitch, } from '../../../../actions'
 
 const Cursor = () => {
     const dispatch = useDispatch()
-    const { mode } = useSelector(state => state.edit.painter)
+    const { mode, } = useSelector(state => state.edit.painter)
 
-    const modes = ['selector', 'brush']
+    const modes = [ 'selector', 'brush', ]
 
     const handleChange = m => dispatch(editPainterModeSwitch(m))
 

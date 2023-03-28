@@ -8,28 +8,34 @@ import slider_up from '../../../resources/slider_up.svg'
 import slider_down from '../../../resources/slider_down.svg'
 
 
-const Board = ({ board, loopAll, changeCell }) => {
+const Board = ({ board, loopAll, changeCell, }) => {
 
     const imgs = {
         slider_left,
         slider_right,
         slider_up,
-        slider_down
+        slider_down,
     }
 
     function generateRows () {
         const cols = []
-        for (let c=0; c<board.length; c++) {
+        for (let c = 0; c < board.length; c++) {
             const rows = []
-            for (let r=0; r<board[0].length; r++) {
+            for (let r = 0; r < board[0].length; r++) {
                 rows.push(
                     <div key={r} className={`col ${board[c][r].type}`} onContextMenu={e => {
                         e.preventDefault()
-                        changeCell({ y: c, x: r })
+                        changeCell({ y: c, x: r, })
                     }}>
                         {
                             board[c][r].type === 'slider'
-                                ? <img className='slider__img' src={imgs[`slider_${board[c][r].direction}`]} alt={`slider ${board[c][r].direction}`} />
+                                ? (
+									<img
+										className='slider__img'
+										src={imgs[`slider_${board[c][r].direction}`]}
+										alt={`slider ${board[c][r].direction}`}
+									/>
+                                )
                                 : ''
                         }
                     </div>

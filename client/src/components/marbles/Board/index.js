@@ -8,28 +8,34 @@ import marble_up from '../../../resources/marble_up.svg'
 import marble_down from '../../../resources/marble_down.svg'
 
 
-const Board = ({ board, loopAll, changeCell }) => {
+const Board = ({ board, loopAll, changeCell, }) => {
 
     const imgs = {
         marble_left,
         marble_right,
         marble_up,
-        marble_down
+        marble_down,
     }
 
     function generateRows () {
         const cols = []
-        for (let c=0; c<board.length; c++) {
+        for (let c = 0; c < board.length; c++) {
             const rows = []
-            for (let r=0; r<board[0].length; r++) {
+            for (let r = 0; r < board[0].length; r++) {
                 rows.push(
                     <div key={r} className={`col ${board[c][r].type}`} onContextMenu={e => {
                         e.preventDefault()
-                        changeCell({ y: c, x: r })
+                        changeCell({ y: c, x: r, })
                     }}>
                         {
                             board[c][r].type === 'ball'
-                                ? <img className='marble__img' src={imgs[`marble_${board[c][r].direction}`]} alt={`marble ${board[c][r].direction}`} />
+                                ? (
+									<img
+										className='marble__img'
+										src={imgs[`marble_${board[c][r].direction}`]}
+										alt={`marble ${board[c][r].direction}`}
+									/>
+                                )
                                 : ''
                         }
                     </div>

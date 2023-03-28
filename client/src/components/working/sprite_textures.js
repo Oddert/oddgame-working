@@ -92,21 +92,21 @@ export const shooter_imgs = {
     shooter_marble_left,
     shooter_marble_right,
     shooter_marble_up,
-    shooter_marble_down
+    shooter_marble_down,
 }
 
 export const slider_imgs = {
     slider_left,
     slider_right,
     slider_up,
-    slider_down
+    slider_down,
 }
 
 export const marble_imgs = {
     marble_left,
     marble_right,
     marble_up,
-    marble_down
+    marble_down,
 }
 
 export const rotate_imgs = {
@@ -167,7 +167,7 @@ export const diamond_imgs = {
 export const block_imgs = {
     block_square,
     block_soft,
-    block_round
+    block_round,
 }
 
 export const enemy_imgs = {

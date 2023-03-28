@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers, } from 'redux'
 
 import play from './play'
 import edit from './edit'

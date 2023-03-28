@@ -80,7 +80,26 @@
 				"ignoreUrls": true,
 				"ignoreRegExpLiterals": true
 			}
-		]
+		],
+		"comma-dangle": ["error", "always"],
+		"array-bracket-spacing": [
+			"error",
+			"always",
+			{
+				"singleValue": true,
+				"objectsInArrays": false,
+				"arraysInArrays": false
+			}
+		],
+		"array-bracket-newline": [
+			"error",
+			{
+				"multiline": true,
+				"minItems": 3
+			}
+		],
+		"no-whitespace-before-property": "error",
+		"space-infix-ops": "error"
 	  }
   },
   "browserslist": {

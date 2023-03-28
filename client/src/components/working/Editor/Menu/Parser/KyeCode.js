@@ -1,21 +1,23 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, } from 'react-redux'
 
-import { editWriteBoard, playBoardWrite } from '../../../../../actions'
+import { editWriteBoard, playBoardWrite, } from '../../../../../actions'
 
-import { levels } from '../../../defaultKye.js'
+import { levels, } from '../../../defaultKye.js'
 
 const KyeCode = () => {
     const dispatch = useDispatch()
-    const { entity_list, data: { board } } = useSelector(state => state.edit)
+    const { entity_list, data: { board, }, } = useSelector(state => state.edit)
 
     const lazy = 11
     const t = levels[`l_${lazy}`].data
 
     const initialPositionShooter = x => {
-        console.log({ x })
+        console.log({ x, })
         const lookupMod = x % 4
-        const lookupDict = ['right', 'up', 'left', 'down']
+        const lookupDict = [
+            'right', 'up', 'left', 'down', 
+        ]
         return lookupDict[lookupMod]
     }
 
@@ -78,7 +80,7 @@ const KyeCode = () => {
         const out = str.split(/\n/gi).map((row, y) =>
             row.split('').map((each, x) => {
                 if (mapping[each]) return mapping[each](y, x)
-                else return { type: 'somebs' }
+                else return { type: 'somebs', }
             })
         )
         return out

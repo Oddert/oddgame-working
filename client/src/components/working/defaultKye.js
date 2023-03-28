@@ -22,7 +22,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'FIRST',
         hint: 'Just for practice',
-        finish_message: 'The first level was for practice.'
+        finish_message: 'The first level was for practice.',
     },
 
     l_2: {
@@ -48,7 +48,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'SECOND',
         hint: 'Use the sticky block',
-        finish_message: 'OK, that\'s got the easy one out of the way.'
+        finish_message: 'OK, that\'s got the easy one out of the way.',
     },
 
     l_3: {
@@ -74,7 +74,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'SLIDER',
         hint: 'Synchronization',
-        finish_message: 'Well done, that one was a bit harder.'
+        finish_message: 'Well done, that one was a bit harder.',
     },
 
     l_4: {
@@ -100,7 +100,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'ZOO',
         hint: 'Immobilize them.',
-        finish_message: 'Very good, I see you are getting the hang of this.'
+        finish_message: 'Very good, I see you are getting the hang of this.',
     },
 
     l_5: {
@@ -126,7 +126,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'DIAMOND',
         hint: 'Follow the leader.',
-        finish_message: 'That was pretty wasn\'t it.'
+        finish_message: 'That was pretty wasn\'t it.',
     },
 
     l_6: {
@@ -152,7 +152,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'COUNTERS',
         hint: 'Stay out of the road.',
-        finish_message: 'If you\'re this good - design some new levels.'
+        finish_message: 'If you\'re this good - design some new levels.',
     },
 
     l_7: {
@@ -178,7 +178,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'BLOCKS',
         hint: 'Don\'t drop any.',
-        finish_message: 'Ho hum, now for some work.'
+        finish_message: 'Ho hum, now for some work.',
     },
 
     l_8: {
@@ -204,7 +204,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'CIRCUS',
         hint: 'Do something first.',
-        finish_message: 'Now they start to get tricky.'
+        finish_message: 'Now they start to get tricky.',
     },
 
     l_9: {
@@ -230,7 +230,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'GALLERY',
         hint: 'Good shooting',
-        finish_message: 'Not bad for a beginner!'
+        finish_message: 'Not bad for a beginner!',
     },
 
     l_10: {
@@ -256,7 +256,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'TRAPPER',
         hint: 'Build a trap.',
-        finish_message: 'I hope you didn\'t just outrun \'em.'
+        finish_message: 'I hope you didn\'t just outrun \'em.',
     },
 
     l_11: {
@@ -282,7 +282,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'PINTPOT',
         hint: 'Black is good.',
-        finish_message: 'Fun but easy.'
+        finish_message: 'Fun but easy.',
     },
 
     l_12: {
@@ -308,7 +308,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'GETOUT',
         hint: 'Patience',
-        finish_message: 'Piece of cake!'
+        finish_message: 'Piece of cake!',
     },
 
     l_13: {
@@ -334,7 +334,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'FALLIN',
         hint: 'You\'re on your own.',
-        finish_message: ''
+        finish_message: '',
     },
 
     l_14: {
@@ -360,7 +360,7 @@ export const levels = {
 555555555555555555555555555555`,
         title: 'ADOORABLE',
         hint: 'Don\'t be afraid.',
-        finish_message: 'Darn doors!'
+        finish_message: 'Darn doors!',
     },
 
     l_15: {
@@ -386,7 +386,7 @@ export const levels = {
 155555555555555555555555555553`,
         title: 'ROCKYV',
         hint: 'If at first you don\'t ...',
-        finish_message: 'Wowee'
+        finish_message: 'Wowee',
     },
 
 }
