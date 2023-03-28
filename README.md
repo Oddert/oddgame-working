@@ -3,7 +3,7 @@
 
 https://goldenrod-dandelion-drip.glitch.me/
 
-A working project for an implamentation of the old windows game [Kye](https://en.wikipedia.org/wiki/Kye_(video_game)) in JavaScript with React for the display / UI elements.
+A working project for an implementation of the old windows game [Kye](https://en.wikipedia.org/wiki/Kye_(video_game)) in JavaScript with React for the display / UI elements.
 
 ## Installation
 ```

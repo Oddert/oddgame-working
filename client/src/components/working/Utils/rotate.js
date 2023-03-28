@@ -1,35 +1,35 @@
 export const  getClockwise = dir => {
-  switch (dir) {
+    switch (dir) {
     case 'left':
-      return 'up'
+        return 'up'
     case 'right':
-      return 'down'
+        return 'down'
     case 'up':
-      return 'right'
+        return 'right'
     case 'down':
-      return 'left'
+        return 'left'
     default:
-      console.error(`Invalid direction found: ${dir}`)
-      return dir
-  }
+        console.error(`Invalid direction found: ${dir}`)
+        return dir
+    }
 }
 
 export const getAnticlockwise = dir => {
-  switch (dir) {
+    switch (dir) {
     case 'left':
-      return 'down'
+        return 'down'
     case 'right':
-      return 'up'
+        return 'up'
     case 'up':
-      return 'left'
+        return 'left'
     case 'down':
-      return 'right'
+        return 'right'
     default:
-      console.error(`Invalid direction found: ${dir}`)
-      return dir
-  }
+        console.error(`Invalid direction found: ${dir}`)
+        return dir
+    }
 }
 
 export const getRoatation = (dir, desire, boardRef) => boardRef[desire.y][desire.x].direction === 'clock'
-  ? getClockwise(dir)
-  : getAnticlockwise(dir)
+    ? getClockwise(dir)
+    : getAnticlockwise(dir)

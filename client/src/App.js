@@ -7,13 +7,13 @@ import store from './constants/store'
 import Index from './components/working/'
 
 function App() {
-  return (
-    <div className="App">
-      <Provider store={store}>
-        <Index />
-      </Provider>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Provider store={store}>
+                <Index />
+            </Provider>
+        </div>
+    );
 }
 
 export default App;

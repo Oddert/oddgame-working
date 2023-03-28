@@ -1,6 +1,6 @@
 export const levels = {
-  l_1: {
-    data: `555555555555555555555555555555
+    l_1: {
+        data: `555555555555555555555555555555
 5T   e       K*  a    d e   E5
 5    b 455556        a  b    5
 5    b dvvvvd           b    5
@@ -20,13 +20,13 @@ export const levels = {
 5    b 455556  5     5  b    5
 5C   e         e  [  e  e   ~5
 555555555555555555555555555555`,
-    title: 'FIRST',
-    hint: 'Just for practice',
-    finish_message: 'The first level was for practice.'
-  },
+        title: 'FIRST',
+        hint: 'Just for practice',
+        finish_message: 'The first level was for practice.'
+    },
 
-  l_2: {
-    data: `555555555555555555555555555555
+    l_2: {
+        data: `555555555555555555555555555555
 5*>>>>e   e         e       K5
 5>>>>>e   5         5        5
 5555559   59       75        5
@@ -46,13 +46,13 @@ export const levels = {
 5     e^^e              5v45e5
 5     e*^e              eeee*5
 555555555555555555555555555555`,
-    title: 'SECOND',
-    hint: 'Use the sticky block',
-    finish_message: 'OK, that\'s got the easy one out of the way.'
-  },
+        title: 'SECOND',
+        hint: 'Use the sticky block',
+        finish_message: 'OK, that\'s got the easy one out of the way.'
+    },
 
-  l_3: {
-    data: `555555555555555555555555555555
+    l_3: {
+        data: `555555555555555555555555555555
 5*vvvvvv5  re  5   e K 5 b  *5
 59vvvvv73  re  56  5   5b  bb5
 559vvv73   re  5   5 755  b  5
@@ -72,13 +72,13 @@ export const levels = {
 55ee555555555555^^^5 5  5u   5
 5*eeeeeeeeeeeeee^^^5 e  5u  *5
 555555555555555555555555555555`,
-    title: 'SLIDER',
-    hint: 'Synchronization',
-    finish_message: 'Well done, that one was a bit harder.'
-  },
+        title: 'SLIDER',
+        hint: 'Synchronization',
+        finish_message: 'Well done, that one was a bit harder.'
+    },
 
-  l_4: {
-    data: `555555555555555555555555555555
+    l_4: {
+        data: `555555555555555555555555555555
 5 e         55T  b    b 5    5
 5 49eeeeeeeeee       b  e K  5
 5  19[     el5      b   5    5
@@ -98,13 +98,13 @@ export const levels = {
 559<<<e        vvvvv  555555 5
 5 ~ eee       eeeeevv e      5
 555555555555555555555555555555`,
-    title: 'ZOO',
-    hint: 'Immobilize them.',
-    finish_message: 'Very good, I see you are getting the hang of this.'
-  },
+        title: 'ZOO',
+        hint: 'Immobilize them.',
+        finish_message: 'Very good, I see you are getting the hang of this.'
+    },
 
-  l_5: {
-    data: `555555555555555555555555555555
+    l_5: {
+        data: `555555555555555555555555555555
 5>>>>155     e 155    2   8 *5
 5 >>>>15    8   15       45  5
 5  >>>>2   75    2    9   2  5
@@ -124,13 +124,13 @@ export const levels = {
 5        5u5  5      ^       5
 5        5*5  5              5
 555555555555555555555555555555`,
-    title: 'DIAMOND',
-    hint: 'Follow the leader.',
-    finish_message: 'That was pretty wasn\'t it.'
-  },
+        title: 'DIAMOND',
+        hint: 'Follow the leader.',
+        finish_message: 'That was pretty wasn\'t it.'
+    },
 
-  l_6: {
-    data: `555555555555555555555555555555
+    l_6: {
+        data: `555555555555555555555555555555
 5K   5553  1553 15c5         5
 5   c              155e5555e55
 55e55 7a55e5555e5a        c  5
@@ -150,13 +150,13 @@ export const levels = {
 5            r            c5 5
 55c555559   75555559   75555*5
 555555555555555555555555555555`,
-    title: 'COUNTERS',
-    hint: 'Stay out of the road.',
-    finish_message: 'If you\'re this good - design some new levels.'
-  },
+        title: 'COUNTERS',
+        hint: 'Stay out of the road.',
+        finish_message: 'If you\'re this good - design some new levels.'
+    },
 
-  l_7: {
-    data: `555555555555555555555555555555
+    l_7: {
+        data: `555555555555555555555555555555
 5>>>B     5K     vvv         5
 5 >>B     5     vvvvv   s  S 5
 5  e     *5    vvvvvvv       5
@@ -176,13 +176,13 @@ export const levels = {
 5                    9<<<<<< 5
 5        3            9<<<<<*5
 555555555555555555555555555555`,
-    title: 'BLOCKS',
-    hint: 'Don\'t drop any.',
-    finish_message: 'Ho hum, now for some work.'
-  },
+        title: 'BLOCKS',
+        hint: 'Don\'t drop any.',
+        finish_message: 'Ho hum, now for some work.'
+    },
 
-  l_8: {
-    data: `555555555555555555555555555555
+    l_8: {
+        data: `555555555555555555555555555555
 5 5*555eed      5    5       5
 5 5v5Seeud      5vvvv5  rdd  5
 5v5v5bbbue      5vvvv5  r*l  5
@@ -202,13 +202,13 @@ export const levels = {
 55bb5555555s555555eee5555555 5
 5*         llll            >*5
 555555555555555555555555555555`,
-    title: 'CIRCUS',
-    hint: 'Do something first.',
-    finish_message: 'Now they start to get tricky.'
-  },
+        title: 'CIRCUS',
+        hint: 'Do something first.',
+        finish_message: 'Now they start to get tricky.'
+    },
 
-  l_9: {
-    data: `555555555555555555555555555555
+    l_9: {
+        data: `555555555555555555555555555555
 5       a  c  a  c  a  c  a  5
 5c                          a5
 5* 8                      8 *5
@@ -228,13 +228,13 @@ export const levels = {
 5  el                        5
 5  re                        5
 555555555555555555555555555555`,
-    title: 'GALLERY',
-    hint: 'Good shooting',
-    finish_message: 'Not bad for a beginner!'
-  },
+        title: 'GALLERY',
+        hint: 'Good shooting',
+        finish_message: 'Not bad for a beginner!'
+    },
 
-  l_10: {
-    data: `555555555555555555555555555555
+    l_10: {
+        data: `555555555555555555555555555555
 5K                b         *5
 5 b  bb Rbb       B          5
 5 b               b    T     5
@@ -254,13 +254,13 @@ export const levels = {
 5 B   b           b          5
 5                 B         *5
 555555555555555555555555555555`,
-    title: 'TRAPPER',
-    hint: 'Build a trap.',
-    finish_message: 'I hope you didn\'t just outrun \'em.'
-  },
+        title: 'TRAPPER',
+        hint: 'Build a trap.',
+        finish_message: 'I hope you didn\'t just outrun \'em.'
+    },
 
-  l_11: {
-    data: `555555555555555555555555555555
+    l_11: {
+        data: `555555555555555555555555555555
 5K             5             5
 5 755555555559 5  bbbbbbbb   5
 5 5FFFFFFFFFF5 5  bC         5
@@ -280,13 +280,13 @@ export const levels = {
 5d **d**d*d*dd*5  bbbbbbbb   5
 5**d ** * * ** 5             5
 555555555555555555555555555555`,
-    title: 'PINTPOT',
-    hint: 'Black is good.',
-    finish_message: 'Fun but easy.'
-  },
+        title: 'PINTPOT',
+        hint: 'Black is good.',
+        finish_message: 'Fun but easy.'
+    },
 
-  l_12: {
-    data: `555555555555555555555555555555
+    l_12: {
+        data: `555555555555555555555555555555
 5                       B EB 5
 5   e                   B    5
 5  6^4 a                B    5
@@ -306,13 +306,13 @@ export const levels = {
 5>*c         5 8       5    c5
 5ccc755555555555       5cc  c5
 555555555555555555555555555555`,
-    title: 'GETOUT',
-    hint: 'Patience',
-    finish_message: 'Piece of cake!'
-  },
+        title: 'GETOUT',
+        hint: 'Patience',
+        finish_message: 'Piece of cake!'
+    },
 
-  l_13: {
-    data: `555555555555555555555555555555
+    l_13: {
+        data: `555555555555555555555555555555
 5      f  5*e5>e  e >e  e >e*5
 5555h5 8  5ev5 e >e  e >e  e*5
 5  5 5 5  19e5 555555555555555
@@ -332,13 +332,13 @@ export const levels = {
 53i5555555h55 55    ^^^^^ 5ee5
 5             g           e*<5
 555555555555555555555555555555`,
-    title: 'FALLIN',
-    hint: 'You\'re on your own.',
-    finish_message: ''
-  },
+        title: 'FALLIN',
+        hint: 'You\'re on your own.',
+        finish_message: ''
+    },
 
-  l_14: {
-    data: `555555555555555555555555555555
+    l_14: {
+        data: `555555555555555555555555555555
 5*5         R*H*F*    1553  K5
 5 5   e   5553F**            5
 5 5555eeee5   *              5
@@ -358,13 +358,13 @@ export const levels = {
 5  59 e 73         5 5 v>*<v 5
 5   55555          5*5e^***^e5
 555555555555555555555555555555`,
-    title: 'ADOORABLE',
-    hint: 'Don\'t be afraid.',
-    finish_message: 'Darn doors!'
-  },
+        title: 'ADOORABLE',
+        hint: 'Don\'t be afraid.',
+        finish_message: 'Darn doors!'
+    },
 
-  l_15: {
-    data: `755555555555555555555555555559
+    l_15: {
+        data: `755555555555555555555555555559
 5c         w<<<<<<<<<<<<<c15*5
 5  4555559  w<<<<7a55559<^a5 5
 5 v 5eeH 156i75555^e>ev2v^a5 5
@@ -384,9 +384,9 @@ export const levels = {
 59    e  c5a       5a    59<<5
 55559cc79c5a     8a55559a559<5
 155555555555555555555555555553`,
-    title: 'ROCKYV',
-    hint: 'If at first you don\'t ...',
-    finish_message: 'Wowee'
-  },
+        title: 'ROCKYV',
+        hint: 'If at first you don\'t ...',
+        finish_message: 'Wowee'
+    },
 
 }

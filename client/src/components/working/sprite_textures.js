@@ -84,112 +84,112 @@ import kye_default from '../../resources/kye_default.svg'
 
 
 export const shooter_imgs = {
-  shooter_slider_left,
-  shooter_slider_right,
-  shooter_slider_up,
-  shooter_slider_down,
+    shooter_slider_left,
+    shooter_slider_right,
+    shooter_slider_up,
+    shooter_slider_down,
 
-  shooter_marble_left,
-  shooter_marble_right,
-  shooter_marble_up,
-  shooter_marble_down
+    shooter_marble_left,
+    shooter_marble_right,
+    shooter_marble_up,
+    shooter_marble_down
 }
 
 export const slider_imgs = {
-  slider_left,
-  slider_right,
-  slider_up,
-  slider_down
+    slider_left,
+    slider_right,
+    slider_up,
+    slider_down
 }
 
 export const marble_imgs = {
-  marble_left,
-  marble_right,
-  marble_up,
-  marble_down
+    marble_left,
+    marble_right,
+    marble_up,
+    marble_down
 }
 
 export const rotate_imgs = {
-  rotate_clock,
-  rotate_anticlock,
+    rotate_clock,
+    rotate_anticlock,
 }
 
 export const sentry_imgs = {
-  sentry_right,
-  sentry_left,
-  sentry_up,
-  sentry_down,
+    sentry_right,
+    sentry_left,
+    sentry_up,
+    sentry_down,
 }
 
 export const blackhole_imgs = {
-  blackhole,
-  blackhole_1,
-  blackhole_2,
-  blackhole_3,
-  blackhole_4,
+    blackhole,
+    blackhole_1,
+    blackhole_2,
+    blackhole_3,
+    blackhole_4,
 }
 
 export const timer_imgs = {
-  timer_0,
-  timer_1,
-  timer_2,
-  timer_3,
-  timer_4,
-  timer_5,
-  timer_6,
-  timer_7,
-  timer_8,
-  timer_9,
+    timer_0,
+    timer_1,
+    timer_2,
+    timer_3,
+    timer_4,
+    timer_5,
+    timer_6,
+    timer_7,
+    timer_8,
+    timer_9,
 }
 
 export const wall_imgs = {
-  wall_square,
-  wall_round,
-  wall_round_1,
-  wall_round_2,
-  wall_round_3,
-  wall_round_4,
-  wall_round_5,
-  wall_round_6,
-  wall_round_7,
-  wall_round_8,
-  wall_round_9,
+    wall_square,
+    wall_round,
+    wall_round_1,
+    wall_round_2,
+    wall_round_3,
+    wall_round_4,
+    wall_round_5,
+    wall_round_6,
+    wall_round_7,
+    wall_round_8,
+    wall_round_9,
 }
 
 export const diamond_imgs = {
-  diamond,
-  // diamond_1,
-  // diamond_2,
-  // diamond_3,
-  // diamond_4,
+    diamond,
+    // diamond_1,
+    // diamond_2,
+    // diamond_3,
+    // diamond_4,
 }
 
 export const block_imgs = {
-  block_square,
-  block_soft,
-  block_round
+    block_square,
+    block_soft,
+    block_round
 }
 
 export const enemy_imgs = {
-  enemy_cloud,
-  enemy_cross,
-  enemy_wheel,
-  enemy_teeth,
-  enemy_snake,
+    enemy_cloud,
+    enemy_cross,
+    enemy_wheel,
+    enemy_teeth,
+    enemy_snake,
 }
 
 export const forcefield_imgs = {
-  forcefield_up,
-  forcefield_down,
-  forcefield_left,
-  forcefield_right,
+    forcefield_up,
+    forcefield_down,
+    forcefield_left,
+    forcefield_right,
 }
 
 export const magnet_imgs = {
-  magnet_vertical,
-  magnet_horizontal,
+    magnet_vertical,
+    magnet_horizontal,
 }
 
 export const kye_imgs = {
-  kye_default,
+    kye_default,
 }

@@ -16,55 +16,55 @@ import Timer from '../Entities/Timer'
 import Wall from '../Entities/Wall'
 
 import {
-  blackhole_imgs,
-  block_imgs,
-  diamond_imgs,
-  enemy_imgs,
-  forcefield_imgs,
-  kye_imgs,
-  magnet_imgs,
-  marble_imgs,
-  rotate_imgs,
-  sentry_imgs,
-  shooter_imgs,
-  slider_imgs,
-  timer_imgs,
-  wall_imgs,
+    blackhole_imgs,
+    block_imgs,
+    diamond_imgs,
+    enemy_imgs,
+    forcefield_imgs,
+    kye_imgs,
+    magnet_imgs,
+    marble_imgs,
+    rotate_imgs,
+    sentry_imgs,
+    shooter_imgs,
+    slider_imgs,
+    timer_imgs,
+    wall_imgs,
 } from '../sprite_textures'
 
 export const getCell = cell => {
-  switch(cell.type) {
+    switch(cell.type) {
     case 'wall':
-      return <Wall imgs={wall_imgs} {...cell} />
+        return <Wall imgs={wall_imgs} {...cell} />
     case 'shooter':
-      return <Shooter imgs={shooter_imgs} {...cell} />
+        return <Shooter imgs={shooter_imgs} {...cell} />
     case 'slider':
-      return <Slider imgs={slider_imgs} {...cell} />
+        return <Slider imgs={slider_imgs} {...cell} />
     case 'marble':
-      return <Marble imgs={marble_imgs} {...cell} />
+        return <Marble imgs={marble_imgs} {...cell} />
     case 'rotate':
-      return <Rotate imgs={rotate_imgs} {...cell} />
+        return <Rotate imgs={rotate_imgs} {...cell} />
     case 'sentry':
-      return <Sentry imgs={sentry_imgs} {...cell} />
+        return <Sentry imgs={sentry_imgs} {...cell} />
     case 'blackhole':
-      return <Blackhole imgs={blackhole_imgs} />
+        return <Blackhole imgs={blackhole_imgs} />
     case 'timer':
-      return <Timer imgs={timer_imgs} {...cell} />
+        return <Timer imgs={timer_imgs} {...cell} />
     case 'diamond':
-      return <Diamond imgs={diamond_imgs} />
+        return <Diamond imgs={diamond_imgs} />
     case 'block':
-      return <Block imgs={block_imgs} {...cell} />
+        return <Block imgs={block_imgs} {...cell} />
     case 'enemy':
-      return <Enemy imgs={enemy_imgs} {...cell} />
+        return <Enemy imgs={enemy_imgs} {...cell} />
     case 'forcefield':
-      return <Forcefield imgs={forcefield_imgs} {...cell} />
+        return <Forcefield imgs={forcefield_imgs} {...cell} />
     case 'magnet':
-      return <Magnet imgs={magnet_imgs} {...cell} />
+        return <Magnet imgs={magnet_imgs} {...cell} />
     case 'kye':
-      return <Kye imgs={kye_imgs} />
+        return <Kye imgs={kye_imgs} />
     case 'toBeDeCoded':
-      return '?'
+        return '?'
     default:
-      return ''
-  }
+        return ''
+    }
 }

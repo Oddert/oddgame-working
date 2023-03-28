@@ -10,10 +10,10 @@ import ui from './ui'
 // }
 
 const rootReducer = combineReducers ({
-  play,
-  edit,
-  ui,
-  // def
+    play,
+    edit,
+    ui,
+    // def
 })
 
 export default rootReducer

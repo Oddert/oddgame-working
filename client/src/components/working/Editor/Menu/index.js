@@ -7,16 +7,16 @@ import Cursor from './Cursor'
 import Parser from './Parser/'
 
 const Menu = () => {
-  return (
-    <>
-      {/* <h3>Edit Tools</h3> */}
-      <BoardSetup />
-      {/* <GameDetials /> */}
-      <Cursor />
-      <CellPainter />
-      <Parser />
-    </>
-  )
+    return (
+        <>
+            {/* <h3>Edit Tools</h3> */}
+            <BoardSetup />
+            {/* <GameDetials /> */}
+            <Cursor />
+            <CellPainter />
+            <Parser />
+        </>
+    )
 }
 
 export default Menu
