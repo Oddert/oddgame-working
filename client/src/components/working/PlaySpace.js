@@ -241,124 +241,128 @@ const PlaySpace = () => {
         board.forEach((row, r) => {
             row.forEach((col, c) => {
                 switch(col.type) {
-                case 'shooter':
-                    function shootEntity () {
-                        const { direction, emits } = col
-                        const shoot = handleShoot(r, c, nv, tick, direction, emits)
-                        nv[r][c].direction = getAnticlockwise(nv[r][c].direction)
+                    case 'shooter':
+                        function shootEntity () {
+                            const { direction, emits } = col
+                            const shoot = handleShoot(r, c, nv, tick, direction, emits)
+                            nv[r][c].direction = getAnticlockwise(nv[r][c].direction)
 
-                        createRegisterDynamic.push(reg(r, c, nv[r][c]))
-                        if (!shoot.status) return
-                        nv[shoot.y][shoot.x] = shoot.data
-                        createRegisterDynamic.push(reg(shoot.y, shoot.x, nv[shoot.y][shoot.x]))
+                            createRegisterDynamic.push(reg(r, c, nv[r][c]))
+                            if (!shoot.status) return
+                            nv[shoot.y][shoot.x] = shoot.data
+                            createRegisterDynamic.push(reg(shoot.y, shoot.x, nv[shoot.y][shoot.x]))
 
-                    }
-                    callstack.push(shootEntity)
-                    return
-                case 'slider':
-                    function moveslider () {
-                        const { direction } = col
-                        const moved = handleSliderMove(r, c, nv, tick, direction)
-                        // console.log(moved)
-                        if (moved.toBeRemoved) {
+                        }
+                        callstack.push(shootEntity)
+                        return
+                    case 'slider':
+                        function moveslider () {
+                            const { direction } = col
+                            const moved = handleSliderMove(r, c, nv, tick, direction)
+                            // console.log(moved)
+                            if (moved.toBeRemoved) {
                             // set blackhole to cooldown
                             // remove from registry
-                            nv[r][c] = entity_list.floor()
-                            return
-                        }
-                        const directionUnchanged = !moved.direction || (moved.direction && moved.direction === col.direction)
-                        const positionUnMoved = moved.y === r && moved.x === c
+                                nv[r][c] = entity_list.floor()
+                                return
+                            }
+                            const directionUnchanged = !moved.direction || (moved.direction && moved.direction === col.direction)
+                            const positionUnMoved = moved.y === r && moved.x === c
 
-                        if (!directionUnchanged) nv[r][c].direction = moved.direction
-                        if (positionUnMoved) {
-                            return
+                            if (!directionUnchanged) nv[r][c].direction = moved.direction
+                            if (positionUnMoved) {
+                                return
+                            }
+                            // console.log(
+                            // 	`swapping ${r}, ${c}, ${board[r][c].direction} to ${moved.y}, ${moved.x}, ${moved.direction}`
+                            // )
+                            nv[moved.y][moved.x].type = 'slider'
+                            nv[moved.y][moved.x].direction = nv[r][c].direction
+                            if (!positionUnMoved) {
+                                nv[r][c].type = 'floor'
+                                delete nv[r][c].direction
+                            }
                         }
-                        // console.log(`swapping ${r}, ${c}, ${board[r][c].direction} to ${moved.y}, ${moved.x}, ${moved.direction}`)
-                        nv[moved.y][moved.x].type = 'slider'
-                        nv[moved.y][moved.x].direction = nv[r][c].direction
-                        if (!positionUnMoved) {
-                            nv[r][c].type = 'floor'
-                            delete nv[r][c].direction
-                        }
-                    }
-                    callstack.push(moveslider)
-                    return
-                case 'marble':
-                    function moveMarble () {
+                        callstack.push(moveslider)
+                        return
+                    case 'marble':
+                        function moveMarble () {
                         // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
                         // console.log('baw found')
-                        const { direction, halted } = col
-                        const moved = handleMarbleMove(r, c, nv, tick, direction, halted)
-                        // console.log(moved, nv[r][c])
-                        if (moved.toBeRemoved) {
-                            nv[r][c] = { type: 'floor' }
-                            return
-                        }
+                            const { direction, halted } = col
+                            const moved = handleMarbleMove(r, c, nv, tick, direction, halted)
+                            // console.log(moved, nv[r][c])
+                            if (moved.toBeRemoved) {
+                                nv[r][c] = { type: 'floor' }
+                                return
+                            }
 
-                        if (moved.halted) nv[r][c].halted = true
-                        else delete nv[r][c].halted
-                        // console.log(r, c, moved)
-                        // console.log(moved.direction && moved.direction !== col.direction)
+                            if (moved.halted) nv[r][c].halted = true
+                            else delete nv[r][c].halted
+                            // console.log(r, c, moved)
+                            // console.log(moved.direction && moved.direction !== col.direction)
 
-                        if (moved.direction && moved.direction !== col.direction) {
-                            console.log('direction changed')
-                            nv[moved.y][moved.x].direction = moved.direction
-                            return
-                        }
+                            if (moved.direction && moved.direction !== col.direction) {
+                                console.log('direction changed')
+                                nv[moved.y][moved.x].direction = moved.direction
+                                return
+                            }
 
-                        if (moved.y === r && moved.x === c) return
-                        // console.log({ r, c  }, moved)
-                        if (nv[moved.y] && nv[moved.y][moved.x]) {
+                            if (moved.y === r && moved.x === c) return
+                            // console.log({ r, c  }, moved)
+                            if (nv[moved.y] && nv[moved.y][moved.x]) {
                             // console.log(`swapping ${r}, ${c} to ${moved.y}, ${moved.x}`)
-                            nv[moved.y][moved.x].type = 'marble'
-                            nv[moved.y][moved.x].direction = nv[r][c].direction
-                            nv[r][c].type = 'floor'
-                            delete nv[r][c].direction
+                                nv[moved.y][moved.x].type = 'marble'
+                                nv[moved.y][moved.x].direction = nv[r][c].direction
+                                nv[r][c].type = 'floor'
+                                delete nv[r][c].direction
+                            }
                         }
-                    }
-                    callstack.push(moveMarble)
-                    return
-                case 'sentry':
-                    function moveSentry () {
-                        const { direction } = col
-                        const moved = handleSentryMove(r, c, nv, tick, direction)
-                        // console.log(moved)
-                        if (moved.toBeRemoved) {
-                            nv[r][c] = { type: 'floor' }
-                            return
-                        }
+                        callstack.push(moveMarble)
+                        return
+                    case 'sentry':
+                        function moveSentry () {
+                            const { direction } = col
+                            const moved = handleSentryMove(r, c, nv, tick, direction)
+                            // console.log(moved)
+                            if (moved.toBeRemoved) {
+                                nv[r][c] = { type: 'floor' }
+                                return
+                            }
 
-                        const positionUnMoved = moved.y === r && moved.x === c
-                        if (positionUnMoved && moved.direction === col.direction) return
-                        // console.log(`swapping ${r}, ${c}, ${board[r][c].direction} to ${moved.y}, ${moved.x}, ${moved.direction}`)
-                        nv[moved.y][moved.x].type = 'sentry'
-                        nv[moved.y][moved.x].direction = moved.direction
-                        if (moved.bounce) {
-                            const { target, source } = moved.bounce
-                            nv[target.y][target.x] = { ...nv[source.y][source.x] }
-                            nv[source.y][source.x] = entity_list.floor()
+                            const positionUnMoved = moved.y === r && moved.x === c
+                            if (positionUnMoved && moved.direction === col.direction) return
+                            // console.log(
+                            // 	`swapping ${r}, ${c}, ${board[r][c].direction} to ${moved.y}, ${moved.x}, ${moved.direction}`
+                            // )
+                            nv[moved.y][moved.x].type = 'sentry'
+                            nv[moved.y][moved.x].direction = moved.direction
+                            if (moved.bounce) {
+                                const { target, source } = moved.bounce
+                                nv[target.y][target.x] = { ...nv[source.y][source.x] }
+                                nv[source.y][source.x] = entity_list.floor()
+                            }
+                            if (!positionUnMoved) {
+                                nv[r][c].type = 'floor'
+                                delete nv[r][c].direction
+                            }
                         }
-                        if (!positionUnMoved) {
-                            nv[r][c].type = 'floor'
-                            delete nv[r][c].direction
+                        callstack.push(moveSentry)
+                        return
+                    case 'timer':
+                        function tickTock () {
+                            const { time, speed } = col
+                            const ticked = handleTimer(r, c, nv, tick, time, speed)
+                            if (ticked.toBeRemoved) {
+                                nv[r][c] = { type: 'floor' }
+                                return
+                            }
+                            nv[r][c].time = ticked.time
                         }
-                    }
-                    callstack.push(moveSentry)
-                    return
-                case 'timer':
-                    function tickTock () {
-                        const { time, speed } = col
-                        const ticked = handleTimer(r, c, nv, tick, time, speed)
-                        if (ticked.toBeRemoved) {
-                            nv[r][c] = { type: 'floor' }
-                            return
-                        }
-                        nv[r][c].time = ticked.time
-                    }
-                    callstack.push(tickTock)
-                    return
-                default:
-                    return
+                        callstack.push(tickTock)
+                        return
+                    default:
+                        return
                 }
             })
         })

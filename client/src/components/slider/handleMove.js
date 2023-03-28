@@ -8,16 +8,16 @@ const checkIsFloor = (y, x, boardRef) => boardRef[y] && boardRef[y][x] && boardR
 
 const handleMove = (y, x, direction, boardRef) => {
     switch (direction) {
-    case 'left':
-        return mLeft(y, x, boardRef, direction)
-    case 'right':
-        return mRight(y, x, boardRef, direction)
-    case 'up':
-        return mUp(y, x, boardRef, direction)
-    case 'down':
-        return mDown(y, x, boardRef, direction)
-    default:
-        return { x, y, direction }
+        case 'left':
+            return mLeft(y, x, boardRef, direction)
+        case 'right':
+            return mRight(y, x, boardRef, direction)
+        case 'up':
+            return mUp(y, x, boardRef, direction)
+        case 'down':
+            return mDown(y, x, boardRef, direction)
+        default:
+            return { x, y, direction }
     }
 }
 
