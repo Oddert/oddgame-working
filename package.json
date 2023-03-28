@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node app.js",
+    "start": "node app.js",
     "dev": "cd client && npm run start",
     "install-client": "cd client && npm i"
   },
@@ -13,6 +13,6 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "express": "^4.18.2"
   }
 }
