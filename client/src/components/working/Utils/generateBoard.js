@@ -1,12 +1,12 @@
 
-import { ranArr, } from './randomisers'
+import { ranArr } from './randomisers'
 
 const generateBoard = (sliderEmits) => {
     const out = []
     for (let row = 0; row < 10; row++) {
         const r = []
         for (let col = 0; col < 10; col++) {
-            const cell = { type: 'floor', }
+            const cell = { type: 'floor' }
             if (row === 0 || row === 9) cell.type = 'wall'
             if (col === 0 || col === 9) cell.type = 'wall'
             r.push(cell)
@@ -45,9 +45,9 @@ const generateBoard = (sliderEmits) => {
     }
 
     // for (let i=0; i<3; i++) getShooter(sliderEmits)
-    for (let i = 0; i < 3; i++) getRotate(ranArr([ 'clock', 'anticlock', ]))
+    for (let i = 0; i < 3; i++) getRotate(ranArr([ 'clock', 'anticlock' ]))
 
-    console.log({ initBoard: out, })
+    console.log({ initBoard: out })
     return out
 }
 

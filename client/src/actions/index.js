@@ -3,52 +3,52 @@ import types from './types'
 
 export const playBoardWrite = (board, resetTick, resetRegistry) => ({
     type: types.PLAY_BOARD_WRITE,
-    payload: { board, resetTick, resetRegistry, },
+    payload: { board, resetTick, resetRegistry },
 })
 
 export const editToggleOpen = (override, value) => ({
     type: types.EDIT_TOGGLE_OPEN,
-    payload: { override, value, },
+    payload: { override, value },
 })
 
 export const editWriteBoard = board => ({
     type: types.EDIT_WRITE_BOARD,
-    payload: { board, },
+    payload: { board },
 })
 
 export const editWriteBoardNew = (save = null) => ({
     type: types.EDIT_WRITE_BOARD_NEW,
-    payload: { save, },
+    payload: { save },
 })
 
 export const editWriteCol = inc => ({
     type: types.EDIT_WRITE_COL,
-    payload: { inc, },
+    payload: { inc },
 })
 
 export const editWriteRow = inc => ({
     type: types.EDIT_WRITE_ROW,
-    payload: { inc, },
+    payload: { inc },
 })
 
 export const editWriteRowsDirect = value => ({
     type: types.EDIT_WRITE_ROWS_DIRECT,
-    payload: { value, },
+    payload: { value },
 })
 
 export const editWriteColsDirect = value => ({
     type: types.EDIT_WRITE_COLS_DIRECT,
-    payload: { value, },
+    payload: { value },
 })
 
 export const editChangePainterSelect = selected => ({
     type: types.EDIT_PAINTER_SELECT_CHANGE,
-    payload: { selected, },
+    payload: { selected },
 })
 
 export const editChangeCell = (y, x, cell) => ({
     type: types.EDIT_CHANGE_CELL,
-    payload: { y, x, cell, },
+    payload: { y, x, cell },
 })
 
 export const uiMousedownHigh = () => ({
@@ -61,17 +61,17 @@ export const uiMousedownLow = () => ({
 
 export const editPaintmodeToggle = mode => ({
     type: types.EDIT_PAINTMODE_TOGGLE,
-    payload: { mode, },
+    payload: { mode },
 })
 
 export const editPainterModeSwitch = mode => ({
     type: types.EDIT_PAINTER_MODE_SWITCH,
-    payload: { mode, },
+    payload: { mode },
 })
 
 export const editPainterFocusUpdate = (y, x) => ({
     type: types.EDIT_PAINTER_FOCUS_UPDATE,
-    payload: { y, x, },
+    payload: { y, x },
 })
 
 // const genericAction = ({ type, payload }) => ({})

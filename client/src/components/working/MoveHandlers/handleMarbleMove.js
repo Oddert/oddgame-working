@@ -1,12 +1,12 @@
 
 
-import { getClockwise, getAnticlockwise, } from '../Utils/rotate'
-import { /*checkIsWall, checkIsBall, checkIsRotate, */ checkIsFloor, checkIsBlackhole, getCell, } from '../Utils/check'
+import { getClockwise, getAnticlockwise } from '../Utils/rotate'
+import { /*checkIsWall, checkIsBall, checkIsRotate, */ checkIsFloor, checkIsBlackhole, getCell } from '../Utils/check'
 
 function mUp (y, x, boardRef, dir, halted) {
-    const move = moveValidator({ y, x, halted, }, { y: y - 1, x, }, boardRef, dir)
-    if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved, halted: move.halted, }
-    return { y: move.y, x: move.x, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved, halted: move.halted, }
+    const move = moveValidator({ y, x, halted }, { y: y - 1, x }, boardRef, dir)
+    if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved, halted: move.halted }
+    return { y: move.y, x: move.x, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved, halted: move.halted }
 }
 
 function mDown (y, x, boardRef, dir, halted) {
@@ -14,25 +14,25 @@ function mDown (y, x, boardRef, dir, halted) {
     // if (y + 1 >= boardRef[0].length) return { y, x, status: false }
     // return { x, y: y + 1, status: true }
 
-    const move = moveValidator({ y, x, halted, }, { y: y + 1, x, }, boardRef, dir)
-    if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved, halted: move.halted, }
-    return { y: move.y, x: move.x, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved, halted: move.halted, }
+    const move = moveValidator({ y, x, halted }, { y: y + 1, x }, boardRef, dir)
+    if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved, halted: move.halted }
+    return { y: move.y, x: move.x, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved, halted: move.halted }
 }
 
 function mLeft (y, x, boardRef, dir, halted) {
-    const move = moveValidator({ y, x, halted, }, { y, x: x - 1, }, boardRef, dir)
-    if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved, halted: move.halted, }
-    return { y: move.y, x: move.x, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved, halted: move.halted, }
+    const move = moveValidator({ y, x, halted }, { y, x: x - 1 }, boardRef, dir)
+    if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved, halted: move.halted }
+    return { y: move.y, x: move.x, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved, halted: move.halted }
 }
 
 // A move to the right is requested from the controller
 function mRight (y, x, boardRef, dir, halted) {
     // Desired move (to right) is validated by a universal function
-    const move = moveValidator({ y, x, halted, }, { y, x: x + 1, }, boardRef, dir)
+    const move = moveValidator({ y, x, halted }, { y, x: x + 1 }, boardRef, dir)
     // The status attr returns is move is valid
-    if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved, halted: move.halted, }
+    if (!move.status) return { y, x, status: false, toBeRemoved: move.toBeRemoved, halted: move.halted }
     // Validator may make an adjustment to the request (e.g changin object direction) so return y,x is used
-    return { y: move.y, x: move.x, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved, halted: move.halted, }
+    return { y: move.y, x: move.x, direction: move.direction, status: true, toBeRemoved: move.toBeRemoved, halted: move.halted }
 }
 
 function swerve (originalY, originalX, boardRef, dir, halted) {
@@ -47,13 +47,13 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
         case 'down':
             return pickDirection(originalY + 1, originalX - 1, originalY + 1, originalX + 1, dir, originalY, originalX, halted)
         default:
-            return { y: originalY, x: originalX, }
+            return { y: originalY, x: originalX }
     }
 
     function pickDirection (y1, x1, y2, x2, dir, originalY, originalX, halted) {
 
         // console.log('#')
-        if (obsticalLikelyToMove(dir, originalY, originalX, halted)) return { y: originalY, x: originalX, halted: true, }
+        if (obsticalLikelyToMove(dir, originalY, originalX, halted)) return { y: originalY, x: originalX, halted: true }
         // console.log('##')
 
         const obstical = getOffset(dir, originalY, originalX, 1)
@@ -68,10 +68,10 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
         const possibilities = []
         // going "left" / "up"
         // console.log({ obstical })
-        if (swerveValid(y1, x1, dir, null, obstical).valid) possibilities.push({ y: y1, x: x1, })
+        if (swerveValid(y1, x1, dir, null, obstical).valid) possibilities.push({ y: y1, x: x1 })
         // going "right" / "down"
-        if (swerveValid(y2, x2, dir, null, obstical).valid) possibilities.push({ y: y2, x: x2, })
-        if (possibilities.length === 0) return { y: originalY, x: originalX, }
+        if (swerveValid(y2, x2, dir, null, obstical).valid) possibilities.push({ y: y2, x: x2 })
+        if (possibilities.length === 0) return { y: originalY, x: originalX }
         // console.log({ possibilities })
         return possibilities[Math.floor(Math.random() * possibilities.length)]
 
@@ -88,28 +88,28 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
                     return {
                         y,
                         x: x - inc,
-                        cell: boardRef[y] && boardRef[y][x - inc] ? boardRef[y][x - inc] : { type: '', },
+                        cell: boardRef[y] && boardRef[y][x - inc] ? boardRef[y][x - inc] : { type: '' },
                     }
                 case 'right':
                     return {
                         y,
                         x: x + inc,
-                        cell: boardRef[y] && boardRef[y][x + inc] ? boardRef[y][x + inc] : { type: '', },
+                        cell: boardRef[y] && boardRef[y][x + inc] ? boardRef[y][x + inc] : { type: '' },
                     }
                 case 'up':
                     return {
                         y: y - inc,
                         x,
-                        cell: boardRef[y] && boardRef[y - inc][x] ? boardRef[y - inc][x] : { type: '', },
+                        cell: boardRef[y] && boardRef[y - inc][x] ? boardRef[y - inc][x] : { type: '' },
                     }
                 case 'down':
                     return {
                         y: y + inc,
                         x,
-                        cell: boardRef[y] && boardRef[y + inc][x] ? boardRef[y + inc][x] : { type: '', },
+                        cell: boardRef[y] && boardRef[y + inc][x] ? boardRef[y + inc][x] : { type: '' },
                     }
                 default:
-                    return { cell: { type: 'default', }, y, x, }
+                    return { cell: { type: 'default' }, y, x }
             }
         }
 
@@ -146,38 +146,38 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
     // [ ][ ][?]
     // [ ][x][#]
     // [ ][ ][?]
-        if (y < 0 || y > boardRef.length - 1) return { valid: false, }
-        if (x < 0 || x > boardRef[0].length - 1) return { valid: false, }
+        if (y < 0 || y > boardRef.length - 1) return { valid: false }
+        if (x < 0 || x > boardRef[0].length - 1) return { valid: false }
 
         if (dir === 'right') {
             if (obstical.cell.type === 'wall') {
                 if (y < obstical.y && ![
                     4, 7, 8, 
                 ].includes(obstical.cell.direction)) {
-                    return { valid: false, }
+                    return { valid: false }
                 }
                 if (y > obstical.y && ![
                     1, 2, 4, 
                 ].includes(obstical.cell.direction)) {
-                    return { valid: false, }
+                    return { valid: false }
                 }
             }
-            if (getCell(y, x - 1, boardRef).type !== 'floor') return { valid: false, }
+            if (getCell(y, x - 1, boardRef).type !== 'floor') return { valid: false }
         }
         if (dir === 'down') {
             if (obstical.cell.type === 'wall') {
                 if (x < obstical.x && ![
                     4, 7, 8, 
                 ].includes(obstical.cell.direction)) {
-                    return { valid: false, }
+                    return { valid: false }
                 }
                 if (x > obstical.x && ![
                     6, 8, 9, 
                 ].includes(obstical.cell.direction)) {
-                    return { valid: false, }
+                    return { valid: false }
                 }
             }
-            if (getCell(y - 1, x, boardRef).type !== 'floor') return { valid: false, }
+            if (getCell(y - 1, x, boardRef).type !== 'floor') return { valid: false }
         }
         if (dir === 'left') {
             // if the obstical is a wall we must determine it's type (direction) and validate this vs our marble's direction
@@ -187,37 +187,37 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
                     6, 8, 9, 
                 ].includes(obstical.cell.direction)) {
                     // reference the encoding guidelines for which wall types 6, 8, and 9 are
-                    return { valid: false, }
+                    return { valid: false }
                 }
                 // we repeat the process for the cell "under" the obstical
                 if (y > obstical.y && ![
                     2, 3, 6, 
                 ].includes(obstical.cell.direction)) {
-                    return { valid: false, }
+                    return { valid: false }
                 }
             }
             // assuming this does not disqualify the route, the getCell function is used to check that the tartget is clear
-            if (getCell(y, x + 1, boardRef).type !== 'floor') return { valid: false, }
+            if (getCell(y, x + 1, boardRef).type !== 'floor') return { valid: false }
         }
         if (dir === 'up') {
             if (obstical.cell.type === 'wall') {
                 if (x < obstical.x && ![
                     1, 2, 4, 
                 ].includes(obstical.cell.direction)) {
-                    return { valid: false, }
+                    return { valid: false }
                 }
                 if (x > obstical.x && ![
                     2, 3, 6, 
                 ].includes(obstical.cell.direction)) {
-                    return { valid: false, }
+                    return { valid: false }
                 }
             }
-            if (getCell(y + 1, x, boardRef).type !== 'floor') return { valid: false, }
+            if (getCell(y + 1, x, boardRef).type !== 'floor') return { valid: false }
         }
 
         const cell = boardRef[y] && boardRef[y][x]
-        if (!cell || cell.type !== 'floor') return { valid: false, }
-        return { valid: true, cell, y, x, }
+        if (!cell || cell.type !== 'floor') return { valid: false }
+        return { valid: true, cell, y, x }
     } // swerveValid
 
 } // swerve
@@ -248,13 +248,13 @@ const moveValidator = (current, desire, boardRef, dir) => {
                 swervable = false
             }
         }
-        if (!swervable) return { y: current.y, x: current.x, status, toBeRemoved, }
+        if (!swervable) return { y: current.y, x: current.x, status, toBeRemoved }
         const swerved = swerve(current.y, current.x, boardRef, dir, current.halted)
         // console.log('nah swerve that: ', swerved)
-        return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true, toBeRemoved, halted: swerved.halted, }
+        return { y: swerved.y, x: swerved.x, direction: swerved.direction, status: true, toBeRemoved, halted: swerved.halted }
     }
     // console.log('*** Givin it what it wants ***')
-    return { y: desire.y, x: desire.x, status, toBeRemoved, halted: desire.halted, }
+    return { y: desire.y, x: desire.x, status, toBeRemoved, halted: desire.halted }
 
     // switch (dir) {
     //   case 'left':
@@ -296,7 +296,7 @@ const handleMove = (y, x, boardRef, tick, dir, halted) => {
         case 'right':
             return mRight(y, x, boardRef, dir, halted)
         default:
-            return { x, y, }
+            return { x, y }
     }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Timer = ({ time, imgs, }) => (
+const Timer = ({ time, imgs }) => (
     <img
         className='timer__img'
         data-img={`timer_${time}`}

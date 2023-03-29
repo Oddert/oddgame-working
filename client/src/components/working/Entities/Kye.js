@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Kye = ({ imgs, }) => (
+const Kye = ({ imgs }) => (
     <img
         className='kye__img'
         src={imgs['kye_default']}

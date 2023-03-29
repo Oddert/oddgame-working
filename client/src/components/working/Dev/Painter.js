@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Painter = ({ handleSelectChange, painter, }) => {
+const Painter = ({ handleSelectChange, painter }) => {
 
     const handleChange = e => {
         handleSelectChange(e.target.value)

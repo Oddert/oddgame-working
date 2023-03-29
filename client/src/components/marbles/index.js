@@ -10,7 +10,7 @@ const generateBoard = () => {
     for (let row = 0; row < 10; row++) {
         const r = []
         for (let col = 0; col < 10; col++) {
-            const cell = { type: 'floor', }
+            const cell = { type: 'floor' }
             if (row === 0 || row === 9) cell.type = 'wall'
             if (col === 0 || col === 9) cell.type = 'wall'
             r.push(cell)
@@ -44,15 +44,15 @@ const generateBoard = () => {
 
 
 const Marbles = () => {
-    const [ board, setBoard, ] = React.useState(generateBoard())
+    const [ board, setBoard ] = React.useState(generateBoard())
 
-    const [ painter, setPainter, ] = React.useState('wall')
+    const [ painter, setPainter ] = React.useState('wall')
 
     function handleSelectChange (e) {
         setPainter(e)
     }
 
-    function changeCell ({ y, x, }) {
+    function changeCell ({ y, x }) {
         const nb = JSON.parse(JSON.stringify(board))
         nb[y][x].type = painter
         nb[y][x].direction = 'right'

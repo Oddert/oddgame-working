@@ -1,6 +1,6 @@
 
-import { checkIsRotate, checkIsFloor, checkIsBlackhole, } from '../Utils/check'
-import { getRoatation, } from '../Utils/rotate'
+import { checkIsRotate, checkIsFloor, checkIsBlackhole } from '../Utils/check'
+import { getRoatation } from '../Utils/rotate'
 
 const dirMap = {
     left: 'right',
@@ -10,7 +10,7 @@ const dirMap = {
 }
 
 const handleMove = (y, x, boardRef, tick, direction, speed = 4) => {
-    if (tick % speed) return { x, y, direction, }
+    if (tick % speed) return { x, y, direction }
     switch (direction) {
         case 'left':
             return mLeft(y, x, boardRef, direction)
@@ -21,26 +21,26 @@ const handleMove = (y, x, boardRef, tick, direction, speed = 4) => {
         case 'down':
             return mDown(y, x, boardRef, direction)
         default:
-            return { x, y, direction, }
+            return { x, y, direction }
     }
 }
 
 
 function mLeft(y, x, boardRef, direction) {
-    const move = moveValidator({ y, x, direction, }, { y, x: x - 1, direction, }, boardRef)
-    return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved, bounce: move.bounce, }
+    const move = moveValidator({ y, x, direction }, { y, x: x - 1, direction }, boardRef)
+    return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved, bounce: move.bounce }
 }
 function mRight(y, x, boardRef, direction) {
-    const move = moveValidator({ y, x, direction, }, { y, x: x + 1, direction, }, boardRef)
-    return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved, bounce: move.bounce, }
+    const move = moveValidator({ y, x, direction }, { y, x: x + 1, direction }, boardRef)
+    return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved, bounce: move.bounce }
 }
 function mUp(y, x, boardRef, direction) {
-    const move = moveValidator({ y, x, direction, }, { y: y - 1, x, direction, }, boardRef)
-    return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved, bounce: move.bounce, }
+    const move = moveValidator({ y, x, direction }, { y: y - 1, x, direction }, boardRef)
+    return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved, bounce: move.bounce }
 }
 function mDown(y, x, boardRef, direction) {
-    const move = moveValidator({ y, x, direction, }, { y: y + 1, x, direction, }, boardRef)
-    return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved, bounce: move.bounce, }
+    const move = moveValidator({ y, x, direction }, { y: y + 1, x, direction }, boardRef)
+    return { y: move.y, x: move.x, direction: move.direction, toBeRemoved: move.toBeRemoved, bounce: move.bounce }
 
 }
 
@@ -109,9 +109,9 @@ function moveValidator (current, desire, boardRef) {
 
     const bounce = checkIsBounce(desire.y, desire.x, boardRef, current.direction)
 
-    if (!status) return { y: current.y, x: current.x, direction: dirMap[current.direction], toBeRemoved, bounce, }
+    if (!status) return { y: current.y, x: current.x, direction: dirMap[current.direction], toBeRemoved, bounce }
 
-    return { y: desire.y, x: desire.x, direction: current.direction, toBeRemoved, bounce, }
+    return { y: desire.y, x: desire.x, direction: current.direction, toBeRemoved, bounce }
 }
 
 

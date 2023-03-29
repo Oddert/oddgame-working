@@ -8,7 +8,7 @@ import marble_up from '../../../resources/marble_up.svg'
 import marble_down from '../../../resources/marble_down.svg'
 
 
-const Board = ({ board, loopAll, changeCell, }) => {
+const Board = ({ board, loopAll, changeCell }) => {
 
     const imgs = {
         marble_left,
@@ -25,7 +25,7 @@ const Board = ({ board, loopAll, changeCell, }) => {
                 rows.push(
                     <div key={r} className={`col ${board[c][r].type}`} onContextMenu={e => {
                         e.preventDefault()
-                        changeCell({ y: c, x: r, })
+                        changeCell({ y: c, x: r })
                     }}>
                         {
                             board[c][r].type === 'ball'

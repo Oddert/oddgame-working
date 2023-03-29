@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Rotate = ({ direction, imgs, }) => (
+const Rotate = ({ direction, imgs }) => (
     <img
         className='rotate__img'
         data-img={`rotate_${direction}`}

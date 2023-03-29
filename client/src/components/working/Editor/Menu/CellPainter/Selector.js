@@ -1,8 +1,8 @@
 import React from 'react'
-import { useSelector, useDispatch, } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { editChangePainterSelect, } from '../../../../../actions'
-import { getCell, } from '../../../Utils/entityCellCreator'
+import { editChangePainterSelect } from '../../../../../actions'
+import { getCell } from '../../../Utils/entityCellCreator'
 
 const Selector = () => {
     const entities = useSelector(state => state.edit.entities)
@@ -25,14 +25,14 @@ const Selector = () => {
 
 
     const cattegories = entities.reduce((acc, each, idx) => {
-        if (!acc.hasOwnProperty(each.catt)) console.error('No such key on accumulator, Selector.js pre-render', { acc, each, })
+        if (!acc.hasOwnProperty(each.catt)) console.error('No such key on accumulator, Selector.js pre-render', { acc, each })
         each.idx = idx
         acc[each.catt].ent.push(each)
         return acc
     }, {
-        structural: { displayName: 'Structural', ent: [], },
-        obstical: { displayName: 'Obsticals', ent: [], },
-        gameplay: { displayName: 'Gameplay', ent: [], },
+        structural: { displayName: 'Structural', ent: [] },
+        obstical: { displayName: 'Obsticals', ent: [] },
+        gameplay: { displayName: 'Gameplay', ent: [] },
     })
 
     const select = (selected, idx) => {

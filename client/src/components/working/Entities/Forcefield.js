@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Forcefield = ({ imgs, direction, }) => (
+const Forcefield = ({ imgs, direction }) => (
     <img
         className='forcefield__img'
         src={imgs[`forcefield_${direction}`]}

@@ -1,4 +1,4 @@
-import { checkIsFloor, } from '../Utils/check'
+import { checkIsFloor } from '../Utils/check'
 
 const targetCell = (y, x, dir, emit, boardRef) => {
 
@@ -10,16 +10,16 @@ const targetCell = (y, x, dir, emit, boardRef) => {
     let target
     switch(dir) {
         case 'left':
-            target = { y, x: x - 1, }
+            target = { y, x: x - 1 }
             break;
         case 'right':
-            target = { y, x: x + 1, }
+            target = { y, x: x + 1 }
             break;
         case 'up':
-            target = { y: y - 1, x, }
+            target = { y: y - 1, x }
             break;
         case 'down':
-            target = { y: y + 1, x, }
+            target = { y: y + 1, x }
             break;
         default:
             return false
@@ -28,17 +28,17 @@ const targetCell = (y, x, dir, emit, boardRef) => {
     // console.log(target.y, target.x, checkIsFloor(target.y, target.x, boardRef))
     if (!checkIsFloor(target.y, target.x, boardRef)) status = false
     if (!status) return false
-    return { ...target, data: emitOpts(dir)[emit], status: true, }
+    return { ...target, data: emitOpts(dir)[emit], status: true }
 }
 
 const emitOpts = direction => ({
-    marble: { type: 'marble', direction, },
-    slider: { type: 'slider', direction, },
+    marble: { type: 'marble', direction },
+    slider: { type: 'slider', direction },
 })
 
 const handleShoot = (y, x, boardRef, tick, direction, emit) => {
     const target = targetCell(y, x, direction, emit, boardRef)
-    if (!target) return { status: false, data: { type: 'floor', }, }
+    if (!target) return { status: false, data: { type: 'floor' } }
     return target
 }
 

@@ -81,13 +81,13 @@
 				"ignoreRegExpLiterals": true
 			}
 		],
-		"comma-dangle": ["error", "always"],
+		"comma-dangle": ["error", "always-multiline"],
 		"array-bracket-spacing": [
 			"error",
 			"always",
 			{
-				"singleValue": true,
-				"objectsInArrays": false,
+				"singleValue": false,
+				"objectsInArrays": true,
 				"arraysInArrays": false
 			}
 		],

@@ -2,7 +2,7 @@ import React from 'react'
 
 
 
-const Dev = ({ board, setBoard, handleSelectChange, painter, }) => {
+const Dev = ({ board, setBoard, handleSelectChange, painter }) => {
 
     const handleChange = e => {
         handleSelectChange(e.target.value)

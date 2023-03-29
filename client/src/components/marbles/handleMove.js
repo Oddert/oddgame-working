@@ -1,5 +1,5 @@
 
-import { mUp, mDown, mLeft, mRight, } from './moverFuncs.js'
+import { mUp, mDown, mLeft, mRight } from './moverFuncs.js'
 
 const handleMove = (y, x, dir, boardRef) => {
     switch (dir) {
@@ -12,7 +12,7 @@ const handleMove = (y, x, dir, boardRef) => {
         case 'right':
             return mRight(y, x, boardRef, dir)
         default:
-            return { x, y, }
+            return { x, y }
     }
 }
 

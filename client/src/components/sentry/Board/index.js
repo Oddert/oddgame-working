@@ -8,7 +8,7 @@ import sentry_up from '../../../resources/sentry_up.svg'
 import sentry_down from '../../../resources/sentry_down.svg'
 
 
-const Board = ({ board, loopAll, changeCell, }) => {
+const Board = ({ board, loopAll, changeCell }) => {
 
     const imgs = {
         sentry_left,
@@ -25,7 +25,7 @@ const Board = ({ board, loopAll, changeCell, }) => {
                 rows.push(
                     <div key={r} className={`col ${board[c][r].type}`} onContextMenu={e => {
                         e.preventDefault()
-                        changeCell({ y: c, x: r, })
+                        changeCell({ y: c, x: r })
                     }}>
                         {
                             board[c][r].type === 'sentry'
