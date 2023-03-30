@@ -10,7 +10,7 @@ const edit = (state = initialState.edit, action) => {
 
     switch(type) {
         case types.EDIT_CHANGE_CELL: return changeCell(state, payload)
-        case types.EDIT_PAINTMODE_TOGGLE: return paintmodeToggle(state, payload)
+        case types.EDIT_PAINT_MODE_TOGGLE: return paintModeToggle(state, payload)
         case types.EDIT_TOGGLE_OPEN: return toggleOpen(state, payload)
         case types.EDIT_WRITE_COL: return writeCol(state, payload)
         case types.EDIT_WRITE_ROW: return writeRow(state, payload)
@@ -29,15 +29,28 @@ const edit = (state = initialState.edit, action) => {
     }
 }
 
-
+/**
+ * Creates a blank row of floors appended and prepended with a wall.
+ * @param {number} len The length of the row segment to create.
+ * @returns {Object[]}
+ */
 const blankRow = len => {
     const row = [{ type: 'wall', variant: 'square' }]
-    for (let i = 2; i < len; i++) row.push({ type: 'floor' })
+    for (let i = 2; i < len; i++) {
+        row.push({ type: 'floor' })
+    }
     row.push({ type: 'wall', variant: 'square' })
     return row
 }
 
-
+/**
+ * Changes the entity in a given cell.
+ * 
+ * Works by taking a deep copy of the board and overwriting each of the keys on the object in place, rather than overwriting.
+ * @param {Object} state The current state.
+ * @param {Object} payload Contains the new cell data and coordinates.
+ * @returns {Object} The next state.
+ */
 function changeCell (state, payload) {
     const board = JSON.parse(JSON.stringify(state.data.board))
     const { y, x, cell } = payload
@@ -48,20 +61,28 @@ function changeCell (state, payload) {
     for (let each of addKeys) board[y][x][each] = cell[each]
 
     return Object.assign({}, state, {
-        data: Object.assign({}, state.data, {
+        data: {
+            ...state.data,
             board,
-        }),
-        painter: Object.assign({}, state.painter, {
-            focus: { y, x },
-        }),
+        },
+        painter: {
+            ...state.painter,
+            focus: {
+                ...state.painter.focus,
+                x,
+                y,
+            },
+        },
     })
 }
 
-function paintmodeToggle (state, payload = {}) {
+function paintModeToggle (state, payload = {}) {
     const { mode } = payload
-    return Object.assign({}, state, {
-        paintMode: typeof mode === 'boolean' ? mode : !state.paintMode,
-    })
+    const paintMode = typeof mode === 'boolean' ? mode : !state.paintMode
+    return {
+        ...state,
+        paintMode,
+    }
 }
 
 function toggleOpen (state, payload) {

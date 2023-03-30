@@ -60,7 +60,7 @@ export const uiMousedownLow = () => ({
 })
 
 export const editPaintmodeToggle = mode => ({
-    type: types.EDIT_PAINTMODE_TOGGLE,
+    type: types.EDIT_PAINT_MODE_TOGGLE,
     payload: { mode },
 })
 

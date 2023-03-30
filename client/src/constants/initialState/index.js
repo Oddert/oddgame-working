@@ -1,8 +1,8 @@
 
 // import generateBoard from '../components/shooter/Utils/generateBoard'
-import defaultBoards from '../components/working/defaultBoards'
+import defaultBoards from '../../components/working/defaultBoards'
 
-const entity_list = {
+const entityList = {
     floor: () => ({
         type: 'floor', catt: 'structural',
     }),
@@ -81,7 +81,7 @@ const initialState = {
             hint: '',
             board: defaultBoards[1].data,//[[]]
         },
-        entity_list,
+        entityList,
         entities: [
             // { type: 'floor', catt: 'structural' },
             // { type: 'wall', variant: 'square', catt: 'structural' },
@@ -97,7 +97,7 @@ const initialState = {
             // { type: 'slider', direction: 'left', catt: 'obstical' },
             // { type: 'timer', time: 6, catt: 'obstical' },
             // { type: 'diamond', catt: 'gameplay' },
-            ...Object.keys(entity_list).map(e => entity_list[e]()),
+            ...Object.keys(entityList).map(e => entityList[e]()),
         ],
         painter: {
             mode: 'selector',

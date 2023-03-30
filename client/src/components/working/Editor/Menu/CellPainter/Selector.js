@@ -23,10 +23,11 @@ const Selector = () => {
         </button>
     )
 
-
+    console.log(entities)
     const cattegories = entities.reduce((acc, each, idx) => {
         if (!acc.hasOwnProperty(each.catt)) console.error('No such key on accumulator, Selector.js pre-render', { acc, each })
         each.idx = idx
+        console.log(each.catt)
         acc[each.catt].ent.push(each)
         return acc
     }, {

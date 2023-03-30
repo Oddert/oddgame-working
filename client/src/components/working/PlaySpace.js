@@ -67,27 +67,36 @@ const PlaySpace = () => {
     const dispatch = useDispatch()
 
     const { board, /*registry,*/ tick } = useSelector(state => state.play)
-    const { entity_list } = useSelector(state => state.edit)
+    const { entityList } = useSelector(state => state.edit)
 
     function handleSelectChange (e) {
         setPainter(e)
     }
 
-
     function handleCellClick ({ y, x }) {
         const nb = JSON.parse(JSON.stringify(board))
         nb[y][x].type = painter
         if (painter !== 'timer') nb[y][x].direction = 'right'
-        if (painter === 'rotate') nb[y][x].direction = ranArr([ 'clock', 'anticlock' ])
-        if (painter === 'timer') nb[y][x].time = ranNum(3, 9)
-        if (painter === 'block') nb[y][x].variant = ranArr([
-            'soft', 'square', 'round', 
-        ])
-        if (painter === 'shooter') {
-            nb[y][x].direction = ranArr([
-                'left', 'right', 'up', 'down', 
-            ])
-            nb[y][x].emits = ranArr([ 'slider', 'marble' ])
+        switch (painter) {
+            case 'rotate':
+                nb[y][x].direction = ranArr([ 'clock', 'anticlock' ])
+                break;
+            case 'timer':
+                nb[y][x].time = ranNum(3, 9)
+                break;
+            case 'block':
+                nb[y][x].variant = ranArr([
+                    'soft', 'square', 'round', 
+                ])
+                break;
+            case 'shooter':
+                nb[y][x].direction = ranArr([
+                    'left', 'right', 'up', 'down', 
+                ])
+                nb[y][x].emits = ranArr([ 'slider', 'marble' ])
+                break;
+            default:
+                break;
         }
         dispatch(playBoardWrite(nb))
     }
@@ -142,7 +151,7 @@ const PlaySpace = () => {
             //       if (moved.toBeRemoved) {
             //         // set blackhole to cooldown
             //         // remove from registry
-            //         nv[r][c] = entity_list.floor()
+            //         nv[r][c] = entityList.floor()
             //         return
             //       }
             //       const directionUnchanged = !moved.direction || (moved.direction && moved.direction === entity.direction)
@@ -214,7 +223,7 @@ const PlaySpace = () => {
             //       if (moved.bounce) {
             //         const { target, source } = moved.bounce
             //         nv[target.y][target.x] = { ...nv[source.y][source.x] }
-            //         nv[source.y][source.x] = entity_list.floor()
+            //         nv[source.y][source.x] = entityList.floor()
             //       }
             //       if (!positionUnMoved) {
             //         nv[r][c].type = 'floor'
@@ -265,9 +274,9 @@ const PlaySpace = () => {
                             const moved = handleSliderMove(r, c, nv, tick, direction)
                             // console.log(moved)
                             if (moved.toBeRemoved) {
-                            // set blackhole to cooldown
-                            // remove from registry
-                                nv[r][c] = entity_list.floor()
+                                // set blackhole to cooldown
+                                // remove from registry
+                                nv[r][c] = entityList.floor()
                                 return
                             }
                             const directionUnchanged = !moved.direction || (moved.direction && moved.direction === col.direction)
@@ -291,8 +300,8 @@ const PlaySpace = () => {
                         return
                     case 'marble':
                         function moveMarble () {
-                        // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
-                        // console.log('baw found')
+                            // BUG: well... potential bug, check screenshot, marble @ 4, 6 not moving
+                            // console.log('baw found')
                             const { direction, halted } = col
                             const moved = handleMarbleMove(r, c, nv, tick, direction, halted)
                             // console.log(moved, nv[r][c])
@@ -315,7 +324,7 @@ const PlaySpace = () => {
                             if (moved.y === r && moved.x === c) return
                             // console.log({ r, c  }, moved)
                             if (nv[moved.y] && nv[moved.y][moved.x]) {
-                            // console.log(`swapping ${r}, ${c} to ${moved.y}, ${moved.x}`)
+                                // console.log(`swapping ${r}, ${c} to ${moved.y}, ${moved.x}`)
                                 nv[moved.y][moved.x].type = 'marble'
                                 nv[moved.y][moved.x].direction = nv[r][c].direction
                                 nv[r][c].type = 'floor'
@@ -344,7 +353,7 @@ const PlaySpace = () => {
                             if (moved.bounce) {
                                 const { target, source } = moved.bounce
                                 nv[target.y][target.x] = { ...nv[source.y][source.x] }
-                                nv[source.y][source.x] = entity_list.floor()
+                                nv[source.y][source.x] = entityList.floor()
                             }
                             if (!positionUnMoved) {
                                 nv[r][c].type = 'floor'
@@ -388,23 +397,23 @@ const PlaySpace = () => {
 
     // This file is basically your App.js, rendered as sole child of Provider
     return (
-        <div className='Play-Space'>
-            <Board
-                handleCellClick={handleCellClick}
-                board={board}
-                cache={() => console.log('BOARD MOUNT')}
-            />
-            <Dev
-                board={board}
-                handleSelectChange={handleSelectChange}
-                painter={painter}
-                defaultBoards={defaultBoards}
-                setBoard={nb => dispatch(playBoardWrite(nb, true, true))}
-                loopAll={loopAll}
-                play={play}
-                stopTick={stopTick}
-            />
-        </div>
+		<div className='Play-Space'>
+			<Board
+				handleCellClick={handleCellClick}
+				board={board}
+				cache={() => console.log('BOARD MOUNT')}
+			/>
+			<Dev
+				board={board}
+				handleSelectChange={handleSelectChange}
+				painter={painter}
+				defaultBoards={defaultBoards}
+				setBoard={nb => dispatch(playBoardWrite(nb, true, true))}
+				loopAll={loopAll}
+				play={play}
+				stopTick={stopTick}
+			/>
+		</div>
     )
 }
 
