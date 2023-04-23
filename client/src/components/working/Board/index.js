@@ -57,7 +57,11 @@ const Board = ({ board, handleCellClick, focus, handleMouseEnter, cache }) => {
     }
 
     return (
-        <div className='Board' >
+        <div
+            className='Board'
+            style={{ border: '1px dashed limegreen' }}
+            title='components/working/Board'
+        >
             <div>{ generateRows() }</div>
         </div>
     )

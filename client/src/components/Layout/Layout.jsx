@@ -9,10 +9,16 @@ import {
     uiMousedownHigh,
 } from '../../actions'
 
-import PlaySpace from './PlaySpace'
-import Editor from './Editor/'
+import Editor from '../Editor/'
+import PlaySpace from '../PlaySpace/'
 
-const Index = () => {
+/**
+ * Entry point for the game.
+ *
+ * Rendered by the index file under necessary contexts & wrappers.
+ * @component
+ */
+const Layout = () => {
     const dispatch = useDispatch()
 
     const { open } = useSelector(state => state.edit)
@@ -34,16 +40,12 @@ const Index = () => {
     }
 
     return (
-        <div className='Index' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+        <div className='Layout' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
             <button onClick={newLevel}>New Level +</button>
             <PlaySpace />
-            {
-                open
-                    ? <Editor />
-                    : 'certainly not edit time'
-            }
+            {open && <Editor />}
         </div>
     )
 }
 
-export default Index
+export default Layout
