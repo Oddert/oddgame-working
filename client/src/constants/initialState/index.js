@@ -22,25 +22,25 @@ const entityList = {
         type: 'block', variant: 'square', catt: 'structural',
     }),
     blackhole: () => ({
-        type: 'blackhole', catt: 'obstical',
+        type: 'blackhole', catt: 'obstacle',
     }),
     marble: (direction = 'left') => ({
-        type: 'marble', direction, catt: 'obstical',
+        type: 'marble', direction, catt: 'obstacle',
     }),
     rotate: (direction = 'clock') => ({
-        type: 'rotate', direction, catt: 'obstical',
+        type: 'rotate', direction, catt: 'obstacle',
     }),
     sentry: (direction = 'left') => ({
-        type: 'sentry', direction, catt: 'obstical',
+        type: 'sentry', direction, catt: 'obstacle',
     }),
     shooter: (direction = 'right', emits = 'slider') => ({
-        type: 'shooter', direction, emits, catt: 'obstical',
+        type: 'shooter', direction, emits, catt: 'obstacle',
     }),
     slider: (direction = 'left') => ({
-        type: 'slider', direction, catt: 'obstical',
+        type: 'slider', direction, catt: 'obstacle',
     }),
     timer: (time = 6, speed = 6) => ({
-        type: 'timer', time, speed, catt: 'obstical',
+        type: 'timer', time, speed, catt: 'obstacle',
     }),
     diamond: () => ({
         type: 'diamond', catt: 'gameplay',
@@ -49,7 +49,7 @@ const entityList = {
         type: 'enemy', variant, catt: 'gameplay',
     }),
     forcefield: (direction = 'right') => ({
-        type: 'forcefield', direction, catt: 'obstical',
+        type: 'forcefield', direction, catt: 'obstacle',
     }),
     magnet: (direction = 'vertical') => ({
         type: 'magnet', direction, catt: 'gameplay',
@@ -89,13 +89,13 @@ const initialState = {
             // { type: 'block', variant: 'round', catt: 'structural' },
             // { type: 'block', variant: 'soft', catt: 'structural' },
             // { type: 'block', variant: 'square', catt: 'structural' },
-            // { type: 'blackhole', catt: 'obstical' },
-            // { type: 'marble', direction: 'left', catt: 'obstical' },
-            // { type: 'rotate', direction: 'clock', catt: 'obstical' },
-            // { type: 'sentry', direction: 'left', catt: 'obstical' },
-            // { type: 'shooter', direction: 'left', emits: 'slider', catt: 'obstical' },
-            // { type: 'slider', direction: 'left', catt: 'obstical' },
-            // { type: 'timer', time: 6, catt: 'obstical' },
+            // { type: 'blackhole', catt: 'obstacle' },
+            // { type: 'marble', direction: 'left', catt: 'obstacle' },
+            // { type: 'rotate', direction: 'clock', catt: 'obstacle' },
+            // { type: 'sentry', direction: 'left', catt: 'obstacle' },
+            // { type: 'shooter', direction: 'left', emits: 'slider', catt: 'obstacle' },
+            // { type: 'slider', direction: 'left', catt: 'obstacle' },
+            // { type: 'timer', time: 6, catt: 'obstacle' },
             // { type: 'diamond', catt: 'gameplay' },
             ...Object.keys(entityList).map(e => entityList[e]()),
         ],
@@ -105,6 +105,9 @@ const initialState = {
             focus: {
                 x: null,
                 y: null,
+                entity: {
+                    type: null,
+                },
             },
         },
     },

@@ -32,7 +32,7 @@ const Selector = () => {
         return acc
     }, {
         structural: { displayName: 'Structural', ent: [] },
-        obstical: { displayName: 'Obsticals', ent: [] },
+        obstacle: { displayName: 'Obsticals', ent: [] },
         gameplay: { displayName: 'Gameplay', ent: [] },
     })
 
@@ -45,8 +45,8 @@ const Selector = () => {
             {
                 Object.keys(cattegories).map((catt, c_i) =>
                     <div key={`catt_${c_i}`}>
-                        <h5 className='Selector__cattegory--title'>{ cattegories[catt].displayName }</h5>
-                        <div className='Selector__cattegory'>
+                        <h5 className='Selector__category--title'>{ cattegories[catt].displayName }</h5>
+                        <div className='Selector__category'>
                             {
                                 cattegories[catt].ent.map(entity => cellWrapper(entity, selected))
                             }

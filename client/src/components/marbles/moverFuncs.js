@@ -51,7 +51,7 @@ const swerve = (originalY, originalX, boardRef, dir) => {
 
     const pickDirection = (y1, x1, y2, x2, dir, originalY, originalX) => {
 
-        // BUG: this code assumes the marble acting as obstical is going to move in the same direction as the marble
+        // BUG: this code assumes the marble acting as obstacle is going to move in the same direction as the marble
         // which is deciding to halt. Direction must be read from target and 'infront' calculated from there
         const infrontOfObstical = (dir, originalY, originalX) => {
             const getOffset = (dir, y, x, inc) => {
@@ -87,11 +87,11 @@ const swerve = (originalY, originalX, boardRef, dir) => {
                         return { cell: { type: 'wall' }, y, x }
                 }
             }
-            const obstical = getOffset(dir, originalY, originalX, 1)
-            // console.log(obstical)
-            if (obstical.cell.type === 'ball') {
-                const infront = getOffset(obstical.cell.direction, obstical.y, obstical.x, 1)
-                // console.log(obstical, infront)
+            const obstacle = getOffset(dir, originalY, originalX, 1)
+            // console.log(obstacle)
+            if (obstacle.cell.type === 'ball') {
+                const infront = getOffset(obstacle.cell.direction, obstacle.y, obstacle.x, 1)
+                // console.log(obstacle, infront)
                 if (infront.cell.type === 'floor' || infront.cell.type === 'ball') return true
             } else {
                 return false

@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "classnames": "^2.3.2",
     "node-sass": "^8.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
@@ -19,88 +20,99 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-	"lint": "eslint .",
-	"lint:fix": "eslint --fix ."
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "eslintConfig": {
     "extends": "react-app",
-	"ignorePatterns": ["**/node_modules/**/*", "**/build/**/*"],
-	"rules": {
-		"indent": [
-			"error",
-			4,
-			{
-				"SwitchCase": 1,
-				"VariableDeclarator": 2,
-				"outerIIFEBody": 1,
-				"FunctionDeclaration": {
-					"parameters": 1,
-					"body": 1
-				},
-				"FunctionExpression": {
-					"parameters": 1,
-					"body": 1
-				},
-				"CallExpression": {
-					"arguments": 1
-				},
-				"ArrayExpression": 1,
-				"ObjectExpression": 1,
-				"ImportDeclaration": 1,
-				"flatTernaryExpressions": false,
-				"ignoredNodes": [
-					"JSXElement",
-					"JSXElement > *",
-					"JSXAttribute",
-					"JSXIdentifier",
-					"JSXNamespacedName",
-					"JSXMemberExpression",
-					"JSXSpreadAttribute",
-					"JSXExpressionContainer",
-					"JSXOpeningElement",
-					"JSXClosingElement",
-					"JSXFragment",
-					"JSXOpeningFragment",
-					"JSXClosingFragment",
-					"JSXText",
-					"JSXEmptyExpression",
-					"JSXSpreadChild"
-				],
-				"ignoreComments": false
-			}
-		],
-		"no-mixed-spaces-and-tabs": ["error"],
-		"quotes": ["error", "single"],
-		"max-len": [
-			"error",
-			{
-				"code": 130,
-				"comments": 130,
-				"ignoreTrailingComments": true,
-				"ignoreUrls": true,
-				"ignoreRegExpLiterals": true
-			}
-		],
-		"comma-dangle": ["error", "always-multiline"],
-		"array-bracket-spacing": [
-			"error",
-			"always",
-			{
-				"singleValue": false,
-				"objectsInArrays": true,
-				"arraysInArrays": false
-			}
-		],
-		"array-bracket-newline": [
-			"error",
-			{
-				"multiline": true,
-				"minItems": 3
-			}
-		],
-		"no-whitespace-before-property": "error",
-		"space-infix-ops": "error"
-	  }
+    "ignorePatterns": [
+      "**/node_modules/**/*",
+      "**/build/**/*"
+    ],
+    "rules": {
+      "indent": [
+        "error",
+        4,
+        {
+          "SwitchCase": 1,
+          "VariableDeclarator": 2,
+          "outerIIFEBody": 1,
+          "FunctionDeclaration": {
+            "parameters": 1,
+            "body": 1
+          },
+          "FunctionExpression": {
+            "parameters": 1,
+            "body": 1
+          },
+          "CallExpression": {
+            "arguments": 1
+          },
+          "ArrayExpression": 1,
+          "ObjectExpression": 1,
+          "ImportDeclaration": 1,
+          "flatTernaryExpressions": false,
+          "ignoredNodes": [
+            "JSXElement",
+            "JSXElement > *",
+            "JSXAttribute",
+            "JSXIdentifier",
+            "JSXNamespacedName",
+            "JSXMemberExpression",
+            "JSXSpreadAttribute",
+            "JSXExpressionContainer",
+            "JSXOpeningElement",
+            "JSXClosingElement",
+            "JSXFragment",
+            "JSXOpeningFragment",
+            "JSXClosingFragment",
+            "JSXText",
+            "JSXEmptyExpression",
+            "JSXSpreadChild"
+          ],
+          "ignoreComments": false
+        }
+      ],
+      "no-mixed-spaces-and-tabs": [
+        "error"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "max-len": [
+        "error",
+        {
+          "code": 130,
+          "comments": 130,
+          "ignoreTrailingComments": true,
+          "ignoreUrls": true,
+          "ignoreRegExpLiterals": true
+        }
+      ],
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "array-bracket-spacing": [
+        "error",
+        "always",
+        {
+          "singleValue": false,
+          "objectsInArrays": true,
+          "arraysInArrays": false
+        }
+      ],
+      "array-bracket-newline": [
+        "error",
+        {
+          "multiline": true,
+          "minItems": 3
+        }
+      ],
+      "no-whitespace-before-property": "error",
+      "space-infix-ops": "error"
+    }
   },
   "browserslist": {
     "production": [

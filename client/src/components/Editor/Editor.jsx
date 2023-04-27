@@ -1,10 +1,8 @@
 import React from 'react'
 
-import Menu from '../working/Editor/Menu/'
-
 import Board from './layouts/Board'
-
-import Interface from './layouts/Interface/'
+import Interface from './layouts/Interface'
+import Menu from './layouts/Menu'
 
 import './Editor.scss'
 

@@ -17,12 +17,14 @@ const Interface = ({ board, menu }) => {
 
     const close = e => {
         e.stopPropagation()
-        dispatch(editToggleOpen(true, false))
+        if (e.target.classList.contains('Editor--wrapper')) {
+            dispatch(editToggleOpen(true, false))
+        }
     }
 
     return (
         <div className='Editor--wrapper one' onClick={close}>
-            <div className='Editor'>
+            <div className='Editor' onClick={e => e.preventDefault()}>
                 <div style={{ background: 'tomato', flex: 3, display: 'flex', justifyContent: 'center' }}>
                     {board}
                 </div>

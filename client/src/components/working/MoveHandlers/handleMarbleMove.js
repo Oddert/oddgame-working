@@ -56,28 +56,28 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
         if (obsticalLikelyToMove(dir, originalY, originalX, halted)) return { y: originalY, x: originalX, halted: true }
         // console.log('##')
 
-        const obstical = getOffset(dir, originalY, originalX, 1)
-        // console.log(obstical)
-        if (obstical.cell.type === 'rotate') {
+        const obstacle = getOffset(dir, originalY, originalX, 1)
+        // console.log(obstacle)
+        if (obstacle.cell.type === 'rotate') {
             return {
                 y: originalY,
                 x: originalX,
-                direction: obstical.cell.direction === 'clock' ? getClockwise(dir) : getAnticlockwise(dir),
+                direction: obstacle.cell.direction === 'clock' ? getClockwise(dir) : getAnticlockwise(dir),
             }
         }
         const possibilities = []
         // going "left" / "up"
-        // console.log({ obstical })
-        if (swerveValid(y1, x1, dir, null, obstical).valid) possibilities.push({ y: y1, x: x1 })
+        // console.log({ obstacle })
+        if (swerveValid(y1, x1, dir, null, obstacle).valid) possibilities.push({ y: y1, x: x1 })
         // going "right" / "down"
-        if (swerveValid(y2, x2, dir, null, obstical).valid) possibilities.push({ y: y2, x: x2 })
+        if (swerveValid(y2, x2, dir, null, obstacle).valid) possibilities.push({ y: y2, x: x2 })
         if (possibilities.length === 0) return { y: originalY, x: originalX }
         // console.log({ possibilities })
         return possibilities[Math.floor(Math.random() * possibilities.length)]
 
 
         // Note from future: is this true????? ->
-        // BUG: this code assumes the marble acting as obstical is going to move in the same direction as the marble
+        // BUG: this code assumes the marble acting as obstacle is going to move in the same direction as the marble
         // which is deciding to halt. Direction must be read from target and 'infront' calculated from there
         function getOffset (dir, y, x, inc) {
             switch (dir) {
@@ -120,15 +120,15 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
             const recHash = (y, x, type) => `${y}_${x}_${type}`
             function checkAheadRecurse (dir, previousY, previousX) {
                 // console.log('[checkAheadRecurse]', { dir, previousY, previousX })
-                const obstical = getOffset(dir, previousY, previousX, 1)
+                const obstacle = getOffset(dir, previousY, previousX, 1)
 
-                if (obstical.cell.type === 'floor') return true
-                if (obstical.cell.type === 'marble') {
-                    if (recursionMem.hasOwnProperty(recHash(obstical.y, obstical.x, obstical.type))) {
+                if (obstacle.cell.type === 'floor') return true
+                if (obstacle.cell.type === 'marble') {
+                    if (recursionMem.hasOwnProperty(recHash(obstacle.y, obstacle.x, obstacle.type))) {
                         return false
                     } else {
-                        recursionMem[recHash(obstical.y, obstical.x, obstical.type)] = true
-                        return checkAheadRecurse(obstical.cell.direction, obstical.y, obstical.x)
+                        recursionMem[recHash(obstacle.y, obstacle.x, obstacle.type)] = true
+                        return checkAheadRecurse(obstacle.cell.direction, obstacle.y, obstacle.x)
                     }
                 }
 
@@ -139,7 +139,7 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
 
     } // pickDirection
 
-    function swerveValid (y, x, dir, rotation, obstical) {
+    function swerveValid (y, x, dir, rotation, obstacle) {
     // called on both possible target cells the marble could swerve into
     // this function checks for obsticals and if the move is "valid" e.g. avoiding 'jumping diagonals'
     // "move marble right ->"
@@ -150,49 +150,49 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
         if (x < 0 || x > boardRef[0].length - 1) return { valid: false }
 
         if (dir === 'right') {
-            if (obstical.cell.type === 'wall') {
-                if (y < obstical.y && ![
+            if (obstacle.cell.type === 'wall') {
+                if (y < obstacle.y && ![
                     4, 7, 8, 
-                ].includes(obstical.cell.direction)) {
+                ].includes(obstacle.cell.direction)) {
                     return { valid: false }
                 }
-                if (y > obstical.y && ![
+                if (y > obstacle.y && ![
                     1, 2, 4, 
-                ].includes(obstical.cell.direction)) {
+                ].includes(obstacle.cell.direction)) {
                     return { valid: false }
                 }
             }
             if (getCell(y, x - 1, boardRef).type !== 'floor') return { valid: false }
         }
         if (dir === 'down') {
-            if (obstical.cell.type === 'wall') {
-                if (x < obstical.x && ![
+            if (obstacle.cell.type === 'wall') {
+                if (x < obstacle.x && ![
                     4, 7, 8, 
-                ].includes(obstical.cell.direction)) {
+                ].includes(obstacle.cell.direction)) {
                     return { valid: false }
                 }
-                if (x > obstical.x && ![
+                if (x > obstacle.x && ![
                     6, 8, 9, 
-                ].includes(obstical.cell.direction)) {
+                ].includes(obstacle.cell.direction)) {
                     return { valid: false }
                 }
             }
             if (getCell(y - 1, x, boardRef).type !== 'floor') return { valid: false }
         }
         if (dir === 'left') {
-            // if the obstical is a wall we must determine it's type (direction) and validate this vs our marble's direction
-            if (obstical.cell.type === 'wall') {
-                // if the target y is smaller then the obstical is "above", the movement is a vector poiting top right.
-                if (y < obstical.y && ![
+            // if the obstacle is a wall we must determine it's type (direction) and validate this vs our marble's direction
+            if (obstacle.cell.type === 'wall') {
+                // if the target y is smaller then the obstacle is "above", the movement is a vector poiting top right.
+                if (y < obstacle.y && ![
                     6, 8, 9, 
-                ].includes(obstical.cell.direction)) {
+                ].includes(obstacle.cell.direction)) {
                     // reference the encoding guidelines for which wall types 6, 8, and 9 are
                     return { valid: false }
                 }
-                // we repeat the process for the cell "under" the obstical
-                if (y > obstical.y && ![
+                // we repeat the process for the cell "under" the obstacle
+                if (y > obstacle.y && ![
                     2, 3, 6, 
-                ].includes(obstical.cell.direction)) {
+                ].includes(obstacle.cell.direction)) {
                     return { valid: false }
                 }
             }
@@ -200,15 +200,15 @@ function swerve (originalY, originalX, boardRef, dir, halted) {
             if (getCell(y, x + 1, boardRef).type !== 'floor') return { valid: false }
         }
         if (dir === 'up') {
-            if (obstical.cell.type === 'wall') {
-                if (x < obstical.x && ![
+            if (obstacle.cell.type === 'wall') {
+                if (x < obstacle.x && ![
                     1, 2, 4, 
-                ].includes(obstical.cell.direction)) {
+                ].includes(obstacle.cell.direction)) {
                     return { valid: false }
                 }
-                if (x > obstical.x && ![
+                if (x > obstacle.x && ![
                     2, 3, 6, 
-                ].includes(obstical.cell.direction)) {
+                ].includes(obstacle.cell.direction)) {
                     return { valid: false }
                 }
             }

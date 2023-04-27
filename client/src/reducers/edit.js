@@ -208,13 +208,20 @@ function writeRowsDirect (state, payload) {
 
 function painterFocusUpdate (state, payload) {
     const { y, x } = payload
-    return Object.assign({}, state, {
-        painter: Object.assign({}, state.painter, {
-            focus: Object.assign({}, state.painter.focus, {
-                y, x,
-            }),
-        }),
-    })
+    return {
+        ...state,
+        painter: {
+            ...state.painter,
+            focus: {
+                ...state.painter.focus,
+                y,
+                x,
+                entity: {
+                    ...state.data.board[y][x],
+                },
+            },
+        },
+    }
 }
 
 function changePainterSelect (state, payload) {

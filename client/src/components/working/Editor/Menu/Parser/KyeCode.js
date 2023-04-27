@@ -8,6 +8,7 @@ import { levels } from '../../../defaultKye.js'
 const KyeCode = () => {
     const dispatch = useDispatch()
     const { entityList, data: { board } } = useSelector(state => state.edit)
+    console.log('entityList: ', entityList)
 
     const lazy = 11
     const t = levels[`l_${lazy}`].data
