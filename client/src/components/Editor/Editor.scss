@@ -2,6 +2,33 @@
 @mixin after_font {
     font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'PT Sans', 'Tahoma', 'Avant Garde', 'impact', 'ubuntu', 'sans serif';
 }
+
+@mixin selector_option {
+    box-sizing: border-box;
+    background: #ecf0f1;
+    border: 3px solid #bec3c7;
+    margin: 4px;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .1s linear;
+    img {
+        width: 70%;
+        height: 70%;
+    }
+    &:hover {
+        // background: #bcc9cc;
+        background: #d0d6db;
+    }
+    &.selected {
+        border: 3px solid #39B8FF;
+    }
+}
   
 .Editor--wrapper {
     overflow-y: auto;
@@ -10,7 +37,7 @@
         border: 1px solid black;
         display: flex;
         &:after {
-            content: "Editor";
+            // content: "Editor";
             position: absolute;
             bottom: 1px;
             left: 1px;
@@ -22,7 +49,7 @@
         $margT: 2.5rem;
         $margS: 1.5rem;
         $pad: 2rem;
-        border: 1px dashed tomato;
+        // border: 1px dashed tomato;
         position: fixed;
         top: 0;
         left: 0;
@@ -35,7 +62,7 @@
             padding: $pad;
         }
         &:after {
-            content: "Editor Wrapper One";
+            // content: "Editor Wrapper One";
             position: absolute;
             bottom: 20px;
             left: 30px;
@@ -60,30 +87,7 @@
             display: flex;
             flex-direction: column;
             .col {
-                box-sizing: border-box;
-                background: #ecf0f1;
-                border: 3px solid #bec3c7;
-                margin: 4px;
-                padding: 0;
-                width: 50px;
-                height: 50px;
-                position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                transition: .1s linear;
-                img {
-                    width: 70%;
-                    height: 70%;
-                }
-                &:hover {
-                    // background: #bcc9cc;
-                    background: #d0d6db;
-                }
-                &.selected {
-                    border: 3px solid #39B8FF;
-                }
+                @include selector_option()
             }
             .Selector__option__label {
                 font-size: 11px;
@@ -95,7 +99,7 @@
   
 .Rowcol {
     display: flex;
-    border: 1px dashed tomato;
+    // border: 1px dashed tomato;
     input {
         width: 50px;
         text-align: center;

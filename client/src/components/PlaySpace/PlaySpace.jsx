@@ -377,7 +377,7 @@ const PlaySpace = () => {
     return (
 		<div
             className='Play-Space'
-            style={{ border: '1px dashed orange' }}
+            // style={{ border: '1px dashed orange' }}
             title='components/PlaySpace'
         >
 			<Board

@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import BlockAttributes from './components/BlockAttributes/BlockAttributes'
 
 const EntityAttributeMenu = () => {
     const { entity, y, x } = useSelector(state => state.edit.painter.focus)
     const variant = entity?.variant ? ` (${entity.variant})` : ' '
+
+    const editor = useMemo(() => {
+        switch(entity.type) {
+            case 'block':
+                return <BlockAttributes />
+            default:
+                return <p>Selected entity: {entity.type}{variant} at Y: {y}, X: {x}</p>
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [entity.type])
+
     return (
         <div>
-            <p>Selected entity: {entity.type}{variant} at Y: {y}, X: {x}</p>
+            {editor}
         </div>
     )
 }
