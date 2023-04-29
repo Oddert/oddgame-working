@@ -19,22 +19,35 @@ const CursorSelector = () => {
 
     const modes = [ 'selector', 'brush' ]
 
-    const handleChange = useCallback((m) => dispatch(editPainterModeSwitch(m)), [dispatch])
+    const handleChange = useCallback((m) => {
+        // console.log(m);
+        dispatch(editPainterModeSwitch(m))
+    }, [dispatch])
 
+    // console.log(mode, modes)
     return (
         <form>
             {
-                modes.map(option =>
-                    <label key={option}>
-                        <input
-                            type='radio'
-                            value={option}
-                            checked={mode === option}
-                            onChange={() => handleChange(option)}
-                        />
-                        { option }
-                    </label>
-                )
+                modes.map(option => {
+                    // console.log(option, mode, option === mode)
+                    const checked = mode === option
+                    return (
+                        <div key={option}>
+                            <input
+                                id={`CursorSelector-${option}`}
+                                type='radio'
+                                value={option}
+                                checked={checked}
+                                onChange={() => handleChange(option)}
+                            />
+                            <label
+                                htmlFor={`CursorSelector-${option}`}
+                            >
+                                { option } {String(mode === option)}
+                            </label>
+                        </div>
+                    )
+                })
             }
         </form>
     )

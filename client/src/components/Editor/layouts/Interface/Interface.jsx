@@ -25,10 +25,10 @@ const Interface = ({ board, menu }) => {
     return (
         <div className='Editor--wrapper one' onClick={close}>
             <div className='Editor' onClick={e => e.preventDefault()}>
-                <div style={{ background: 'tomato', flex: 3, display: 'flex', justifyContent: 'center' }}>
+                <div className='Editor__panel board'>
                     {board}
                 </div>
-                <div style={{ background: 'steelblue', flex: 2 }}>
+                <div className='Editor__panel menu'>
                     {menu}
                 </div>
             </div>

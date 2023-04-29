@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCell } from '../../../../../working/Utils/entityCellCreator'
 import { editChangeCell } from '../../../../../../actions'
 
-const BlockAttributes = () => {
+const WallAttributes = () => {
     const dispatch = useDispatch()
     const { entity, y, x } = useSelector(state => state.edit.painter.focus)
+
+    console.log(entity)
     const selectedVariant = entity?.variant
+    const selectedDirection = entity?.direction
 
     const handleClick = useCallback((variant, direction) => {
         const cell = {
@@ -21,14 +24,16 @@ const BlockAttributes = () => {
     ])
 
     const option = (variant, direction) => {
-        const selected = selectedVariant === variant ? 'selected' : ''
+        const selected = (selectedVariant === variant && selectedDirection === direction)
+            ? 'selected'
+            : ''
         return (
             <div className='Selector__option'>
                 <button
                     className={`col ${selected}`}
                     onClick={() => handleClick(variant, direction)}
                 >
-                    {getCell({ type: 'block', variant, direction })}
+                    {getCell({ type: 'wall', variant, direction })}
                 </button>
             </div>
         )
@@ -36,14 +41,21 @@ const BlockAttributes = () => {
 
     return (
         <div className='Selector'>
-            <h5>Block Variant</h5>
+            <h5>Wall Variant</h5>
             <div className='Selector__category'>
-                {option('square', null)}
-                {option('round', null)}
-                {option('soft', null)}
+                {option('square')}
+                {option('round', 5)}
+                {option('round', 1)}
+                {option('round', 3)}
+                {option('round', 7)}
+                {option('round', 9)}
+                {option('round', 2)}
+                {option('round', 4)}
+                {option('round', 6)}
+                {option('round', 8)}
             </div>
         </div>
     )
 }
 
-export default BlockAttributes
+export default WallAttributes

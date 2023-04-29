@@ -28,7 +28,7 @@ const EntitySelector = () => {
     }, [dispatch])
 
     const cellWrapper = (cell) => {
-        console.log(cell)
+        // console.log(cell)
         const key = `${cell.type}_${cell.variant || cell.emits || cell.direction || 'default'}`
         return (
             <div

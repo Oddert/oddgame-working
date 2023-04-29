@@ -2,7 +2,7 @@ import React from 'react'
 
 // import CellPainter from '../../../working/Editor/Menu/CellPainter/'
 // import GameDetials from './GameDetials'
-import Parser from '../../../working/Editor/Menu/Parser/'
+// import Parser from '../../../working/Editor/Menu/Parser/'
 
 import BoardDimensions from '../../components/BoardDimensions/'
 import CursorSelector from '../../components/CursorSelector/'
@@ -24,7 +24,7 @@ const Menu = () => {
             {/* <GameDetials /> */}
             <CursorSelector />
             <PainterSelector />
-            <Parser />
+            {/* <Parser /> */}
         </>
     )
 }

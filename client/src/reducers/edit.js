@@ -69,6 +69,7 @@ function changeCell (state, payload) {
             ...state.painter,
             focus: {
                 ...state.painter.focus,
+                entity: cell,
                 x,
                 y,
             },
