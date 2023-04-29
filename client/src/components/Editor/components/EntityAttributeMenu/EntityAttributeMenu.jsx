@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
 import BlockAttributes from './components/BlockAttributes/BlockAttributes'
+import MarbleAttributes from './components/MarbleAttributes/MarbleAttributes'
 import WallAttributes from './components/WallAttributes/WallAttributes'
 
 const EntityAttributeMenu = () => {
@@ -14,6 +15,8 @@ const EntityAttributeMenu = () => {
                 return <BlockAttributes />
             case 'wall':
                 return <WallAttributes />
+            case 'marble':
+                return <MarbleAttributes />
             case 'floor':
             case 'blackhole':
                 return null;
