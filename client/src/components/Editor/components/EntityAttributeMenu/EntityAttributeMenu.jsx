@@ -5,6 +5,7 @@ import BlockAttributes from './components/BlockAttributes/BlockAttributes'
 import MarbleAttributes from './components/MarbleAttributes/MarbleAttributes'
 import RotateAttributes from './components/RotateAttributes/RotateAttributes'
 import SentryAttributes from './components/SentryAttributes/SentryAttributes'
+import SliderAttributes from './components/SliderAttributes/SliderAttributes'
 import WallAttributes from './components/WallAttributes/WallAttributes'
 
 const EntityAttributeMenu = () => {
@@ -15,16 +16,19 @@ const EntityAttributeMenu = () => {
         switch(entity.type) {
             case 'block':
                 return <BlockAttributes />
-            case 'wall':
-                return <WallAttributes />
             case 'marble':
                 return <MarbleAttributes />
             case 'rotate':
                 return <RotateAttributes />
             case 'sentry':
                 return <SentryAttributes />
-            case 'floor':
+            case 'slider':
+                return <SliderAttributes />
+            case 'wall':
+                return <WallAttributes />
             case 'blackhole':
+            case 'diamond':
+            case 'floor':
                 return null;
             default:
                 return <p>Selected entity: {entity.type}{variant} at Y: {y}, X: {x}</p>

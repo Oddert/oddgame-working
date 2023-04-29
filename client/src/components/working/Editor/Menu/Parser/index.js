@@ -6,7 +6,7 @@ const Parser = () => {
     return (
         <div>
             <div>
-                <textarea></textarea>
+                {/* <textarea></textarea> */}
                 <KyeCode />
             </div>
         </div>
