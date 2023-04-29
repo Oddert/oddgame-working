@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
 // import { useSelector } from 'react-redux'
 
-import { getCell } from '../working/Utils/entityCellCreator'
+import { getCell } from '../../utils/entityCellCreator'
 
 import '../working/index.scss'
 

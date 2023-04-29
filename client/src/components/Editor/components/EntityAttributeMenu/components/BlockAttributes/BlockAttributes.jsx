@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getCell } from '../../../../../working/Utils/entityCellCreator'
+import { getCell } from '../../../../../../utils/entityCellCreator'
+
 import { editChangeCell } from '../../../../../../actions'
 
 const BlockAttributes = () => {

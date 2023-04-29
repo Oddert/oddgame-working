@@ -2,7 +2,8 @@ import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
 
-import { getCell } from '../../../../../working/Utils/entityCellCreator'
+import { getCell } from '../../../../../../utils/entityCellCreator'
+
 import { editChangeCell } from '../../../../../../actions'
 
 const RotateAttributes = () => {

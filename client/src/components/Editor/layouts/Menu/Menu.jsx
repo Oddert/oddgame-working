@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 // import CellPainter from '../../../working/Editor/Menu/CellPainter/'
 // import GameDetials from './GameDetials'
@@ -19,13 +19,13 @@ import PainterSelector from '../../components/PainterSelector/'
 const Menu = () => {
     // return <p>test</p>
     return (
-        <>
+        <Fragment>
             <BoardDimensions />
             {/* <GameDetials /> */}
             <CursorSelector />
             <PainterSelector />
             <Parser />
-        </>
+        </Fragment>
     )
 }
 

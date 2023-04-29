@@ -1,5 +1,5 @@
 
-import { getRoatation } from '../Utils/rotate'
+import { getRotation } from '../Utils/rotate'
 import { checkIsFloor, checkIsRotate, checkIsBlackhole } from '../Utils/check'
 
 // OPTIMIZE: Double check these files for potential unused code / vars
@@ -45,7 +45,7 @@ function moveValidator (current, desire, boardRef) {
     if (checkIsRotate(desire.y, desire.x, boardRef)) return {
         y: current.y,
         x: current.x,
-        direction: getRoatation(current.direction, desire, boardRef),
+        direction: getRotation(current.direction, desire, boardRef),
         toBeRemoved,
     }
     if (!status) return { y: current.y, x: current.x, toBeRemoved }

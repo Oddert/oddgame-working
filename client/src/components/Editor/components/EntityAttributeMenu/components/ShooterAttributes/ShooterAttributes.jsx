@@ -1,32 +1,15 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import rotateLeft from '../../../../../../resources/ui-rotate-left.png'
 import rotateRight from '../../../../../../resources/ui-rotate-right.png'
 
-import { getCell } from '../../../../../working/Utils/entityCellCreator'
-import { editChangeCell } from '../../../../../../actions'
-import classNames from 'classnames'
+import { getCell } from '../../../../../../utils/entityCellCreator'
+import { getAnticlockwise, getClockwise } from '../../../../../../utils/rotate'
 
-const directionsLookup = {
-    up: {
-        clockwise: 'right',
-        antiClockwise: 'left',
-    },
-    right: {
-        clockwise: 'down',
-        antiClockwise: 'up',
-    },
-    down: {
-        clockwise: 'left',
-        antiClockwise: 'right',
-    },
-    left: {
-        clockwise: 'up',
-        antiClockwise: 'down',
-    },
-}
+import { editChangeCell } from '../../../../../../actions'
 
 const DirectionSelector = ({ entityName, entityType }) => {
     const dispatch = useDispatch()
@@ -38,7 +21,7 @@ const DirectionSelector = ({ entityName, entityType }) => {
     const handleClickClockwise = useCallback(() => {
         const cell = {
             ...entity,
-            direction: directionsLookup[direction].clockwise,
+            direction: getClockwise(direction),
         }
         dispatch(editChangeCell(y, x, cell))
     }, [
@@ -48,7 +31,7 @@ const DirectionSelector = ({ entityName, entityType }) => {
     const handleClickAntiClockwise = useCallback(() => {
         const cell = {
             ...entity,
-            direction: directionsLookup[direction].antiClockwise,
+            direction: getAnticlockwise(direction),
         }
         dispatch(editChangeCell(y, x, cell))
     }, [

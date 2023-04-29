@@ -52,7 +52,7 @@ const TimerAttributes = () => {
                     <input
                         id='TimerAttributes-time'
                         onChange={handleChangeTime}
-                        max='10'
+                        max='9'
                         min='3'
                         type='range'
                         value={time}
@@ -65,7 +65,7 @@ const TimerAttributes = () => {
                     <input
                         id='TimerAttributes-speed'
                         onChange={handleChangeSpeed}
-                        max='10'
+                        max='9'
                         min='3'
                         type='range'
                         value={speed}

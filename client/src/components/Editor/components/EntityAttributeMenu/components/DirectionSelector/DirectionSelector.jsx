@@ -5,7 +5,8 @@ import PropTypes from 'prop-types'
 import rotateLeft from '../../../../../../resources/ui-rotate-left.png'
 import rotateRight from '../../../../../../resources/ui-rotate-right.png'
 
-import { getCell } from '../../../../../working/Utils/entityCellCreator'
+import { getCell } from '../../../../../../utils/entityCellCreator'
+
 import { editChangeCell } from '../../../../../../actions'
 
 const directionsLookup = {
