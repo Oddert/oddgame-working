@@ -7,6 +7,7 @@ import rotateRight from '../../../../../../resources/ui-rotate-right.png'
 
 import { getCell } from '../../../../../working/Utils/entityCellCreator'
 import { editChangeCell } from '../../../../../../actions'
+import classNames from 'classnames'
 
 const directionsLookup = {
     up: {
@@ -32,6 +33,7 @@ const DirectionSelector = ({ entityName, entityType }) => {
     const { entity, y, x } = useSelector(state => state.edit.painter.focus)
 
     const direction = entity?.direction
+    const emits = entity?.emits
 
     const handleClickClockwise = useCallback(() => {
         const cell = {
@@ -53,9 +55,29 @@ const DirectionSelector = ({ entityName, entityType }) => {
         dispatch, entity, y, x, direction,
     ])
 
+    const handleClickSlider = useCallback(() => {
+        const cell = {
+            ...entity,
+            emits: 'slider',
+        }
+        dispatch(editChangeCell(y, x, cell))
+    }, [
+        dispatch, entity, y, x,
+    ])
+
+    const handleClickMarble = useCallback(() => {
+        const cell = {
+            ...entity,
+            emits: 'marble',
+        }
+        dispatch(editChangeCell(y, x, cell))
+    }, [
+        dispatch, entity, y, x,
+    ])
+
     return (
         <div className='Selector'>
-            <h5>{entityName} Direction</h5>
+            <h5>Shooter Direction</h5>
             <div className='Selector__category centred'>
                 <div className='Selector__option'>
                     <button
@@ -69,7 +91,7 @@ const DirectionSelector = ({ entityName, entityType }) => {
                     <div
                         className='col larger'
                     >
-                        {getCell({ type: entityType, direction })}
+                        {getCell({ type: 'shooter', direction, emits })}
                     </div>
                 </div>
                 <div className='Selector__option'>
@@ -78,6 +100,35 @@ const DirectionSelector = ({ entityName, entityType }) => {
                         onClick={handleClickClockwise}
                     >
                         <img src={rotateRight} alt='rotate clockwise' />
+                    </button>
+                </div>
+            </div>
+            <h5>Shooter Emits</h5>
+            <div className='Selector__category centred'>
+                <div
+                    className='Selector__option'
+                    onClick={handleClickSlider}
+                >
+                    <button
+                        className={classNames(
+                            'col',
+                            emits === 'slider' ? 'selected' : null,
+                        )}
+                    >
+                        {getCell({ type: 'slider', direction })}
+                    </button>
+                </div>
+                <div
+                    className='Selector__option'
+                    onClick={handleClickMarble}
+                >
+                    <button
+                        className={classNames(
+                            'col',
+                            emits === 'marble' ? 'selected' : null,
+                        )}
+                    >
+                        {getCell({ type: 'marble', direction })}
                     </button>
                 </div>
             </div>

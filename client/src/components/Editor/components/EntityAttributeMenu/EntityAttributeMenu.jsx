@@ -8,6 +8,7 @@ import MagnetAttributes from './components/MagnetAttributes/MagnetAttributes'
 import MarbleAttributes from './components/MarbleAttributes/MarbleAttributes'
 import RotateAttributes from './components/RotateAttributes/RotateAttributes'
 import SentryAttributes from './components/SentryAttributes/SentryAttributes'
+import ShooterAttributes from './components/ShooterAttributes/ShooterAttributes'
 import SliderAttributes from './components/SliderAttributes/SliderAttributes'
 import WallAttributes from './components/WallAttributes/WallAttributes'
 
@@ -31,6 +32,8 @@ const EntityAttributeMenu = () => {
                 return <RotateAttributes />
             case 'sentry':
                 return <SentryAttributes />
+            case 'shooter':
+                return <ShooterAttributes />
             case 'slider':
                 return <SliderAttributes />
             case 'wall':
@@ -40,6 +43,7 @@ const EntityAttributeMenu = () => {
             case 'floor':
             case 'kye':
                 return null;
+                // timer
             default:
                 return <p>Selected entity: {entity.type}{variant} at Y: {y}, X: {x}</p>
         }
