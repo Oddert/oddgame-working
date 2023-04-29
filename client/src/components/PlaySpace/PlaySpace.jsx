@@ -6,14 +6,14 @@ import DevControls from './components/DevControls/'
 
 import { playBoardWrite } from '../../actions/'
 
-import handleShoot from '../working/MoveHandlers/handleShoot'
-import handleSliderMove from '../working/MoveHandlers/handleSliderMove'
-import handleMarbleMove from '../working/MoveHandlers/handleMarbleMove'
-import handleSentryMove from '../working/MoveHandlers/handleSentryMove'
-import handleTimer from '../working/MoveHandlers/handleTimer'
+import handleShoot from '../../utils/moveHandlers/handleShoot'
+import handleSliderMove from '../../utils/moveHandlers/handleSliderMove'
+import handleMarbleMove from '../../utils/moveHandlers/handleMarbleMove'
+import handleSentryMove from '../../utils/moveHandlers/handleSentryMove'
+import handleTimer from '../../utils/moveHandlers/handleTimer'
 
-import { ranArr, ranNum } from '../working/Utils/randomisers'
-import { getAnticlockwise } from '../working/Utils/rotate'
+import { ranArr, ranNum } from '../../utils/randomisers'
+import { getAnticlockwise } from '../../utils/rotate'
 
 /**
  * Custom hook for looping a function.

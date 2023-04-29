@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
 
 import { editChangePainterSelect } from '../../../../actions'
-import { getCell } from '../../../working/Utils/entityCellCreator'
+
+import { getCell } from '../../../../utils/entityCellCreator'
 
 /**
  * Allows the user to select an entity for the painter.
