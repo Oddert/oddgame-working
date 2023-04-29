@@ -1,6 +1,6 @@
 
 // import generateBoard from '../components/shooter/Utils/generateBoard'
-import defaultBoards from '../../components/working/defaultBoards'
+import defaultBoards from '../../utils/defaultBoards'
 
 const entityList = {
     floor: () => ({

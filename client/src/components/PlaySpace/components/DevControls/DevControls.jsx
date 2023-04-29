@@ -1,6 +1,6 @@
 import React from 'react'
 
-import defaultBoards from '../../../working/defaultBoards'
+import defaultBoards from '../../../../utils/defaultBoards'
 
 import Loader from './components/Loader'
 import Painter from './components/Painter'

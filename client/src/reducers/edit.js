@@ -3,7 +3,7 @@ import types from '../actions/types'
 import initialState from '../constants/initialState'
 import reducerFilter from '../constants/reducerFilter'
 
-import defaultBoards from '../components/working/defaultBoards'
+import defaultBoards from '../utils/defaultBoards'
 
 const edit = (state = initialState.edit, action) => {
     const { payload, type } = action
