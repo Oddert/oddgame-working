@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import BlockAttributes from './components/BlockAttributes/BlockAttributes'
 import ForcefieldAttributes from './components/ForcefieldAttributes/ForcefieldAttributes'
+import EnemyAttributes from './components/EnemyAttributes/EnemyAttributes'
 import MagnetAttributes from './components/MagnetAttributes/MagnetAttributes'
 import MarbleAttributes from './components/MarbleAttributes/MarbleAttributes'
 import RotateAttributes from './components/RotateAttributes/RotateAttributes'
@@ -20,6 +21,8 @@ const EntityAttributeMenu = () => {
                 return <BlockAttributes />
             case 'forcefield':
                 return <ForcefieldAttributes />
+            case 'enemy':
+                return <EnemyAttributes />
             case 'magnet':
                 return <MagnetAttributes />
             case 'marble':
@@ -35,6 +38,7 @@ const EntityAttributeMenu = () => {
             case 'blackhole':
             case 'diamond':
             case 'floor':
+            case 'kye':
                 return null;
             default:
                 return <p>Selected entity: {entity.type}{variant} at Y: {y}, X: {x}</p>
