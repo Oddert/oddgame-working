@@ -2,6 +2,8 @@ import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
 import BlockAttributes from './components/BlockAttributes/BlockAttributes'
+import ForcefieldAttributes from './components/ForcefieldAttributes/ForcefieldAttributes'
+import MagnetAttributes from './components/MagnetAttributes/MagnetAttributes'
 import MarbleAttributes from './components/MarbleAttributes/MarbleAttributes'
 import RotateAttributes from './components/RotateAttributes/RotateAttributes'
 import SentryAttributes from './components/SentryAttributes/SentryAttributes'
@@ -16,6 +18,10 @@ const EntityAttributeMenu = () => {
         switch(entity.type) {
             case 'block':
                 return <BlockAttributes />
+            case 'forcefield':
+                return <ForcefieldAttributes />
+            case 'magnet':
+                return <MagnetAttributes />
             case 'marble':
                 return <MarbleAttributes />
             case 'rotate':
