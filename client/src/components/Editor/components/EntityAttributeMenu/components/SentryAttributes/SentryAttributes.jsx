@@ -2,13 +2,13 @@ import React from 'react'
 
 import DirectionSelector from '../DirectionSelector/DirectionSelector'
 
-const MarbleAttributes = () => {
+const SentryAttributes = () => {
     return (
         <DirectionSelector
-            entityName='Marble'
-            entityType='marble'
+            entityName='Sentry'
+            entityType='sentry'
         />
     )
 }
 
-export default MarbleAttributes
+export default SentryAttributes

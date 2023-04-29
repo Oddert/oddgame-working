@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import BlockAttributes from './components/BlockAttributes/BlockAttributes'
 import MarbleAttributes from './components/MarbleAttributes/MarbleAttributes'
 import RotateAttributes from './components/RotateAttributes/RotateAttributes'
+import SentryAttributes from './components/SentryAttributes/SentryAttributes'
 import WallAttributes from './components/WallAttributes/WallAttributes'
 
 const EntityAttributeMenu = () => {
@@ -20,6 +21,8 @@ const EntityAttributeMenu = () => {
                 return <MarbleAttributes />
             case 'rotate':
                 return <RotateAttributes />
+            case 'sentry':
+                return <SentryAttributes />
             case 'floor':
             case 'blackhole':
                 return null;
