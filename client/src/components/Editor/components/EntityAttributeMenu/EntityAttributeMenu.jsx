@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import BlockAttributes from './components/BlockAttributes/BlockAttributes'
 import MarbleAttributes from './components/MarbleAttributes/MarbleAttributes'
+import RotateAttributes from './components/RotateAttributes/RotateAttributes'
 import WallAttributes from './components/WallAttributes/WallAttributes'
 
 const EntityAttributeMenu = () => {
@@ -17,6 +18,8 @@ const EntityAttributeMenu = () => {
                 return <WallAttributes />
             case 'marble':
                 return <MarbleAttributes />
+            case 'rotate':
+                return <RotateAttributes />
             case 'floor':
             case 'blackhole':
                 return null;
