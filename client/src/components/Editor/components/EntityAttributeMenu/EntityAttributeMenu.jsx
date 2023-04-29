@@ -10,6 +10,7 @@ import RotateAttributes from './components/RotateAttributes/RotateAttributes'
 import SentryAttributes from './components/SentryAttributes/SentryAttributes'
 import ShooterAttributes from './components/ShooterAttributes/ShooterAttributes'
 import SliderAttributes from './components/SliderAttributes/SliderAttributes'
+import TimerAttributes from './components/TimerAttributes/TimerAttributes'
 import WallAttributes from './components/WallAttributes/WallAttributes'
 
 const EntityAttributeMenu = () => {
@@ -36,6 +37,8 @@ const EntityAttributeMenu = () => {
                 return <ShooterAttributes />
             case 'slider':
                 return <SliderAttributes />
+            case 'timer':
+                return <TimerAttributes />
             case 'wall':
                 return <WallAttributes />
             case 'blackhole':
@@ -43,7 +46,6 @@ const EntityAttributeMenu = () => {
             case 'floor':
             case 'kye':
                 return null;
-                // timer
             default:
                 return <p>Selected entity: {entity.type}{variant} at Y: {y}, X: {x}</p>
         }
