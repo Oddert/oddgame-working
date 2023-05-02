@@ -225,10 +225,10 @@ const mDown = (y, x, boardRef, direction) => {
  * @param {Object[][]} boardRef A copy of the board object.
  * @param {number} tick The current game tick.
  * @param {Directions} direction The direction the Shooter is facing.
- * @param {string} emit The entity type the shooter emits.
+ * @param {number} speed The sentry's speed. REVIEW: verify if this is to stay.
  * @returns {Target}
  */
-const handleMove = (y, x, boardRef, tick, direction, speed = 4) => {
+const handleMove = (y, x, boardRef, tick, direction, speed = 1) => {
     if (tick % speed) return { x, y, direction }
     switch (direction) {
         case 'left':

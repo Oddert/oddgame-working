@@ -266,7 +266,7 @@ const obstacleLikelyToMove = (dir, originalY, originalX, boardRef) => {
  */
 const pickDirection = (y1, x1, y2, x2, dir, originalY, originalX, halted, boardRef) => {
     // If the obstacle is likely to move then it will be 'halted', meaning it should not attempt to swerve.
-    if (obstacleLikelyToMove(dir, originalY, originalX, halted, boardRef)) {
+    if (obstacleLikelyToMove(dir, originalY, originalX, boardRef)) {
         return { y: originalY, x: originalX, halted: true }
     }
 
