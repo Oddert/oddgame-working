@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react'
 
-// import CellPainter from '../../../working/Editor/Menu/CellPainter/'
-// import GameDetials from './GameDetials'
 import Parser from '../../../working/Editor/Menu/Parser/'
 
 import BoardDimensions from '../../components/BoardDimensions/'
