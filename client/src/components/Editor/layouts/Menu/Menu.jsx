@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
 
-import Parser from '../../../working/Editor/Menu/Parser/'
 
 import BoardDimensions from '../../components/BoardDimensions/'
 import CursorSelector from '../../components/CursorSelector/'
 import PainterSelector from '../../components/PainterSelector/'
+import Parser from '../../components/Parser'
 
 /**
  * Layout component for the control-panel interface.
@@ -15,7 +15,6 @@ import PainterSelector from '../../components/PainterSelector/'
  *  )
  */
 const Menu = () => {
-    // return <p>test</p>
     return (
         <Fragment>
             <BoardDimensions />

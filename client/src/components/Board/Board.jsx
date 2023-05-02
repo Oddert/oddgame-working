@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import { getCell } from '../../utils/entityCellCreator'
 
-import '../working/index.scss'
+import './Board.scss'
 
 /**
  * Renders a board.

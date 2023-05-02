@@ -1,0 +1,92 @@
+$rad: 25px;
+$sprite_size: 80%;
+
+$floor_colour: #ecf0f1;
+
+.row {
+  display: flex;
+  .col {
+    display: flex;
+    flex-shrink: 0;
+    // border: 1px dashed tomato;
+    width: $rad;
+    height: $rad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // border: 1px solid #bec3c7;
+    position: relative;
+    img {
+      width: $sprite_size;
+      height: $sprite_size;
+      object-fit: contain;
+
+    }
+    &.floor {
+      background: $floor_colour;
+    }
+    &.wall {
+      // background: #bec3c7;
+      background: $floor_colour;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &.marble {
+      background: $floor_colour;
+    }
+    &.sentry {
+      background: $floor_colour;
+    }
+    &.slider {
+      background: $floor_colour;
+    }
+    &.shooter {
+      background: $floor_colour;
+    }
+    &.rotate {
+      background: $floor_colour;
+    }
+    &.timer {
+      background: $floor_colour;
+    }
+    &.blackhole {
+      background: $floor_colour;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &.diamond {
+      background: $floor_colour;
+    }
+    &.block {
+      background: $floor_colour;
+    }
+    &.toBeDeCoded {
+      background: #00fc00;
+    }
+    &.focused {
+      outline: 3px solid #39B8FF;
+      z-index: 90;
+    }
+    &.enemy {
+      background: $floor_colour;
+    }
+    &.forcefield {
+      background: $floor_colour;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &.magnet {
+      background: $floor_colour;
+    }
+    &.kye {
+      background: $floor_colour;
+    }
+  }
+  // border: 1px solid steelblue;
+}

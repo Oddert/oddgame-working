@@ -5,10 +5,7 @@ import KyeCode from './KyeCode'
 const Parser = () => {
     return (
         <div>
-            <div>
-                {/* <textarea></textarea> */}
-                <KyeCode />
-            </div>
+            <KyeCode />
         </div>
     )
 }
