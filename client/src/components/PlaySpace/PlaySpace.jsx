@@ -253,7 +253,7 @@ const PlaySpace = () => {
                         callstack.push(shootEntity)
                         return
                     case 'slider':
-                        function moveslider () {
+                        function moveSlider () {
                             const { direction } = col
                             const moved = handleSliderMove(r, c, nv, tick, direction)
                             // console.log(moved)
@@ -280,7 +280,7 @@ const PlaySpace = () => {
                                 delete nv[r][c].direction
                             }
                         }
-                        callstack.push(moveslider)
+                        callstack.push(moveSlider)
                         return
                     case 'marble':
                         function moveMarble () {
