@@ -39,25 +39,46 @@ const moveResponse = move => ({
 })
 
 /**
- * Checks the target cell to determine if the entity is going to 'bounce' (change direction 180 degrees).
- * @param {number} targetY 
- * @param {number} targetX 
- * @param {Object[][]} boardRef 
- * @param {Directions} dir 
+ * When facing an entity, determine if that entity is to be pushed forwards.
+ *
+ * Blocks, Timers, Marbles, and Sliders may be nudged forward if there is a clear floor in the direction of travel.
+ * @param {number} targetY The Y coordinate of the entity in front of the Sentry.
+ * @param {number} targetX The X coordinate of the entity in front of the Sentry.
+ * @param {Object[][]} boardRef Copy of the board object to search within.
+ * @param {Directions} dir The direction of travel for the Sentry.
  * @returns {(null|{ source: { x: number, y: number }, target: { x: number, y: number } })}
  */
 const checkIsBounce = (targetY, targetX, boardRef, dir) => {
+    /**
+     * List of whitelisted entities the sentry may bounce off of.
+     */
     const moveTypes = [
         'block', 'timer', 'marble', 'slider', 
     ]
+
+    // Retrieve the entity type the Sentry is facing.
     const target = boardRef[targetY][targetX].type
 
+    // If the entity type is not in the allowed list, return a negative result.
     if (!moveTypes.includes(target)) return null
 
+    /**
+     * Tracks if the bounce is allowed.
+     */
     let valid = false
+
+    /**
+     * X coordinate of the cell to be moved into, initialised as the entity's current X.
+     */
     let x = targetX
+
+    /**
+     * Y coordinate of the cell to be moved into, initialised as the entity's current Y.
+     */
     let y = targetY
 
+    // For each direction, check the cell immediately in front of the entity being bounced.
+    // If the space if clear (it is a Floor), list the move as valid and update the relevant coordinate.
     switch(dir) {
         case 'left':
             if (boardRef[targetY][targetX - 1].type === 'floor') {
@@ -84,10 +105,15 @@ const checkIsBounce = (targetY, targetX, boardRef, dir) => {
             }
             break
         default:
-            console.error(`[handleSentryMove > checkIsBounce] No such direction type ${dir}`)
+            console.error(
+                `[src/utils/moveHandlers/handleSentryMove] > checkIsBounce(): No such direction type "${dir}"`
+            )
     }
 
+    // If the move has been found to be valid, return the instructions for the entity's new position as well as its origin.
     if (valid) {
+        // 'source' is the cell currently occupied.
+        // 'target' is the cell the entity will be pushed into.
         return {
             source: {
                 y: targetY,
@@ -98,6 +124,8 @@ const checkIsBounce = (targetY, targetX, boardRef, dir) => {
             },
         }
     }
+
+    // The entity is blocked by something else, return a negative result.
     return null
 }
 
@@ -111,10 +139,20 @@ const checkIsBounce = (targetY, targetX, boardRef, dir) => {
  * @returns {SliderMoveResponse}
  */
 const moveValidator = (current, desire, boardRef) => {
+    /**
+     * Tracks if the move forward is valid.
+     */
     let status = true
+
+    /**
+     * Tracks if the sentry should be deleted.
+     */
     let toBeRemoved = false
 
+    // If the position to move to contains a Blackhole, flag the sentry for deletion.
     if (checkIsBlackhole(desire.y, desire.x, boardRef)) toBeRemoved = true
+
+    // If the sentry is faced with a Rotate, cancel its forward movement and rotate it around.
     if (checkIsRotate(desire.y, desire.x, boardRef)) {
         return {
             y: current.y,
@@ -123,10 +161,14 @@ const moveValidator = (current, desire, boardRef) => {
             toBeRemoved,
         }
     }
+
+    // If the cell in front is not a floor the sentry cannot move forward.
     if (!checkIsFloor(desire.y, desire.x, boardRef)) status = false
 
+    // Calculate if the entity blocking the sentry may be 'bounced' (nudged forward one cell).
     const bounce = checkIsBounce(desire.y, desire.x, boardRef, current.direction)
 
+    // The entity is not allowed to move forward, return the results.
     if (!status) {
         return {
             y: current.y,
@@ -136,7 +178,8 @@ const moveValidator = (current, desire, boardRef) => {
             bounce,
         }
     }
-
+    
+    // The entity is allowed to move forward.
     return {
         y: desire.y,
         x: desire.x,
