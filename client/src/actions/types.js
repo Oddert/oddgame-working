@@ -17,6 +17,8 @@ const types = {
 
     UI_MOUSEDOWN_HIGH: 'UI_MOUSEDOWN_HIGH',
     UI_MOUSEDOWN_LOW: 'UI_MOUSEDOWN_LOW',
+
+    FILES_TOGGLE_OPEN: 'FILES_TOGGLE_OPEN',
 }
 
 export default types

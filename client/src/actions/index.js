@@ -74,4 +74,9 @@ export const editPainterFocusUpdate = (y, x) => ({
     payload: { y, x },
 })
 
+export const fileToggleOpen = (override, value) => ({
+    type: types.FILES_TOGGLE_OPEN,
+    payload: { override, value },
+})
+
 // const genericAction = ({ type, payload }) => ({})

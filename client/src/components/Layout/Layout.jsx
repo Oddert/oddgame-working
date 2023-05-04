@@ -7,10 +7,12 @@ import {
     editWriteBoardNew,
     uiMousedownLow,
     uiMousedownHigh,
+    fileToggleOpen,
 } from '../../actions'
 
 import Editor from '../Editor/'
 import PlaySpace from '../PlaySpace/'
+import FileEditor from '../FileEditor/FileEditor'
 
 /**
  * Entry point for the game.
@@ -21,7 +23,9 @@ import PlaySpace from '../PlaySpace/'
 const Layout = () => {
     const dispatch = useDispatch()
 
-    const { open } = useSelector(state => state.edit)
+    const graphicalEditorOpen = useSelector(state => state.edit.open)
+    const fileEditorOpen = useSelector(state => state.files.open)
+
     const { mouseIsDown } = useSelector(state => state.ui)
 
     const handleMouseDown = e => {
@@ -34,16 +38,24 @@ const Layout = () => {
         return
     }
 
-    const newLevel = () => {
+    const graphicalEditor = () => {
         dispatch(editWriteBoardNew())
         dispatch(editToggleOpen())
     }
 
+    const textEditor = () => {
+        dispatch(fileToggleOpen())
+    }
+
+    console.log({ graphicalEditorOpen, fileEditorOpen })
+
     return (
         <div className='Layout' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-            <button onClick={newLevel}>New Level +</button>
+            <button onClick={graphicalEditor}>Graphical Editor</button>
+            <button onClick={textEditor}>Text Editor</button>
             <PlaySpace />
-            {open && <Editor />}
+            {graphicalEditorOpen && <Editor />}
+            {fileEditorOpen && <FileEditor />}
         </div>
     )
 }

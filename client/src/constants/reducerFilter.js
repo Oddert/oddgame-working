@@ -1,6 +1,6 @@
 const reducerFilter = type => {
     const types = [
-        'edit', 'play', 'ui', 
+        'edit', 'play', 'ui', 'file',
     ]
 
     const processedTypes = types

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 import play from './play'
 import edit from './edit'
+import files from './files'
 import ui from './ui'
 
 // const def = (state = null, action) => {
@@ -12,6 +13,7 @@ import ui from './ui'
 const rootReducer = combineReducers ({
     play,
     edit,
+    files,
     ui,
     // def
 })

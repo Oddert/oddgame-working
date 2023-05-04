@@ -16,6 +16,9 @@ const initialState = {
     ui: {
         mouseIsDown: false,
     },
+    files: {
+        open: true,
+    },
     edit: {
         open: true,
         lastSave: null,
