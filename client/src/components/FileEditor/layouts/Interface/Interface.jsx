@@ -1,22 +1,21 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
-import { fileToggleOpen } from '../../../../actions'
+import { filesToggleOpen } from '../../../../actions'
 
 const Interface = ({ bottomControls, text, topControls }) => {
     const dispatch = useDispatch()
 
     const close = e => {
         e.stopPropagation()
-        console.log(e.target)
-        console.log(e.target.classList.contains('FileEditor--wrapper'))
         if (e.target.classList.contains('FileEditor--wrapper')) {
-            dispatch(fileToggleOpen(true, false))
+            dispatch(filesToggleOpen(true, false))
         }
     }
 
     return (
         <div className='FileEditor--wrapper one' onClick={close}>
+            <h2>File Editor</h2>
             <div className='FileEditor'>
                 <div>{topControls}</div>
                 <div>{text}</div>

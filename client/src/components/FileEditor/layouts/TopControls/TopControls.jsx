@@ -1,7 +1,13 @@
 import React from 'react'
 
+import LevelSetSelector from '../../components/LevelSetSelector'
+
 const TopControls = () => {
-    return <p>TopControls</p>
+    return (
+        <div>
+            <LevelSetSelector />
+        </div>
+    )
 }
 
 export default TopControls
