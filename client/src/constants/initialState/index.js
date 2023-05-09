@@ -1,64 +1,17 @@
 
-// import generateBoard from '../components/shooter/Utils/generateBoard'
-import defaultBoards from '../../utils/defaultBoards'
-
-import entityList from '../entityList'
+import editInitialState from './editInitialState'
+import filesInitialState from './filesInitialState'
+import levelsInitialState from './levelsInitialState'
+import playInitialState from './playInitialState'
+import uiInitialState from './uiInitialState'
 
 const initialState = {
     // board: generateBoard()
-    play: {
-        board: defaultBoards[0].data,
-        registry: {
-
-        },
-        tick: 0,
-    },
-    ui: {
-        mouseIsDown: false,
-    },
-    files: {
-        open: true,
-    },
-    edit: {
-        open: true,
-        lastSave: null,
-        lastChange: null,
-        save: null,
-        data: {
-            title: '',
-            hint: '',
-            board: defaultBoards[1].data,//[[]]
-        },
-        entityList,
-        entities: [
-            // { type: 'floor', catt: 'structural' },
-            // { type: 'wall', variant: 'square', catt: 'structural' },
-            // { type: 'wall', variant: 'round', catt: 'structural' },
-            // { type: 'block', variant: 'round', catt: 'structural' },
-            // { type: 'block', variant: 'soft', catt: 'structural' },
-            // { type: 'block', variant: 'square', catt: 'structural' },
-            // { type: 'blackhole', catt: 'obstacle' },
-            // { type: 'marble', direction: 'left', catt: 'obstacle' },
-            // { type: 'rotate', direction: 'clock', catt: 'obstacle' },
-            // { type: 'sentry', direction: 'left', catt: 'obstacle' },
-            // { type: 'shooter', direction: 'left', emits: 'slider', catt: 'obstacle' },
-            // { type: 'slider', direction: 'left', catt: 'obstacle' },
-            // { type: 'timer', time: 6, catt: 'obstacle' },
-            // { type: 'diamond', catt: 'gameplay' },
-            ...Object.keys(entityList).map(e => entityList[e]()),
-        ],
-        painter: {
-            mode: 'selector',
-            selected: 1,
-            focus: {
-                x: null,
-                y: null,
-                entity: {
-                    type: null,
-                },
-            },
-        },
-    },
+    edit: editInitialState,
+    files: filesInitialState,
+    levels: levelsInitialState,
+    play: playInitialState,
+    ui: uiInitialState,
     // def: null
 }
 

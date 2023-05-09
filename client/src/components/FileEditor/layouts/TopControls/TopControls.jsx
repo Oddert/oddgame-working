@@ -2,13 +2,13 @@ import React from 'react'
 
 import LevelSetSelector from '../../components/LevelSetSelector'
 import NewLevelButton from '../../components/NewLevelButton/NewLevelButton'
-import SaveButton from '../../components/SaveButton/SaveButton'
+import UploadFile from '../../components/UploadFile/UploadFile'
 
 const TopControls = () => {
     return (
-        <div>
-            <SaveButton />
+        <div className='FileEditor__TopControls'>
             <NewLevelButton />
+            <UploadFile />
             <LevelSetSelector />
         </div>
     )

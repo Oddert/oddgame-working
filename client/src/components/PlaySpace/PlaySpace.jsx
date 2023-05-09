@@ -383,7 +383,7 @@ const PlaySpace = () => {
 			<Board
 				handleCellClick={handleCellClick}
 				board={board}
-				cache={() => console.log('BOARD MOUNT')}
+				// cache={() => console.log('BOARD MOUNT')}
 			/>
 			<DevControls
 				board={board}

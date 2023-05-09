@@ -39,6 +39,16 @@
     input[type=text] {
         width: 100%;
     }
+    .FileEditor__bar {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+
+.FileEditor__TopControls {
+    display: flex;
+    flex-direction: column;
 }
 
 .FileEditor__LevelSet {

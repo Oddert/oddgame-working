@@ -74,9 +74,44 @@ export const editPainterFocusUpdate = (y, x) => ({
     payload: { y, x },
 })
 
-export const fileToggleOpen = (override, value) => ({
+export const filesToggleOpen = (override, value) => ({
     type: types.FILES_TOGGLE_OPEN,
     payload: { override, value },
+})
+
+export const filesOpenSet = (levelSet, isUserLevel) => ({
+    type: types.FILES_OPEN_SET,
+    payload: { levelSet, isUserLevel },
+})
+
+export const filesUpdateText = (text) => ({
+    type: types.FILES_UPDATE_TEXT,
+    payload: { text },
+})
+
+export const filesUpdateName = (name) => ({
+    type: types.FILES_UPDATE_NAME,
+    payload: { name },
+})
+
+export const filesSaveUser = (name, text) => ({
+    type: types.FILES_SAVE_USER,
+    payload: { name, text },
+})
+
+export const filesSaveUserAndNew = () => ({
+    type: types.FILES_SAVE_USER_AND_NEW,
+    payload: null,
+})
+
+export const levelsDeleteUser = (name) => ({
+    type: types.LEVELS_DELETE_USER,
+    payload: { name },
+})
+
+export const levelsWriteUser = (userLevels) => ({
+    type: types.LEVELS_WRITE_USER,
+    payload: { userLevels },
 })
 
 // const genericAction = ({ type, payload }) => ({})

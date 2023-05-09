@@ -23,10 +23,11 @@ const SaveButton = () => {
     return (
         <button
             onClick={handleClick}
+            disabled={!unSavedChanges}
             title={
                 unSavedChanges
-                    ? 'there are unsaved changes, click to save'
-                    : 'changes saved'
+                    ? 'There are unsaved changes. Click to save'
+                    : 'No changes to save'
             }
         >
             {

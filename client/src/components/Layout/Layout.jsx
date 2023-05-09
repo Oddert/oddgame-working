@@ -7,7 +7,7 @@ import {
     editWriteBoardNew,
     uiMousedownLow,
     uiMousedownHigh,
-    fileToggleOpen,
+    filesToggleOpen,
 } from '../../actions'
 
 import Editor from '../Editor/'
@@ -44,10 +44,8 @@ const Layout = () => {
     }
 
     const textEditor = () => {
-        dispatch(fileToggleOpen())
+        dispatch(filesToggleOpen())
     }
-
-    console.log({ graphicalEditorOpen, fileEditorOpen })
 
     return (
         <div className='Layout' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
