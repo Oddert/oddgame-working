@@ -1,67 +1,47 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { filesSaveUserAndNew } from '../../../../../../actions'
+import { isObject } from '../../../../../../utils/commonUtils'
+import { mapUserLevelsToMenu } from '../../../../../../utils/textEditorUtils'
 
 import LevelSet from '../LevelSet/LevelSet'
-import { convertTextToLevelSet } from '../../../../../../utils/textEditorUtils'
-
-const isObject = obj =>
-    obj && typeof obj === 'object' && !Array.isArray(obj)
+import { loadUserLevels } from '../../../../../../common/localStore/levelsLocalStore'
+import { levelsWriteUser } from '../../../../../../actions'
 
 const UserLevels = () => {
     const dispatch = useDispatch()
-    const [ levels, setLevels ] = useState([])
-    const [ readFinished, setReadFinished ] = useState(false)
-    
-    const unSavedChanges = useSelector(state => state.files.unSavedChanges)
 
+    const [ readFinished, setReadFinished ] = useState(false)
+
+    const levels = useSelector(state => state.levels.userLevels)
+    
     useEffect(() => {
         if (!readFinished) {
-            const userLevels = localStorage.getItem('KYE_USER_LEVELS')
-            if (userLevels) {
-                const parsed = JSON.parse(userLevels)
-                if (isObject(parsed)) {
-                    setLevels(Object.keys(parsed).map(key => ({
-                        name: key,
-                        levels: convertTextToLevelSet(parsed[key]).set.levels,
-                    })))
-                }
+            const userLevels = loadUserLevels()
+            if (isObject(userLevels)) {
+                dispatch(
+                    levelsWriteUser(
+                        mapUserLevelsToMenu(userLevels)
+                    )
+                )
             }
             setReadFinished(true)
         }
-    }, [readFinished])
+    }, [ dispatch, readFinished ])
 
-    const handleClickNew = useCallback(() => {
-        const newLevel = () => {
-            dispatch(filesSaveUserAndNew())
-        }
-        if (unSavedChanges) {
-            if (window.confirm(
-                'This file has unsaved changes. Are you sure you want to create a new level?'
-            )) {
-                console.log('create level 1')
-                newLevel()
-            }
-        } else {
-            console.log('create level 2')
-            newLevel()
-        }
-    }, [ dispatch, unSavedChanges ])
-
-    console.log(levels)
     return (
-        <div>
+        <div className='FileEditor__LevelSet'>
             <h3>Your Levels</h3>
-            {levels.map((file, idx) => (
-                <LevelSet
-                    key={idx}
-                    isUserLevels={true}
-                    levels={file.levels}
-                    name={file.name}
-                />
-            ))}
-            <button onClick={handleClickNew}>Create New +</button>
+            <ul className='FileEditor__LevelSet__list'>
+                {levels.map((file, idx) => (
+                    <LevelSet
+                        key={idx}
+                        isUserLevels={true}
+                        levels={file.levels}
+                        name={file.name}
+                    />
+                ))}
+            </ul>
         </div>
     )
 }

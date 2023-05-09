@@ -6,16 +6,18 @@ import defaultLevelSets from '../../../../../../utils/defaultLevelSets'
 
 const PresetLevels = () => {
     return (
-        <div>
+        <div className='FileEditor__LevelSet'>
             <h3>Preset Levels</h3>
-            {Object.values(defaultLevelSets).map((file, idx) => (
-                <LevelSet
-                    key={idx}
-                    isUserLevels={false}
-                    levels={file.levels}
-                    name={file.name}
-                />
-            ))}
+            <ul className='FileEditor__LevelSet__list'>
+                {Object.values(defaultLevelSets).map((file, idx) => (
+                    <LevelSet
+                        key={idx}
+                        isUserLevels={false}
+                        levels={file.levels}
+                        name={file.name}
+                    />
+                ))}
+            </ul>
         </div>
     )
 }
