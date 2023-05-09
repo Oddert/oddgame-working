@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react'
 
 import PresetLevels from './components/PresetLevels/PresetLevels'
 import UserLevels from './components/UserLevels/UserLevels'
+import SaveButton from '../SaveButton/SaveButton'
 
 const LevelSetSelector = () => {
     const [ open, setOpen ] = useState(false)
@@ -22,6 +23,7 @@ const LevelSetSelector = () => {
                 <Fragment>
                     <PresetLevels />
                     <UserLevels />
+                    <SaveButton />
                 </Fragment>
             )}
         </div>
