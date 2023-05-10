@@ -1,7 +1,12 @@
 import React from 'react'
+import Preview from '../../components/Preview/Preview'
 
 const BottomControls = () => {
-    return <p>BottomControls</p>
+    return (
+        <div>
+            <Preview />
+        </div>
+    )
 }
 
 export default BottomControls

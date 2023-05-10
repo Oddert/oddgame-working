@@ -1,4 +1,4 @@
-import { LINE_OF_WALLS } from '../constants/regexConstants'
+import { LEVEL_SEGMENT, LINE_OF_WALLS } from '../constants/regexConstants'
 
 /**
  * Converts an object-based level set to the KYE file format.
@@ -114,7 +114,7 @@ export const convertTextToLevelSet = (text, debugMode, immediate, name) => {
             case 'read':
                 if (section.length !== levelWidth) {
                     errors.push({
-                        message: 'Segment does not match level width',
+                        message: 'Level segment does not match level width',
                         index: sectionIdx,
                         validLevels: set.levels.length,
                         setLength: set.length,
@@ -136,6 +136,19 @@ export const convertTextToLevelSet = (text, debugMode, immediate, name) => {
                     openLevel.finishMessage = null
                     openLevel.level = ''
                     status = 'title'
+                }
+                if (!LEVEL_SEGMENT.test(section)) {
+                    errors.push({
+                        // eslint-disable-next-line max-len
+                        message: 'Level segment is not valid. Level segments must begin and end with a wall and only contain legal entity codes.',
+                        index: sectionIdx,
+                        validLevels: set.levels.length,
+                        setLength: set.length,
+                        openLevel: {
+                            ...openLevel,
+                        },
+                        text,
+                    })
                 }
                 break
             default:

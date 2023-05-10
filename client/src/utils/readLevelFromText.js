@@ -64,7 +64,6 @@ const mapping = {
 }
 
 const readLevelFromText = str => {
-    console.log(str)
     const out = str.split(/\n/gi).map((row, y) =>
         row.split('').map((each, x) => {
             if (mapping[each]) return mapping[each](y, x)
